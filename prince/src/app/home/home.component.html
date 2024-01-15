@@ -1,1 +1,143 @@
-<p>home works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrincePress</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.component.css">
+</head>
+
+<body>
+
+    <section id="banner" class="pageBanner position-relative overflow-hidden bg-light-blue"
+        style="background-image: url('media/crown.png'); background-position: center; background-size: contain; background-repeat: no-repeat; padding-bottom: 50px;">
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-md-6 offset-md-3">
+                    <div class="banner-content text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <nav class="navigation navbar navbar-expand-lg navbar-dark text-uppercase">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto"> <!-- Updated class to mx-auto for centering -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#light-novels">Light Novels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#manga">Manga</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#all-series">All Series</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#profile">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="book-selection" class="bg-light-blue overflow-hidden mt-5 padding-xlarge">
+        <div class="container">
+            <div class="row">
+                <div class="display-header d-flex justify-content-between pb-3">
+                    <h2 class="display-7 text-dark text-uppercase">Our Selection</h2>
+                </div>
+                <div class="book-grid">
+                    <script>
+                        for (let i = 1; i <= 11; i++) {
+                            document.write('<div><a href="details.html?bookId=' + i + '"><img class="book-cover" src="../../book' + i + '.png" alt="Book ' + i + '"></a></div>');
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="our-selection" class="overflow-hidden mt-5 padding-xlarge">
+        <div class="row d-flex flex-wrap align-items-center">
+            <div class="col-md-6 col-sm-12">
+                <div class="text-content offset-4 padding-medium">
+                    <h3>Get cozy &</h3>
+                    <h2 id="discoverText" class="display-2 pb-5 text-uppercase text-dark glowLabel">Discover seasonal favorites!</h2>
+                    <a href="#more-books" class="btn btn-medium btn-dark text-uppercase btn-rounded-none mt-4">DISCOVER</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+            </div>
+        </div>
+    </section>
+
+    <section id="more-books" class="bg-light-blue overflow-hidden">
+        <div class="container">
+            <div class="row">
+                <div class="display-header d-flex justify-content-between pb-3">
+                    <h2 class="display-7 text-dark text-uppercase">More Books to Explore</h2>
+                </div>
+                <div id="moreBooksContainer" class="swiper-container">
+                    <div class="swiper-wrapper books-wrapper">
+                        <script>
+                            for (let i = 1; i <= 11; i++) {
+                                document.write('<div class="swiper-slide"><a href="details.html?bookId=' + i + '"><img class="book-cover swiper-book-cover" src="media/book' + i + '.png" alt="Book ' + i + '"></a></div>');
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 PrincePress. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('#moreBooksContainer', {
+                direction: 'horizontal',
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scroll to "Our Selection" when clicking "Explore Stories"
+            document.getElementById('explore-stories-button').addEventListener('click', function (event) {
+                event.preventDefault();
+                document.getElementById('our-selection').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
