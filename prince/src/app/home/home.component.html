@@ -12,8 +12,8 @@
 
 <body>
 
-    <section id="banner" class="pageBanner position-relative overflow-hidden bg-light-blue"
-        style="background-image: url('media/crown.png'); background-position: center; background-size: contain; background-repeat: no-repeat; padding-bottom: 50px;">
+    <section id="banner" class="pageBanner position-relative overflow-hidden"
+        style="background-image: url('../../assets/crown.png'); background-position: center; background-size: contain; background-repeat: no-repeat; padding-bottom: 50px;">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-6 offset-md-3">
@@ -55,18 +55,24 @@
         </div>
     </nav>
 
-    <section id="book-selection" class="bg-light-blue overflow-hidden mt-5 padding-xlarge">
+    <section id="book-selection" class="overflow-hidden mt-5 padding-xlarge">
         <div class="container">
             <div class="row">
                 <div class="display-header d-flex justify-content-between pb-3">
-                    <h2 class="display-7 text-dark text-uppercase">Our Selection</h2>
+                    <h2 class="titleLabelText display-7 text-uppercase">Our Selection</h2>
                 </div>
                 <div class="book-grid">
-                    <script>
-                        for (let i = 1; i <= 11; i++) {
-                            document.write('<div><a href="details.html?bookId=' + i + '"><img class="book-cover" src="../../book' + i + '.png" alt="Book ' + i + '"></a></div>');
-                        }
-                    </script>
+                    <img class="book-cover" src="../../assets/book1.png">
+                    <img class="book-cover" src="../../assets/book2.png">
+                    <img class="book-cover" src="../../assets/book3.png">
+                    <img class="book-cover" src="../../assets/book4.png">
+                    <img class="book-cover" src="../../assets/book5.png">
+                    <img class="book-cover" src="../../assets/book6.png">
+                    <img class="book-cover" src="../../assets/book7.png">
+                    <img class="book-cover" src="../../assets/book8.png">
+                    <img class="book-cover" src="../../assets/book9.png">
+                    <img class="book-cover" src="../../assets/book10.png">
+                    <img class="book-cover" src="../../assets/book11.png">
                 </div>
             </div>
         </div>
@@ -77,8 +83,10 @@
             <div class="col-md-6 col-sm-12">
                 <div class="text-content offset-4 padding-medium">
                     <h3>Get cozy &</h3>
-                    <h2 id="discoverText" class="display-2 pb-5 text-uppercase text-dark glowLabel">Discover seasonal favorites!</h2>
-                    <a href="#more-books" class="btn btn-medium btn-dark text-uppercase btn-rounded-none mt-4">DISCOVER</a>
+                    <h2 id="discoverText" class="display-2 pb-5 text-uppercase text-dark glowLabel">Discover seasonal
+                        favorites!</h2>
+                    <a href="#more-books"
+                        class="btn btn-medium btn-dark text-uppercase btn-rounded-none mt-4">DISCOVER</a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
@@ -86,7 +94,7 @@
         </div>
     </section>
 
-    <section id="more-books" class="bg-light-blue overflow-hidden">
+    <section id="more-books" class="overflow-hidden">
         <div class="container">
             <div class="row">
                 <div class="display-header d-flex justify-content-between pb-3">
@@ -94,11 +102,17 @@
                 </div>
                 <div id="moreBooksContainer" class="swiper-container">
                     <div class="swiper-wrapper books-wrapper">
-                        <script>
-                            for (let i = 1; i <= 11; i++) {
-                                document.write('<div class="swiper-slide"><a href="details.html?bookId=' + i + '"><img class="book-cover swiper-book-cover" src="media/book' + i + '.png" alt="Book ' + i + '"></a></div>');
-                            }
-                        </script>
+                        <img class="book-cover swiper-book-cover" src="../../assets/book1.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book2.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book3.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book4.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book5.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book6.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book7.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book8.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book9.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book10.png" href="../../app/details/details.component.html">
+                        <img class="book-cover swiper-book-cover" src="../../assets/book11.png" href="../../app/details/details.component.html">
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
