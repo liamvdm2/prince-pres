@@ -20,6 +20,7 @@
     background-clip: padding-box;
     box-shadow: none;
 }
+  
 
 .titleIcon {
     color: gray;
@@ -118,6 +119,27 @@ textarea.form-control {
     .main-content .container-fluid {
         padding-right: 39px !important;
         padding-left: 39px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .rounded-circle {
+        /*height: 20%;
+        width: 20%;*/
+        width: 130px;
+    }
+
+    .badge-container {
+        width: 60%;
+        height: 60%;
+    }
+
+    .heading {
+        margin-top: 60px;
+    }
+
+    .btn {
+        font-size: 12px;
     }
 }
 
