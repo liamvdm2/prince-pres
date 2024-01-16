@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +22,6 @@ export class RegisterComponent {
   terms: boolean = false; /* made it false by default because the laws say that you need to accept them yourself and not prechecked  */
   news: boolean = false;
 
-  constructor(private http: HttpClient) {}
 
 
   showPassword = false; /* made it false by default so it is not shown by default */
@@ -48,9 +46,7 @@ export class RegisterComponent {
 
   onSubmit() {
 
-    
-
-    if (!this.name || !this.surname || !this.username || !this.password || !this.email || !this.confirmPassword || !this.birthdate) { 
+    if (!this.name || !this.surname || !this.username || !this.password || !this.email || !this.confirmPassword || !this.birthdate) { /* if any of the fields are empty show an alert */
       alert("Please fill out all fields");
       return;
     }
@@ -99,18 +95,36 @@ export class RegisterComponent {
 
 
     else {
-      let userdata = {
-        name: this.name,
-        surname: this.surname,
-        username: this.username,
-        password: this.password,
-        email: this.email,
-        birthdate: this.birthdate,
-      }
+      console.log("name: " + this.name);
+      console.log("surname:" + this.surname);
+      console.log("username: " + this.username);
+      console.log("email: " + this.email);
+      console.log("birthdate: " + this.birthdate); /* we dont use the birthdate in the database but we do in the console */
+      console.log("password: " + this.password);
 
-      this.http.post('http://127.0.0.1:8000/api/users', userdata).subscribe(data => {
-        console.log(data);
-     });
+      console.log("news: " + this.news);
+
+
+      localStorage.setItem("name", this.name);
+      localStorage.setItem("surname", this.surname);
+      localStorage.setItem("username", this.username);
+      localStorage.setItem("password", this.password);
+      localStorage.setItem("email", this.email);
+
+
+
+
+      // Reset the form after submission so it doesnt get submitted again
+      this.name = '';
+      this.surname = '';
+      this.username = '';
+      this.password = ''; // here we clear the password from the page, but do not remove it
+      this.email = '';
+      this.birthdate = '';
+      this.confirmPassword = '';
+      
     }
   }
+
+  // TODO : when database is connected put this in the database instead of the console log
 }
