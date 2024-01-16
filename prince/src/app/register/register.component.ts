@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { SlicePipe } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, HttpClientModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -46,10 +46,7 @@ export class RegisterComponent {
 
   onSubmit() {
 
-    if (!this.name || !this.surname || !this.username || !this.password || !this.email || !this.confirmPassword || !this.birthdate) { /* if any of the fields are empty show an alert */
-      alert("Please fill out all fields");
-      return;
-    }
+
 
     const termsaccepted = document.getElementById("terms") as HTMLInputElement; /* get the checkbox */
     if (!termsaccepted.checked) {                                           /* if the checkbox is not checked show an alert */
@@ -73,7 +70,7 @@ export class RegisterComponent {
     }
     else if (age > 100) {                                                   /* if the age is greater than 100 show an alert */
       alert("You must be less than 100 years old");
-      return ;
+      return;
     }
 
 
@@ -95,22 +92,23 @@ export class RegisterComponent {
 
 
     else {
-      console.log("name: " + this.name);
-      console.log("surname:" + this.surname);
-      console.log("username: " + this.username);
-      console.log("email: " + this.email);
-      console.log("birthdate: " + this.birthdate); /* we dont use the birthdate in the database but we do in the console */
-      console.log("password: " + this.password);
 
-      console.log("news: " + this.news);
-
-
-      localStorage.setItem("name", this.name);
-      localStorage.setItem("surname", this.surname);
-      localStorage.setItem("username", this.username);
-      localStorage.setItem("password", this.password);
-      localStorage.setItem("email", this.email);
-
+      /* this.http.post('/users', {
+        name: this.name,
+        surname: this.surname,
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        birthdate: this.birthdate
+      }).subscribe({
+        next: (res: any) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+ */
 
 
 
@@ -122,7 +120,7 @@ export class RegisterComponent {
       this.email = '';
       this.birthdate = '';
       this.confirmPassword = '';
-      
+
     }
   }
 
