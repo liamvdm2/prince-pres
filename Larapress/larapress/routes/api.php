@@ -45,7 +45,7 @@ Route::get('/comments', function () {
             'user_id',
             'like',
             'content',
-            'commented_date',
+            'comment_date',
         ])
         ->get();
     return response()->json($results);
