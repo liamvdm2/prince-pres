@@ -13,7 +13,7 @@ Route::get('/comments', function () {
     $results = DB::table('Comments')
         ->select([
             'comment_id',
-            'user_id',
+            'id',
             'like',
             'content',
             'comment_date',
@@ -24,16 +24,7 @@ Route::get('/comments', function () {
 
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('Users')
-        ->select([
-            'user_id',
-            'name',
-            'surname',
-            'email',
-            'password',
-            'birthday',
-        ])
-        ->get();
+    $results = DB::table('users')->get();
 
     return response()->json($results);
 });
@@ -45,28 +36,19 @@ Route::post('/users', function (Request $request) {
     $name = $request->name;
     $email = $request->email;
     $password = $request->password;
-    $username = $request->username;
-    $birthday = $request->birthday;
-    $surname = $request->surname;
+   
 
     $validatedData = $request->validate([
         'name' => 'required|max:255',
         'email' => 'required|email|unique:users',
-        'surname' => 'required|max:255',
         'password' => 'required',
-        'username' => 'required',
-        'birthday' => 'required',
     ]);
 
     $user = User::create([
         'name' => $validatedData['name'],
-        'surname' => $validatedData['surname'],
         'email' => $validatedData['email'],
-        'password' => Hash::make($validatedData['password']), // Hash the password before storing it
-        'username' => $validatedData['username'],
-        'birthday' => $validatedData['birthday'],
+        'password' => $validatedData['password'], // Hash the password before storing it
     ]);
-    DB::insert('INSERT INTO Users (name, email, surname, password, username, birthday) VALUES (?, ?, ?, ?, ?, ?)', [$name, $email, $surname ,$password, $username, $birthday]);
     return response()->json(['message' => 'User created successfully'], 201);
 });
 
