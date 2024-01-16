@@ -1,0 +1,172 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #575757;
+}
+
+.pageBanner {
+    background: linear-gradient(0deg, #575757 35%, black 100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+header {
+    color: #eb6cff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #eb6cff;
+}
+
+section {
+    padding: 20px;
+}
+
+.book-cover:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    color: #ffffff;
+    background-color: #212529;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+#banner {
+    position: relative !important;
+    overflow: hidden !important;
+    background-image: url('../../assets/crown.png');
+    background-position: center !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    padding-bottom: 50px !important;
+    height: 300px !important;
+    display: flex !important;
+    align-items: flex-end !important;
+}
+
+#banner .banner-content {
+    margin: auto;
+}
+
+#banner .btn {
+    color: #fff;
+    background-color: #212529d1;
+    border-color: #ffffffd1;
+}
+
+.btn {
+    color: #fff;
+    background-color: #212529d1;
+    border-color: #ffffffd1;
+    margin-top: 1px !important;
+}
+
+#our-selection {
+    background-image: url('../../assets/winter.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#our-selection .text-content {
+    color: #484848;
+}
+
+#more-books {
+    background: rgb(174,253,255);
+    background: linear-gradient(90deg, rgba(174,253,255,1) 35%, rgba(244,178,255,1) 100%);
+    flex: 1;
+    padding-bottom: 120px;
+}
+
+#more-books .display-header,
+#more-books .book-cover {
+    border-color: #fff;
+}
+
+#more-books h2 {
+    color: #fff;
+}
+
+.books-wrapper {
+    display: flex;
+}
+
+.swiper-slide {
+    flex: 0 0 auto;
+}
+
+.swiper-book-cover {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+footer {
+    color: #ffffff;
+    background-color: #212529;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: static;
+}
+
+.navbar-nav .nav-link {
+    color: black;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: black;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Adjust the glow effect as needed */
+}
+
+.glowLabel {
+    font-size: 80px;
+    color: #fff;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a8fff8, 0 0 40px #a8fff8, 0 0 50px #a8fff8, 0 0 60px #a8fff8, 0 0 70px #a8fff8;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ffb5fa, 0 0 40px #ffb5fa, 0 0 50px #ffb5fa, 0 0 60px #ffb5fa, 0 0 70px #ffb5fa, 0 0 80px #ffb5fa;
+    }
+}
