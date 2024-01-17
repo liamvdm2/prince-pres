@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -38,7 +39,7 @@ Route::post('/users', function (Request $request) {
     $surname = $request->surname;
     $password = $request->password;
     $username = $request->username;
-   
+
 
     $validatedData = $request->validate([
         'name' => 'required|max:255',
@@ -52,12 +53,24 @@ Route::post('/users', function (Request $request) {
         'name' => $validatedData['name'],
         'surname' => $validatedData['surname'],
         'email' => $validatedData['email'],
-        'password' => $validatedData['password'], 
+        'password' => $validatedData['password'],
         'username' => $validatedData['username'],
-        'updated_at' => now(),                   
+        'updated_at' => now(),
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
+});
+
+Route::post('/login', function (Request $request) {
+    $credentials = $request->only('username', 'password');
+
+    if (Auth::attempt($credentials)) {
+        // Authentication passed...
+        return response()->json(['message' => 'Logged in successfully'], 200);
+    } else {
+        // Authentication failed...
+        return response()->json(['message' => 'Invalid username or password'], 401);
+    }
 });
 
 // temp token routes
