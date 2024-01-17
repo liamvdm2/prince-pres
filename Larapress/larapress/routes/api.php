@@ -35,19 +35,27 @@ Route::post('/users', function (Request $request) {
 
     $name = $request->name;
     $email = $request->email;
+    $surname = $request->surname;
     $password = $request->password;
+    $username = $request->username;
    
 
     $validatedData = $request->validate([
         'name' => 'required|max:255',
+        'surname' => 'required|max:255',
         'email' => 'required|email|unique:users',
         'password' => 'required',
+        'username' => 'required',
     ]);
 
     $user = User::create([
         'name' => $validatedData['name'],
+        'surname' => $validatedData['surname'],
         'email' => $validatedData['email'],
-        'password' => $validatedData['password'], // Hash the password before storing it
+        'password' => $validatedData['password'], 
+        'username' => $validatedData['username'],
+        'updated_at' => now(),                   
+        'created_at' => now(),
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
 });
@@ -56,7 +64,7 @@ Route::post('/users', function (Request $request) {
 /* Route::post('/tokens/create', function (Request $request) {
     $user = User::find(1);
    
-    $token = $user->createToken('mynewtoken');
+    
     return ['token' => $token->plainTextToken];
 
     
