@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
 
 
 
@@ -63,12 +64,68 @@ Route::post('/users', function (Request $request) {
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password'); // we need only username and password from the request
 
-    if (Auth::attempt($credentials)) {              
+    if (Auth::attempt($credentials)) {
         return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed 
     } else {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
+
+
+Route::get('/products', function (Request $request) {
+    $results = DB::table('Products')->get();       // SELECT * FROM products is query in SQL
+
+    return response()->json($results);
+});
+
+Route::post('/products', function (Request $request) {
+    $title = $request->product_title;
+    $desc = $request->product_desc;
+    /* $release = $request->product_release; */
+    $author = $request->product_author;
+
+    $validatedData = $request->validate([
+        'product_title' => 'required|max:255',
+        'product_desc' => 'required|max:255',
+        /* 'product_release' => 'required|date', */
+        'product_author' => 'required|max:255',
+    ]);
+
+
+    // Store the product in the database
+    $products = Product::create([
+        'product_title' => $validatedData['product_title'],
+        'product_desc' => $validatedData['product_desc'],
+        /* 'product_release' => $validatedData['product_release'], */
+        'product_author' => $validatedData['product_author'],
+
+    ]);
+
+    // Return a response
+    return response()->json(['message' => 'Product added successfully'], 201);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // temp token routes
 /* Route::post('/tokens/create', function (Request $request) {
