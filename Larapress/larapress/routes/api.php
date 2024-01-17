@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,7 +24,7 @@ Route::get('/comments', function () {
 
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')->get();
+    $results = DB::table('users')->get();       // SELECT * FROM users is query in SQL
 
     return response()->json($results);
 });
@@ -44,8 +43,8 @@ Route::post('/users', function (Request $request) {
     $validatedData = $request->validate([
         'name' => 'required|max:255',
         'surname' => 'required|max:255',
-        'email' => 'required|email|unique:users',
-        'password' => 'required',
+        'email' => 'required|email|unique:users',     // email must be unique in users table
+        'password' => 'required',                     // password is automatically hashed by Laravel
         'username' => 'required',
     ]);
 
@@ -62,14 +61,12 @@ Route::post('/users', function (Request $request) {
 });
 
 Route::post('/login', function (Request $request) {
-    $credentials = $request->only('username', 'password');
+    $credentials = $request->only('username', 'password'); // we need only username and password from the request
 
-    if (Auth::attempt($credentials)) {
-        // Authentication passed...
-        return response()->json(['message' => 'Logged in successfully'], 200);
+    if (Auth::attempt($credentials)) {              
+        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed 
     } else {
-        // Authentication failed...
-        return response()->json(['message' => 'Invalid username or password'], 401);
+        return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
 
