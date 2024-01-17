@@ -20,9 +20,6 @@
     <label for="email">Email:</label>
     <input id="email" [(ngModel)]="email" name="email" type="email" required>
 
-    <label for="birthdate">Birthdate:</label>
-    <input type="date" id="birthdate" name="birthdate" required>
-
     <label for="password">Password:</label>
     <div class="password-input-container">
         <input [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" id="password" name="password" required>
@@ -36,8 +33,7 @@
     <label for="terms"> I agree to the terms and conditions</label>
     <input type="checkbox" id="terms" name="terms" required>
 
-    <label for="news"> I would like to receive news</label>
-    <input type="checkbox" id="News" name="News" [(ngModel)]="news" optional>
+
 
 
     <p class="error" id="error"></p>

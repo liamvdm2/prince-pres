@@ -18,9 +18,7 @@ export class RegisterComponent {
   email: any;
   confirmPassword: any;
 
-  birthdate: any;
   terms: boolean = false; /* made it false by default because the laws say that you need to accept them yourself and not prechecked  */
-  news: boolean = false;
 
 
 
@@ -31,17 +29,13 @@ export class RegisterComponent {
   }
 
 
-  toggleNews() {
-    this.news = !this.news;
-    console.log(this.news);
-  }
 
   toggleTerms() {
     this.terms = !this.terms; /* went from true to false and vice versa when the checkbox is clicked */
     console.log(this.terms);
   }
 
-
+  constructor(private http: HttpClient) { }
 
 
   onSubmit() {
@@ -61,17 +55,6 @@ export class RegisterComponent {
       return;
     }
 
-
-    const ageverify = new Date();
-    const age = ageverify.getFullYear() - new Date(this.birthdate).getFullYear();
-    if (age < 18) {                                                         /* if the age is less than 18 show an alert */
-      alert("You must be at least 18 years old");
-      return;
-    }
-    else if (age > 100) {                                                   /* if the age is greater than 100 show an alert */
-      alert("You must be less than 100 years old");
-      return;
-    }
 
 
 
@@ -93,36 +76,33 @@ export class RegisterComponent {
 
     else {
 
-      /* this.http.post('/users', {
+      const userDetails = {
         name: this.name,
         surname: this.surname,
         username: this.username,
         password: this.password,
-        email: this.email,
-        birthdate: this.birthdate
-      }).subscribe({
-        next: (res: any) => {
+        email: this.email
+      };
+
+      this.http.post('http://127.0.0.1:8000/api/users', userDetails).subscribe(
+        res => {
           console.log(res);
+          // Reset the form fields
+          this.name = '';
+          this.surname = '';
+          this.username = '';
+          this.password = '';
+          this.email = '';
+          this.confirmPassword = '';
+          this.terms = false;
         },
-        error: (err) => {
-          console.log(err);
+        err => {
+          console.error("small error");
         }
-      });
- */
-
-
-
-      // Reset the form after submission so it doesnt get submitted again
-      this.name = '';
-      this.surname = '';
-      this.username = '';
-      this.password = ''; // here we clear the password from the page, but do not remove it
-      this.email = '';
-      this.birthdate = '';
-      this.confirmPassword = '';
-
+      );
     }
-  }
 
-  // TODO : when database is connected put this in the database instead of the console log
+  }
 }
+
+// TODO : when database is connected put this in the database instead of the console log
