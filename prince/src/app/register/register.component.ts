@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { SlicePipe } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule, HttpClientModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -18,9 +18,7 @@ export class RegisterComponent {
   email: any;
   confirmPassword: any;
 
-  birthdate: any;
   terms: boolean = false; /* made it false by default because the laws say that you need to accept them yourself and not prechecked  */
-  news: boolean = false;
 
 
 
@@ -31,25 +29,18 @@ export class RegisterComponent {
   }
 
 
-  toggleNews() {
-    this.news = !this.news;
-    console.log(this.news);
-  }
 
   toggleTerms() {
     this.terms = !this.terms; /* went from true to false and vice versa when the checkbox is clicked */
     console.log(this.terms);
   }
 
-
+  constructor(private http: HttpClient) { }
 
 
   onSubmit() {
 
-    if (!this.name || !this.surname || !this.username || !this.password || !this.email || !this.confirmPassword || !this.birthdate) { /* if any of the fields are empty show an alert */
-      alert("Please fill out all fields");
-      return;
-    }
+
 
     const termsaccepted = document.getElementById("terms") as HTMLInputElement; /* get the checkbox */
     if (!termsaccepted.checked) {                                           /* if the checkbox is not checked show an alert */
@@ -64,17 +55,6 @@ export class RegisterComponent {
       return;
     }
 
-
-    const ageverify = new Date();
-    const age = ageverify.getFullYear() - new Date(this.birthdate).getFullYear();
-    if (age < 18) {                                                         /* if the age is less than 18 show an alert */
-      alert("You must be at least 18 years old");
-      return;
-    }
-    else if (age > 100) {                                                   /* if the age is greater than 100 show an alert */
-      alert("You must be less than 100 years old");
-      return ;
-    }
 
 
 
@@ -95,36 +75,34 @@ export class RegisterComponent {
 
 
     else {
-      console.log("name: " + this.name);
-      console.log("surname:" + this.surname);
-      console.log("username: " + this.username);
-      console.log("email: " + this.email);
-      console.log("birthdate: " + this.birthdate); /* we dont use the birthdate in the database but we do in the console */
-      console.log("password: " + this.password);
 
-      console.log("news: " + this.news);
+      const userDetails = {
+        name: this.name,
+        surname: this.surname,
+        username: this.username,
+        password: this.password,
+        email: this.email
+      };
 
-
-      localStorage.setItem("name", this.name);
-      localStorage.setItem("surname", this.surname);
-      localStorage.setItem("username", this.username);
-      localStorage.setItem("password", this.password);
-      localStorage.setItem("email", this.email);
-
-
-
-
-      // Reset the form after submission so it doesnt get submitted again
-      this.name = '';
-      this.surname = '';
-      this.username = '';
-      this.password = ''; // here we clear the password from the page, but do not remove it
-      this.email = '';
-      this.birthdate = '';
-      this.confirmPassword = '';
-      
+      this.http.post('http://127.0.0.1:8000/api/users', userDetails).subscribe(
+        res => {
+          console.log(res);
+          // Reset the form fields
+          this.name = '';
+          this.surname = '';
+          this.username = '';
+          this.password = '';
+          this.email = '';
+          this.confirmPassword = '';
+          this.terms = false;
+        },
+        err => {
+          console.error("small error");
+        }
+      );
     }
-  }
 
-  // TODO : when database is connected put this in the database instead of the console log
+  }
 }
+
+// TODO : when database is connected put this in the database instead of the console log

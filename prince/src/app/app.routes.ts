@@ -34,4 +34,3 @@ export const routes: Routes = [
         component: UserprofileComponent
     }
     
-];
