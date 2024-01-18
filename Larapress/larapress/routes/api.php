@@ -15,10 +15,14 @@ Route::get('/comments', function () {
     return response()->json($results);
 });
 
+
+
+
 // Users
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')->get();       // SELECT * FROM users is query in SQL
+    $results = DB::table('users')
+    ->paginate(15);
 
     return response()->json($results);
 });
