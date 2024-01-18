@@ -3,34 +3,25 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth; //It allows you to handle authentication and authorization in your application.
 use App\Models\Product;
+use App\Models\User;
 
 
 
 Route::get('/comments', function () {
     $results = DB::table('Comments')
-        ->select([
-            'comment_id',
-            'id',
-            'like',
-            'content',
-            'comment_date',
-        ])
-        ->get();
+        ->get();                            // we don't use select because we want to get all the data
     return response()->json($results);
 });
 
+// Users
 
 Route::get('/users', function (Request $request) {
     $results = DB::table('users')->get();       // SELECT * FROM users is query in SQL
 
     return response()->json($results);
 });
-
-
 
 Route::post('/users', function (Request $request) {
 
@@ -61,6 +52,7 @@ Route::post('/users', function (Request $request) {
     return response()->json(['message' => 'User created successfully'], 201);
 });
 
+// Authentication
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password'); // we need only username and password from the request
 
@@ -93,6 +85,7 @@ Route::get('/logout', function () {
 });
 
 
+// Products
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('Products')->get();       // SELECT * FROM products is query in SQL
