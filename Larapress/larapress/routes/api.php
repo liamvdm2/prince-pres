@@ -64,12 +64,34 @@ Route::post('/users', function (Request $request) {
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password'); // we need only username and password from the request
 
-    if (Auth::attempt($credentials)) {
-        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed 
+    if (Auth::attempt($credentials, true)) {
+        $user = User::create([
+            'username' => $request->username,
+            'password' => $request->password,
+        ]);
+
+        $rememberToken = $user->createToken('remember_me');
+        $user->rememberToken = $rememberToken->token;
+        $user->save();
+
+        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed
     } else {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
+
+Route::get('/logout', function () {
+    Auth::logout();
+
+    $user = User::find(Auth::user()->id);
+    if ($user) {
+        $user->rememberToken = null;
+        $user->save();
+    }
+
+    return redirect('/');
+});
+
 
 
 Route::get('/products', function (Request $request) {
@@ -104,36 +126,3 @@ Route::post('/products', function (Request $request) {
     // Return a response
     return response()->json(['message' => 'Product added successfully'], 201);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// temp token routes
-/* Route::post('/tokens/create', function (Request $request) {
-    $user = User::find(1);
-   
-    
-    return ['token' => $token->plainTextToken];
-
-    
-    $user::where('id', 1)->update(['remember_token' => $token->plainTextToken]);
-}); */
