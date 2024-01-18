@@ -8,7 +8,6 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
 
 
 
-
 export const routes: Routes = [
     {
         path: 'register',
@@ -35,8 +34,3 @@ export const routes: Routes = [
         component: UserprofileComponent
     }
     
-];
-
- 
-  
-

@@ -26,6 +26,18 @@
     color: gray;
 }
 
+.fa-heart {
+    color: red;
+}
+
+.fa-check {
+    color: green;
+}
+
+.fa-star {
+    color: #F4CA00;
+}
+
 .input-group {
     padding-bottom: 15px;
 }
