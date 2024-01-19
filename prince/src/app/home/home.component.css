@@ -1,10 +1,9 @@
-body {
+/* body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    background: radial-gradient(rgb(132, 132, 132) 5%, rgb(21, 21, 21) 100%);
-}
+} */
 
 /* .pageBanner {
     background: linear-gradient(0deg, #575757 35%, black 100%) !important;
@@ -152,15 +151,4 @@ footer {
 .glowLabel {
     font-size: 80px;
     color: #fff;
-    animation: glow 1s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #a8fff8, 0 0 40px #a8fff8, 0 0 50px #a8fff8, 0 0 60px #a8fff8, 0 0 70px #a8fff8;
-    }
-
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ffb5fa, 0 0 40px #ffb5fa, 0 0 50px #ffb5fa, 0 0 60px #ffb5fa, 0 0 70px #ffb5fa, 0 0 80px #ffb5fa;
-    }
 }
