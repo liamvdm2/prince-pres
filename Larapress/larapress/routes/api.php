@@ -98,7 +98,7 @@ Route::post('/login', function (Request $request) {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
-
+/* 
 Route::get('/logout', function () {
     Auth::logout();
 
@@ -109,7 +109,7 @@ Route::get('/logout', function () {
     }
 
     return redirect('/');
-});
+}); */
 
 
 // Products
