@@ -7,7 +7,7 @@
 
 
 
-<form (ngSubmit)="onSubmit()">
+<form>
     <label for="surname">Surname:</label>
     <input id="surname" [(ngModel)]="surname" name="surname" type="text" required>
 
@@ -33,6 +33,10 @@
     <label for="terms"> I agree to the terms and conditions</label>
     <input type="checkbox" id="terms" name="terms" required>
 
+    <label for="remember"> Remember me</label>
+    <input type="checkbox" name="remember" value="1">
+
+
 
 
 
@@ -40,7 +44,7 @@
 
     <p>Already have an account? <routerLink class="link" [routerLink]="['/login']">Login</routerLink>
     </p> <!-- we go via the route to the login page -->
-    <button type="submit">Submit</button>
+    <button type="button" (click)="onSubmit()">Submit</button>
 
     <!-- TODO: add a button to go back -->
 </form>
