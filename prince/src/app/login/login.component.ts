@@ -38,7 +38,7 @@ export class LoginComponent {
         this.router.navigate(['/userprofile']);
       },
       err => {
-        console.error("oops there was an error!");
+        console.error(err);
         // Handle failed login here
       }
     );
