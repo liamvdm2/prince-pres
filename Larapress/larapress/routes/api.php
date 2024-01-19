@@ -81,12 +81,15 @@ Route::post('/users', function (Request $request) {
 
 // Authentication
 Route::post('/login', function (Request $request) {
-    $credentials = $request->only('username', 'password'); // we need only username and password from the request
+    $credentials = $request->only('username', 'password', 'remember_token'); // we need only username and password from the request
 
     if (Auth::attempt($credentials, true)) {
+
+        
         $user = User::create([
             'username' => $request->username,
             'password' => $request->password,
+            'remember_token' => $request->remember_token,
         ]);
 
         $rememberToken = $user->createToken('remember_me');
@@ -98,18 +101,7 @@ Route::post('/login', function (Request $request) {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
-/* 
-Route::get('/logout', function () {
-    Auth::logout();
 
-    $user = User::find(Auth::user()->id);
-    if ($user) {
-        $user->rememberToken = null;
-        $user->save();
-    }
-
-    return redirect('/');
-}); */
 
 
 // Products
