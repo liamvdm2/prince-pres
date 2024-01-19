@@ -1,0 +1,191 @@
+body {
+    background: radial-gradient(rgb(132, 132, 132) 10%, rgb(39, 39, 39) 100%);
+}
+
+#banner {
+    padding: 50px 0;
+}
+
+.banner img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    color: #495057;
+}
+
+.purchase-links {
+    margin-top: 20px;
+}
+
+.purchase-links h5 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-dark {
+    background-color: #343a40;
+    color: #fff;
+    border: none;
+}
+
+.related-books {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 65px;
+}
+
+.related-books h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.book-cover {
+    max-height: 375px;
+    margin-right: 20px;
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.book-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.book-info {
+    flex: 1;
+}
+
+.book-cover:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    color: #ffffff;
+    background-color: #343a40;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: static;
+}
+
+#moreBooksContainer {
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+}
+
+.books-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.swiper-slide {
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.swiper-book-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.swiper-pagination-bullets {
+    flex-direction: row;
+}
+
+.swiper-pagination-bullet {
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #041d32;
+    opacity: 0.2;
+    transition: all .3s;
+    margin: 0 3px;
+}
+
+.swiper-pagination-bullet-active {
+    width: 50px;
+    opacity: 1;
+    background: linear-gradient(90deg, rgba(174, 253, 255, 1) 35%, rgba(244, 178, 255, 1) 100%);
+    box-shadow: 0px 0px 20px rgba(249, 186, 255, 0.549);
+}
+
+
+.blog-slider__pagination {
+    position: absolute;
+    z-index: 21;
+    bottom: 20px;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: 768px) {
+        position: static;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 0 8px;
+        }
+    }
+}
+
+.swiper-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

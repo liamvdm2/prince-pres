@@ -1,1 +1,112 @@
-<p>details works!</p>
+<!-- //////////////////// load clicked product //////////////////// -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('bookId');
+
+        const bookCover = document.getElementById('book-cover');
+        bookCover.src = `media/book${bookId}.png`;
+
+    });
+</script>
+
+<!-- //////////////////// display page banner //////////////////// -->
+<section class="banner">
+    <img src="media/seriesBanner.png" alt="Series Banner">
+</section>
+
+<!-- //////////////////// display book info //////////////////// -->
+<section class="container mt-5">
+    <div class="book-details">
+        <img id="book-cover" class="book-cover" alt="Book Cover">
+        <div class="book-info">
+            <h2 class="book-title">Book Title</h2>
+            <p class="book-description">Book Description</p>
+            <div class="purchase-links">
+                <h5>Available at:</h5>
+                <a href="#" class="btn btn-dark">Amazon</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- //////////////////// display more from the series //////////////////// -->
+<section class="container mt-5">
+    <div class="related-books">
+        <h2>More from the Series!</h2>
+        <div id="moreBooksContainer" class="swiper-container">
+            <div class="swiper-wrapper books-wrapper">
+                <script>
+                    for (let i = 1; i <= 11; i++) {
+                        document.write(`
+                            <div class="swiper-slide">
+                                <a href="details.html?bookId=${i}">
+                                    <img class="book-cover swiper-book-cover" src="media/book${i}.png" alt="Book ${i} Cover">
+                                </a>
+                            </div>
+                        `);
+                    }
+                </script>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('#moreBooksContainer', {
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        });
+    </script>
+</section>
+
+<!-- //////////////////// display similar products //////////////////// -->
+<!-- <section class="container mt-5">
+        <div class="related-books">
+            <h2 class="text-uppercase">Relaited</h2>
+            <div id="moreBooksContainer" class="swiper-container">
+                <div class="swiper-wrapper books-wrapper">
+                    <script>
+                        for (let i = 1; i <= 11; i++) {
+                            document.write(`
+                            <div class="swiper-slide">
+                                <a href="details.html?bookId=${i}">
+                                    <img class="book-cover swiper-book-cover" src="media/book${i}.png" alt="Book ${i} Cover">
+                                </a>
+                            </div>
+                        `);
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var swiper = new Swiper('#moreBooksContainer', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 20,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                });
+            });
+        </script>
+    </section> -->
+
+<footer>
+    <p>&copy; 2024 PrincePress. All rights reserved.</p>
+</footer>
