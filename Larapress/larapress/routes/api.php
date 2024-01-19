@@ -3,22 +3,20 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-/* use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Mail; */
-/* use Illuminate\Support\Facades\Notification; */
 use Illuminate\Support\Facades\Auth; //It allows you to handle authentication and authorization in your application.
+
+// Models
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Popular;
 
 
 // Comments
 
 Route::get('/comments', function () {
     $results = DB::table('Comments')
-        ->get();
+        ->paginate(10);
     return response()->json($results);
 });
 
@@ -45,13 +43,14 @@ route::post('/comments', function (Request $request) {
 
 Route::get('/users', function (Request $request) {
     $results = DB::table('users')
-        ->paginate(15);
+        ->orderBy('created_at', 'desc')        // select * from products order by created_at desc and  
+        ->paginate(10);                        // limit to 10 per page from newest to oldest so the app can run faster
 
     return response()->json($results);
 });
 
 
-// Users and login
+// Register and login
 
 Route::post('/users', function (Request $request) {
 
@@ -83,10 +82,9 @@ Route::post('/users', function (Request $request) {
 });
 
 Route::post('/login', function (Request $request) {
-    $credentials = $request->only('username', 'password');
+    $credentials = $request->only('username', 'password'); // we only need username and password for a login
 
     if (Auth::attempt($credentials)) {
-        // Authentication passed...
         // Check if the user wants to be remembered
         if ($request->has('remember')) {
             // The 'remember' field was checked on the form
@@ -104,8 +102,8 @@ Route::post('/login', function (Request $request) {
 // Products
 
 Route::get('/products', function (Request $request) {
-    $results = DB::table('Products')->get();       // SELECT * FROM products is query in SQL
-
+    $results = DB::table('Products')
+        ->paginate(15);
     return response()->json($results);
 });
 
