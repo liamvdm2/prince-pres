@@ -16,7 +16,7 @@ export class LoginComponent {
   password: any;
 
 
-
+  rememberMe: boolean = false;
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -28,7 +28,8 @@ export class LoginComponent {
 
     const credentials = {
       username: this.username,
-      password: this.password
+      password: this.password,
+      rememberMe: this.rememberMe
     };
 
     this.http.post('http://127.0.0.1:8000/api/login', credentials).subscribe(
@@ -38,7 +39,7 @@ export class LoginComponent {
         this.router.navigate(['/userprofile']);
       },
       err => {
-        console.error("oops there was an error!");
+        console.error(err);
         // Handle failed login here
       }
     );

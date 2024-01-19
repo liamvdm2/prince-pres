@@ -97,7 +97,7 @@ export class RegisterComponent {
           this.terms = false;
         },
         err => {
-          console.error("small error");
+          console.error(err);
         }
       );
     }
