@@ -3,34 +3,29 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth; //It allows you to handle authentication and authorization in your application.
 use App\Models\Product;
+use App\Models\User;
 
 
 
 Route::get('/comments', function () {
     $results = DB::table('Comments')
-        ->select([
-            'comment_id',
-            'id',
-            'like',
-            'content',
-            'comment_date',
-        ])
-        ->get();
+        ->get();                            // we don't use select because we want to get all the data
     return response()->json($results);
 });
 
+
+
+
+// Users
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')->get();       // SELECT * FROM users is query in SQL
+    $results = DB::table('users')
+    ->paginate(15);
 
     return response()->json($results);
 });
-
-
 
 Route::post('/users', function (Request $request) {
 
@@ -61,16 +56,40 @@ Route::post('/users', function (Request $request) {
     return response()->json(['message' => 'User created successfully'], 201);
 });
 
+// Authentication
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password'); // we need only username and password from the request
 
-    if (Auth::attempt($credentials)) {
-        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed 
+    if (Auth::attempt($credentials, true)) {
+        $user = User::create([
+            'username' => $request->username,
+            'password' => $request->password,
+        ]);
+
+        $rememberToken = $user->createToken('remember_me');
+        $user->rememberToken = $rememberToken->token;
+        $user->save();
+
+        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed
     } else {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
     }
 });
 
+Route::get('/logout', function () {
+    Auth::logout();
+
+    $user = User::find(Auth::user()->id);
+    if ($user) {
+        $user->rememberToken = null;
+        $user->save();
+    }
+
+    return redirect('/');
+});
+
+
+// Products
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('Products')->get();       // SELECT * FROM products is query in SQL
@@ -104,36 +123,3 @@ Route::post('/products', function (Request $request) {
     // Return a response
     return response()->json(['message' => 'Product added successfully'], 201);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// temp token routes
-/* Route::post('/tokens/create', function (Request $request) {
-    $user = User::find(1);
-   
-    
-    return ['token' => $token->plainTextToken];
-
-    
-    $user::where('id', 1)->update(['remember_token' => $token->plainTextToken]);
-}); */
