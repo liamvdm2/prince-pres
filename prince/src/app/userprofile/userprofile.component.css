@@ -1,0 +1,244 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+/*.input-group {
+    margin: 10px;
+}*/
+
+/*form input*/
+.form-control {
+    font-size: 1rem;
+    line-height: 1.5;
+    display: block;
+    width: 100%;
+    height: calc(2.75rem + 2px);
+    padding: .625rem .75rem;
+    transition: all .2s cubic-bezier(.68, -.55, .265, 1.55);
+    color: #8898aa;
+    border: 1px solid #cad1d7;
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: none;
+}
+  
+
+.titleIcon {
+    color: gray;
+}
+
+.fa-heart {
+    color: red;
+}
+
+.fa-check {
+    color: green;
+}
+
+.fa-star {
+    color: #F4CA00;
+}
+
+.input-group {
+    padding-bottom: 15px;
+}
+
+.main-content {
+    margin-top: 5%;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+/*Setting btn*/
+.btn {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    display: inline-block;
+    padding: .625rem 1.25rem;
+    text-align: center;
+    border-radius: .375rem;
+}
+
+.btn-primary {
+    color: #fff;
+    border-color: #5e72e4;
+    background-color: #5e72e4;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, .11), 0 1px 3px rgba(0, 0, 0, .08);
+}
+
+.card-header {
+    margin-bottom: 0;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    background-color: #fff;
+}
+
+.media {
+    display: flex;
+    align-items: flex-start;
+}
+
+.bg-secondary {
+    background-color: #f7fafc !important;
+}
+
+/*Profile card rihgt*/
+.card-profile-image {
+    position: relative;
+}
+
+.card-profile-image img {
+    position: absolute;
+    left: 50%;
+    max-width: 180px;
+    transition: all .15s ease;
+    transform: translate(-50%, -30%);
+    border-radius: .375rem;
+}
+
+.card-profile-image img:hover {
+    transform: translate(-50%, -33%);
+}
+
+.card-profile-stats {
+    padding: 1rem 0;
+}
+
+.card-profile-stats>div {
+    margin-right: 1rem;
+    padding: .875rem;
+    text-align: center;
+}
+
+.card-profile-stats>div:last-child {
+    margin-right: 0;
+}
+
+.card-profile-stats>div .heading {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: block;
+}
+
+.card-profile-stats>div .description {
+    font-size: .875rem;
+    color: #adb5bd;
+}
+
+@media (min-width: 768px) {
+    .main-content .container-fluid {
+        padding-right: 39px !important;
+        padding-left: 39px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .rounded-circle {
+        /*height: 20%;
+        width: 20%;*/
+        width: 130px;
+    }
+
+    .badge-container {
+        width: 60%;
+        height: 60%;
+    }
+
+    .heading {
+        margin-top: 60px;
+    }
+
+    .btn {
+        font-size: 12px;
+    }
+}
+
+
+p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+}
+
+/*Badges*/
+/*.badge-one,
+.badge-two {
+    width: 35%;
+    height: 35%;
+    float: left;
+}
+
+.badge-one {
+    transition: transform 0.3s ease;
+}
+
+.badge-container:hover .badge-one {
+    transform: scale(2);
+}*/
+
+.badge-container {
+    position: relative;
+    /*overflow: hidden;*/
+}
+
+.badge-one,
+.badge-two {
+    width: 35%;
+    height: 35%;
+    float: left;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.badge-one:hover {
+    transform: scale(2); /* or any other transformation you desire for badge-one */
+}
+
+.badge-two:hover {
+    transform: scale(2); /* or any other transformation you desire for badge-two */
+}
+
+
+
+.container {
+    position: relative;
+    width: 50%;
+    float: left;
+  }
+  
+  .image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .container:hover .image {
+    opacity: 0.3;
+    transform: scale(2);
+  }
+  
+  .container:hover .middle {
+    opacity: 1;
+  }
+  
+  .text {
+    color: black;
+    font-size: 16px;
+    padding: 16px 32px;
+  }
