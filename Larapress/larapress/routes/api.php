@@ -50,6 +50,9 @@ Route::get('/users', function (Request $request) {
     return response()->json($results);
 });
 
+
+// Users and login
+
 Route::post('/users', function (Request $request) {
 
     $name = $request->name;
@@ -78,29 +81,6 @@ Route::post('/users', function (Request $request) {
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
 });
-
-// Authentication
-/* Route::post('/login', function (Request $request) {
-    $credentials = $request->only('username', 'password', 'remember_token'); // we need only username and password from the request
-
-    if (Auth::attempt($credentials, true)) {
-
-
-        $user = User::create([
-            'username' => $request->username,
-            'password' => $request->password,
-            'remember_token' => $request->remember_token,
-        ]);
-
-        $rememberToken = $user->createToken('remember_me');
-        $user->rememberToken = $rememberToken->token;
-        $user->save();
-
-        return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed
-    } else {
-        return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
-    }
-}); */
 
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password');
@@ -155,3 +135,11 @@ Route::post('/products', function (Request $request) {
     // Return a response
     return response()->json(['message' => 'Product added successfully'], 201);
 });
+
+// popularity
+
+/* route::get('/popularity', function () {
+    $results = DB::table('popularities')
+        ->get();
+    return response()->json($results);
+}); */
