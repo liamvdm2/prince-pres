@@ -18,7 +18,7 @@ use App\Models\Comment;
 
 Route::get('/comments', function () {
     $results = DB::table('Comments')
-        ->get();                           
+        ->get();
     return response()->json($results);
 });
 
@@ -45,7 +45,7 @@ route::post('/comments', function (Request $request) {
 
 Route::get('/users', function (Request $request) {
     $results = DB::table('users')
-    ->paginate(15);
+        ->paginate(15);
 
     return response()->json($results);
 });
@@ -80,12 +80,12 @@ Route::post('/users', function (Request $request) {
 });
 
 // Authentication
-Route::post('/login', function (Request $request) {
+/* Route::post('/login', function (Request $request) {
     $credentials = $request->only('username', 'password', 'remember_token'); // we need only username and password from the request
 
     if (Auth::attempt($credentials, true)) {
 
-        
+
         $user = User::create([
             'username' => $request->username,
             'password' => $request->password,
@@ -99,6 +99,23 @@ Route::post('/login', function (Request $request) {
         return response()->json(['message' => 'Logged in successfully'], 200); // Authentication passed
     } else {
         return response()->json(['message' => 'Invalid username or password'], 401); // Authentication failed
+    }
+}); */
+
+Route::post('/login', function (Request $request) {
+    $credentials = $request->only('username', 'password');
+
+    if (Auth::attempt($credentials)) {
+        // Authentication passed...
+        // Check if the user wants to be remembered
+        if ($request->has('remember')) {
+            // The 'remember' field was checked on the form
+            Auth::login(Auth::user(), true);
+        }
+        return response()->json(['message' => 'Logged in successfully']);
+    } else {
+        // Authentication failed...
+        return response()->json(['error' => 'Invalid credentials'], 401);
     }
 });
 
