@@ -3,16 +3,39 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+/* use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail; */
+/* use Illuminate\Support\Facades\Notification; */
 use Illuminate\Support\Facades\Auth; //It allows you to handle authentication and authorization in your application.
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Comment;
 
 
+// Comments
 
 Route::get('/comments', function () {
     $results = DB::table('Comments')
-        ->get();                            // we don't use select because we want to get all the data
+        ->get();                           
     return response()->json($results);
+});
+
+route::post('/comments', function (Request $request) {
+
+    $content = $request->content;
+
+    $validatedData = $request->validate([
+        'content' => 'required|max:255',
+    ]);
+
+    $comments = Comment::create([
+        'content' => $validatedData['content'],
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+    return response()->json(['message' => 'Comment created successfully'], 201);
 });
 
 
