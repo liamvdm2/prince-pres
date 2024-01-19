@@ -14,3 +14,6 @@ export class UserprofileComponent {
     this.editMode = !this.editMode;
   }
 }
+
+/*SUBMIT BUTTON */
+

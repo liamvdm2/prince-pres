@@ -1,17 +1,20 @@
-<form>
+"button" (click)="onSubmit()">Submit</button>
 
 
-    <label for="username">Username:</label>
-    <input id="username" [(ngModel)]="username" name="username" type="text" required>
-
-
-    <label for="password">Password:</label>
-    <input id="password" [(ngModel)]="password" name="password" type="password" required>
-
-    <label for="rememberMe"> Remember Me</label>
-    <input type="checkbox" id="rememberMe" name="rememberMe">
-
-    <button type="button" (click)="onSubmit()">Submit</button>
-
-    <!-- TODO: add a button to go back -->
-</form>
+<div class="login-box">
+    <h2>Login</h2>
+   
+        <div class="user-box">
+            <input id="username" [(ngModel)]="username" name="username" type="text" name="" required>
+            <label for="username">Username</label>
+        </div>
+        <div class="user-box">
+            <input id="password" [(ngModel)]="password" name="password" type="password" name="" required>
+            <label for="password">Password</label>
+        </div>
+        <button (click)="onSubmit()" style="--clr:#0FF0FC">
+            <span>Login</span>
+            <i></i>
+        </button>
+   
+</div>
