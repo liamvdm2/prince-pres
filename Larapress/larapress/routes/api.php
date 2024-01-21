@@ -113,8 +113,11 @@ route::post('/comments', function (Request $request) {
 
 // Products
 
+
 Route::get('/products', function (Request $request) {
     $results = DB::table('Products')
+        ->join('Genres', 'Products.genre_id', '=', 'Genres.genre_id')
+        ->select('Products.*', 'Genres.genre_name')
         ->paginate(15);
     return response()->json($results);
 });
@@ -122,24 +125,25 @@ Route::get('/products', function (Request $request) {
 Route::post('/products', function (Request $request) {
     $title = $request->product_title;
     $desc = $request->product_desc;
-    /* $release = $request->product_release; */
     $author = $request->product_author;
+    $genreId = $request->genre_id;
+    $release = $request->product_release;
 
     $validatedData = $request->validate([
         'product_title' => 'required|max:255',
         'product_desc' => 'required|max:255',
-        /* 'product_release' => 'required|date', */
         'product_author' => 'required|max:255',
+        'genre_id' => 'required|exists:Genres,genre_id',
+        'product_release' => 'required|date',
     ]);
-
 
     // Store the product in the database
     $products = Product::create([
         'product_title' => $validatedData['product_title'],
         'product_desc' => $validatedData['product_desc'],
-        /* 'product_release' => $validatedData['product_release'], */
         'product_author' => $validatedData['product_author'],
-
+        'genre_id' => $validatedData['genre_id'],
+        'product_release' => $validatedData['product_release'],
     ]);
 
     // Return a response
