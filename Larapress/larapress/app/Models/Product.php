@@ -14,6 +14,7 @@ class Product extends Model
         'product_desc',
         /*  'product_release', */
         'product_author',
+        'genre_id',
     ];
 
     protected $table = 'Products';

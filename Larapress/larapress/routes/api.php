@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Popular;
+use App\Models\Wishlist;
 
 
 
@@ -157,3 +158,48 @@ Route::post('/products', function (Request $request) {
         ->get();
     return response()->json($results);
 }); */
+
+
+
+
+// wishlist
+
+Route::get('/wishlist/{username}', function ($username) {
+    // Fetch the user whose username matches the {username} parameter
+    $user = DB::table('users')->where('username', $username)->first();
+    // If the user does not exist, return a error
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+    // Fetch all wishlist items associated with this user
+    // Join the wishlist and products tables based on the condition wishlist.product_id equals 'products.product_id'
+    // Select all fields from the 'wishlist' table and the 'product_title', 'product_desc', and 'product_author' fields from the 'products' table
+    $wishlistItems = DB::table('wishlist')
+        ->where('user_id', $user->id)
+        ->join('products', 'wishlist.product_id', '=', 'products.product_id')
+        ->select('wishlist.*', 'products.product_title', 'products.product_desc', 'products.product_author')
+        ->get();
+    return response()->json($wishlistItems);
+});
+
+// Define the POST endpoint for adding a product to a user's wishlist
+Route::post('/wishlist/{username}/{product_id}', function ($username, $product_id) {
+    // Fetch the user whose username matches the {username} parameter
+    $user = DB::table('users')->where('username', $username)->first();
+    // If the user does not exist, return an error
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+    $product = DB::table('products')->where('product_id', $product_id)->first();
+    // If the product does not exist, return a  error
+    if (!$product) {
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+    // Insert a new wishlist item linking this user and product
+    $wishlistItem = DB::table('wishlist')->insert([
+        'user_id' => $user->id,
+        'product_id' => $product->product_id
+    ]);
+    // Return a success message as a JSON response
+    return response()->json(['message' => 'Product added to wishlist successfully'], 201);
+});
