@@ -6,36 +6,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth; //It allows you to handle authentication and authorization in your application.
 
 // Models
-use App\Models\Product;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Product;
 use App\Models\Popular;
-
-
-// Comments
-
-Route::get('/comments', function () {
-    $results = DB::table('Comments')
-        ->paginate(10);
-    return response()->json($results);
-});
-
-route::post('/comments', function (Request $request) {
-
-    $content = $request->content;
-
-    $validatedData = $request->validate([
-        'content' => 'required|max:255',
-    ]);
-
-    $comments = Comment::create([
-        'content' => $validatedData['content'],
-        'updated_at' => now(),
-        'created_at' => now(),
-    ]);
-    return response()->json(['message' => 'Comment created successfully'], 201);
-});
-
 
 
 
@@ -48,7 +22,6 @@ Route::get('/users', function (Request $request) {
 
     return response()->json($results);
 });
-
 
 // Register and login
 
@@ -96,6 +69,45 @@ Route::post('/login', function (Request $request) {
         return response()->json(['error' => 'Invalid credentials'], 401);
     }
 });
+
+// Comments
+
+Route::get('/comments', function () {
+    $results = DB::table('Comments')
+        // Join the Comments table to the users table on the user_id field
+        ->join('users', 'users.id', '=', 'Comments.user_id')
+        // Select the username field from the users table and all fields from the Comments table
+        ->select('users.username', 'Comments.*')
+        ->get();
+
+    $results = $results->map(function ($item) {
+        // Remove the user_id field from the results so its better visible
+        unset($item->user_id);
+        // Convert the item to a collection and sort the keys so comment_id is first
+        return collect($item)->sortKeys();
+    });
+
+    return response()->json($results);
+});
+
+route::post('/comments', function (Request $request) {
+
+    $content = $request->content;
+
+    $validatedData = $request->validate([
+        'content' => 'required|max:255',
+    ]);
+
+    $comments = Comment::create([
+        'content' => $validatedData['content'],
+        'user_id' => Auth::id(), // gets the id of the currently logged in user
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+    return response()->json(['message' => 'Comment created successfully'], 201);
+});
+
+
 
 
 
