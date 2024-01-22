@@ -18,8 +18,8 @@ class Product extends Model
         'product_type',
         'product_cover',
         'available_at',
-    ];
+    ];  
 
     protected $table = 'Products';
-    /* public $timestamps = false; */
+    protected $primaryKey = 'product_id';
 }

@@ -42,13 +42,14 @@ Route::post('/users', function (Request $request) {
         'username' => 'required',
     ]);
 
-    $user = User::create([
-        'name' => $validatedData['name'],
-        'surname' => $validatedData['surname'],
-        'email' => $validatedData['email'],
-        'password' => $validatedData['password'],
-        'username' => $validatedData['username'],
-        'updated_at' => now(),
+    $products = Product::create([
+        'product_title' => $validatedData['product_title'],
+        'product_desc' => $validatedData['product_desc'],
+        'product_type' => $validatedData['product_type'],
+        'product_cover' => $validatedData['product_cover'],
+        'available_at' => $validatedData['available_at'],
+        'product_author' => $validatedData['product_author'],
+        'product_release' => $validatedData['product_release'],
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
@@ -215,25 +216,3 @@ Route::get('/genres', function () {
     return response()->json($genres);
 });
 
-
-
-
-
-// images only uncomment if needed|  this is for uploading images to the server
-
-/* Route::post('/api/images', function (Request $request) {
-    $request->validate([
-      'image' => 'required|image|max:2048',
-    ]);
-  
-    $image = $request->file('image');
-  
-    $imageData = file_get_contents($image->getRealPath());  
-  
-    $imageId = DB::table('images')->insertGetId([
-      'image_data' => $imageData,
-    ]);
-  
-    return response()->json(['imageId' => $imageId], 201);
-  });
- */
