@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -9,9 +10,15 @@ import { Component } from '@angular/core';
 })
 export class UserprofileComponent {
   editMode = false;
+  loggedInUser: any;
 
   toggleEditMode() {
     this.editMode = !this.editMode;
+  }
+
+  constructor(private userService: UserService) {
+    // Retrieve the logged-in user information when the component is initialized
+    this.loggedInUser = this.userService.getLoggedInUser();
   }
 }
 

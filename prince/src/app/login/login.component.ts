@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
+import { UserService } from '../userprofile/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,15 @@ export class LoginComponent {
   rememberMe: boolean = false;
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
+  login() {
+    // Assuming you get the user information after a successful login
+    const loggedInUser = { username: 'exampleUser' };
 
-
+    // Set the logged-in user
+    this.userService.setLoggedInUser(loggedInUser);
+  }
 
   onSubmit() {
 
@@ -35,6 +41,7 @@ export class LoginComponent {
     this.http.post('http://127.0.0.1:8000/api/login', credentials).subscribe(
       res => {
         console.log(res);
+        
         // Navigate to profile page
         this.router.navigate(['/userprofile']);
       },
