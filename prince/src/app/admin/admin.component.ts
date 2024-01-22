@@ -64,6 +64,17 @@ export class AdminComponent {
     this.http.post('http://127.0.0.1:8000/api/products', bookData).subscribe(
       res => {
         console.log(res);
-      });
+        this.title = '';
+        this.author = '';
+        this.description = '';
+        this.whereToBuy = '';
+        this.imagePath = '';
+        this.releaseDate = '';
+        this.type = '';
+      },
+      err => {
+        console.error(err);
+      }
+      );
   }
 }
