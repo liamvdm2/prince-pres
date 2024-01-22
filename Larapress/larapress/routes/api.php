@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth; //It allows you to handle authentication an
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
-use App\Models\Popular;
 use App\Models\Wishlist;
 
 
@@ -136,6 +135,7 @@ Route::post('/products', function (Request $request) {
         'product_author' => 'required|max:255',
         'genre_id' => 'required|exists:Genres,genre_id',
         'product_release' => 'required|date',
+        'created_at' => now(),
     ]);
 
     // Store the product in the database
@@ -150,15 +150,6 @@ Route::post('/products', function (Request $request) {
     // Return a response
     return response()->json(['message' => 'Product added successfully'], 201);
 });
-
-// popularity
-
-/* route::get('/popularity', function () {
-    $results = DB::table('popularities')
-        ->get();
-    return response()->json($results);
-}); */
-
 
 
 
