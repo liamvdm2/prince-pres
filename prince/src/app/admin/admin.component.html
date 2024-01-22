@@ -6,20 +6,26 @@
     <form>
         <label for="title"> Title </label>
         <input id="title" [(ngModel)]="title" name="title" type="text">
+
         <label for="Author"> Author </label>
         <input id="author" [(ngModel)]="author" name="author" type="text">
+
         <label for="description"> Description </label>
         <input id="description" [(ngModel)]="description" name="description" type="text">
+
         <label for="whereToBuy"> Where to buy </label>
         <input id="whereToBuy" [(ngModel)]="whereToBuy" name="whereToBuy" type="text">
+
         <label for="image"> Image </label>
-        <input type="file" (change)="onFileSelected($event)">
+        <input  type="file"  (change)="onFileSelected($event)" id="image" name="image">
+        <!-- <img [src]="imagePath">
+ -->
         <label for="releaseDate"> Release Date </label>
-        <input id="releaseDate" [(ngModel)]="releaseDate" name="releaseDate" type="text">
-        <label for="genre"> Genre </label>
-        <input id="genre" [(ngModel)]="genre" name="genre" type="text">
+        <input id="releaseDate" [(ngModel)]="releaseDate" name="releaseDate" type="date">
+
         <label for="type"> Type </label>
         <input id="type" [(ngModel)]="type" name="type" type="text">
+
         <button (click)="createBook()">Create</button>
     </form>
 </div>

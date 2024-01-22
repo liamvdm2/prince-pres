@@ -116,8 +116,8 @@ route::post('/comments', function (Request $request) {
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('Products')
-        ->join('Genres', 'Products.genre_id', '=', 'Genres.genre_id')
-        ->select('Products.*', 'Genres.genre_name')
+/*         ->join('Genres', 'Products.genre_id', '=', 'Genres.genre_id')
+        ->select('Products.*', 'Genres.genre_name') */
         ->paginate(15);
     return response()->json($results);
 });
@@ -127,7 +127,7 @@ Route::post('/products', function (Request $request) {
     $desc = $request->product_desc;
     $type = $request->product_type;
     $author = $request->product_author;
-    $genreId = $request->genre_id;
+    /* $genreId = $request->genre_id; */
     $release = $request->product_release;
     $cover = $request->product_cover;
     $available = $request->available_at;
@@ -137,12 +137,16 @@ Route::post('/products', function (Request $request) {
         'product_desc' => 'required|max:255',
         'product_type' => 'required|max:255',
         'product_author' => 'required|max:255',
-        'genre_id' => 'required|exists:Genres,genre_id',
+        /* 'genre_id' => 'required|exists:Genres,genre_id', */
         'product_release' => 'required|date',
-        'product_cover' => 'required|string',
+        'product_cover' => 'required',
         'available_at' => 'required|max:255',
         'created_at' => now(),
     ]);
+
+    if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $cover, $matches)) {
+        return response()->json(['message' => 'Invalid image data'], 422);
+    }
 
     // Store the product in the database
     $products = Product::create([
@@ -152,7 +156,7 @@ Route::post('/products', function (Request $request) {
         'product_cover' => $validatedData['product_cover'],
         'available_at' => $validatedData['available_at'],
         'product_author' => $validatedData['product_author'],
-        'genre_id' => $validatedData['genre_id'],
+        /* 'genre_id' => $validatedData['genre_id'], */
         'product_release' => $validatedData['product_release'],
     ]);
 
@@ -203,3 +207,33 @@ Route::post('/wishlist/{username}/{product_id}', function ($username, $product_i
     // Return a success message as a JSON response
     return response()->json(['message' => 'Product added to wishlist successfully'], 201);
 });
+
+// genres
+
+Route::get('/genres', function () {
+    $genres = DB::table('Genres')->get();
+    return response()->json($genres);
+});
+
+
+
+
+
+// images only uncomment if needed|  this is for uploading images to the server
+
+/* Route::post('/api/images', function (Request $request) {
+    $request->validate([
+      'image' => 'required|image|max:2048',
+    ]);
+  
+    $image = $request->file('image');
+  
+    $imageData = file_get_contents($image->getRealPath());  
+  
+    $imageId = DB::table('images')->insertGetId([
+      'image_data' => $imageData,
+    ]);
+  
+    return response()->json(['imageId' => $imageId], 201);
+  });
+ */
