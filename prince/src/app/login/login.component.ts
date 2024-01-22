@@ -22,13 +22,13 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
-  login() {
+  /*login() {
     // Assuming you get the user information after a successful login
     const loggedInUser = { username: 'exampleUser' };
 
     // Set the logged-in user
     this.userService.setLoggedInUser(loggedInUser);
-  }
+  }*/
 
   onSubmit() {
 
@@ -38,15 +38,21 @@ export class LoginComponent {
       rememberMe: this.rememberMe
     };
 
+    console.log('Sending credentials:', credentials.username);
+
     this.http.post('http://127.0.0.1:8000/api/login', credentials).subscribe(
-      res => {
-        console.log(res);
+      (res:any) => {
+        console.log('Server response', res);
         
+        const loggedInUser = res.user;
+        this.userService.setLoggedInUser(loggedInUser);
+
+
         // Navigate to profile page
         this.router.navigate(['/userprofile']);
       },
       err => {
-        console.error(err);
+        console.error('Error during login', err);
         // Handle failed login here
       }
     );

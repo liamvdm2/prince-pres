@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { UserService } from './user.service';
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css'
 })
-export class UserprofileComponent {
+export class UserprofileComponent implements OnInit {
   editMode = false;
   loggedInUser: any;
 
@@ -19,6 +19,12 @@ export class UserprofileComponent {
   constructor(private userService: UserService) {
     // Retrieve the logged-in user information when the component is initialized
     this.loggedInUser = this.userService.getLoggedInUser();
+  }
+
+  ngOnInit() {
+    this.loggedInUser = this.userService.getLoggedInUser();
+    console.log('Logged-in User:', this.loggedInUser?.username);
+    
   }
 }
 
