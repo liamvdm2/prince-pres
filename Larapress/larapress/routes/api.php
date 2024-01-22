@@ -42,14 +42,13 @@ Route::post('/users', function (Request $request) {
         'username' => 'required',
     ]);
 
-    $products = Product::create([
-        'product_title' => $validatedData['product_title'],
-        'product_desc' => $validatedData['product_desc'],
-        'product_type' => $validatedData['product_type'],
-        'product_cover' => $validatedData['product_cover'],
-        'available_at' => $validatedData['available_at'],
-        'product_author' => $validatedData['product_author'],
-        'product_release' => $validatedData['product_release'],
+    $user = User::create([
+        'name' => $validatedData['name'],
+        'surname' => $validatedData['surname'],
+        'email' => $validatedData['email'],
+        'password' => $validatedData['password'], 
+        'username' => $validatedData['username'],
+        'updated_at' => now(),                   
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
