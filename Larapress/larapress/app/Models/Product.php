@@ -9,17 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable =  [
-        'product_title',
-        'product_desc',
-         'product_release',
-        'product_author',
-        /* 'genre_id', */
-        'product_type',
-        'product_cover',
-        'available_at',
-    ];  
+    protected $guarded = [];
 
-    protected $table = 'Products';
-    protected $primaryKey = 'product_id';
+
 }

@@ -10,9 +10,6 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
-
-
-
 // Users
 
 Route::get('/users', function (Request $request) {
@@ -115,10 +112,10 @@ route::post('/comments', function (Request $request) {
 
 
 Route::get('/products', function (Request $request) {
-    $results = DB::table('Products')
+    $results = DB::table('products')
 /*         ->join('Genres', 'Products.genre_id', '=', 'Genres.genre_id')
         ->select('Products.*', 'Genres.genre_name') */
-        ->paginate(15);
+        ->get();
     return response()->json($results);
 });
 
@@ -132,32 +129,22 @@ Route::post('/products', function (Request $request) {
     $cover = $request->product_cover;
     $available = $request->available_at;
 
-    $validatedData = $request->validate([
-        'product_title' => 'required|max:255',
-        'product_desc' => 'required|max:255',
-        'product_type' => 'required|max:255',
-        'product_author' => 'required|max:255',
-        /* 'genre_id' => 'required|exists:Genres,genre_id', */
-        'product_release' => 'required|date',
-        'product_cover' => 'required',
-        'available_at' => 'required|max:255',
-        'created_at' => now(),
-    ]);
+  
 
-    if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $cover, $matches)) {
+  /*   if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $cover, $matches)) {
         return response()->json(['message' => 'Invalid image data'], 422);
-    }
+    } */
 
     // Store the product in the database
     $products = Product::create([
-        'product_title' => $validatedData['product_title'],
-        'product_desc' => $validatedData['product_desc'],
-        'product_type' => $validatedData['product_type'],
-        'product_cover' => $validatedData['product_cover'],
-        'available_at' => $validatedData['available_at'],
-        'product_author' => $validatedData['product_author'],
+        'product_title' => $title,
+        'product_desc' => $desc,
+        'product_type' => $type,
+        'product_author' => $author,
         /* 'genre_id' => $validatedData['genre_id'], */
-        'product_release' => $validatedData['product_release'],
+        'product_release' => $release,
+        'product_cover' => $cover,
+        'available_at' => $available
     ]);
 
     // Return a response
