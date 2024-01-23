@@ -113,7 +113,7 @@ route::post('/comments', function (Request $request) {
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
-/*         ->join('Genres', 'Products.genre_id', '=', 'Genres.genre_id')
+/*         ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
         ->select('Products.*', 'Genres.genre_name') */
         ->get();
     return response()->json($results);
@@ -167,7 +167,7 @@ Route::get('/wishlist/{username}', function ($username) {
     // Select all fields from the 'wishlist' table and the 'product_title', 'product_desc', and 'product_author' fields from the 'products' table
     $wishlistItems = DB::table('wishlist')
         ->where('user_id', $user->id)
-        ->join('products', 'wishlist.product_id', '=', 'products.product_id')
+        ->join('products', 'wishlist.product_id', '=', 'products.id')
         ->select('wishlist.*', 'products.product_title', 'products.product_desc', 'products.product_author')
         ->get();
     return response()->json($wishlistItems);
