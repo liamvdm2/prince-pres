@@ -1,1 +1,41 @@
-<p>admin works!</p>
+<H1>Hello, prince admin</H1>
+<h2>This is the admin page</h2>
+
+<div class="new-book">
+    <h2>Create new book</h2>
+    <form>
+        <label for="title"> Title </label>
+        <input id="title" [(ngModel)]="title" name="title" type="text">
+
+        <label for="Author"> Author </label>
+        <input id="author" [(ngModel)]="author" name="author" type="text">
+
+        <label for="description"> Description </label>
+        <input id="description" [(ngModel)]="description" name="description" type="text">
+
+        <label for="whereToBuy"> Where to buy </label>
+        <input id="whereToBuy" [(ngModel)]="whereToBuy" name="whereToBuy" type="text">
+
+        <label for="image"> Image </label>
+        <input  type="file"  (change)="onFileSelected($event)" id="image" name="image">
+
+        <label for="releaseDate"> Release Date </label>
+        <input id="releaseDate" [(ngModel)]="releaseDate" name="releaseDate" type="date">
+
+        <label for="type"> Type </label>
+        <input id="type" [(ngModel)]="type" name="type" type="text">
+
+        <button (click)="createBook()">Create</button>
+    </form>
+    <div id="preview">
+        <img [src]="imagePath">
+        <p>title: {{title}}</p>
+        <p>Author: {{author}}</p>
+        <p>description: {{description}}</p>
+        <p>whereToBuy: {{whereToBuy}}</p>
+        <p>releaseDate: {{releaseDate}}</p>
+        <p>type: {{type}}</p>
+    </div>
+</div>
+
+
