@@ -38,7 +38,7 @@ export class AdminComponent {
     const file = input.files[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-       // Define an event handler for when the reader loads a file
+      // Define an event handler for when the reader loads a file
       const base64String = btoa(reader.result as string);
       this.sanitizeImage(base64String);
       // Set the image path to a data URL with the base64 string
@@ -75,6 +75,31 @@ export class AdminComponent {
       err => {
         console.error(err);
       }
-      );
+    );
+  }
+
+  /*clearInput() {
+    const clearData = {
+      product_title: this.title = '',
+      product_desc: this.description = '',
+      product_type: this.type = '',
+      product_author: this.author = '',
+      product_release: this.releaseDate = '',
+      product_cover: this.imagePath = '',
+      available_at: this.whereToBuy = '',
+    }
+  }*/
+
+  clearInput() {
+    const isConfirmed = window.confirm('Are you sure you want to clear the input fields?');
+    if (isConfirmed) {
+      this.title = '';
+      this.description = '';
+      this.type = '';
+      this.author = '';
+      this.releaseDate = '';
+      this.imagePath = '';
+      this.whereToBuy = '';
+    }
   }
 }
