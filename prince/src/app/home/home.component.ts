@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../product.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
- selector: 'app-home',
- standalone: true,
- templateUrl: './home.component.html',
- styleUrls: ['./home.component.css']
+  selector: 'app-home',
+  standalone: true,
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+  imports: [CommonModule],
+  providers: [ProductService, CommonModule], // add your service here
 })
 export class HomeComponent implements OnInit {
- products: any[] = [];
+  constructor(private productService: ProductService) { }
 
- constructor(private productService: ProductService) { }
+  products: any;
+  productsUrl = this.productService.productsUrl
 
- ngOnInit() {
-    this.productService.getProducts().subscribe((data: Object) => {
-      this.products = data as any[];
-    },
-    err => {
-      console.error(err);
-    });
- }
+  getProducts() {
+    this.productService.getProducts().then(data => {
+      console.log(data);
+    }).catch(error => console.log(error));
+  }
+
+  ngOnInit() {
+    this.getProducts();
+  }
 }

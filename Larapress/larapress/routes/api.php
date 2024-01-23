@@ -115,7 +115,7 @@ Route::get('/logout', function () {
 // Products
 
 Route::get('/products', function (Request $request) {
-    $results = DB::table('Products')->get();       // SELECT * FROM products is query in SQL
+    $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
 
     return response()->json($results);
 });
