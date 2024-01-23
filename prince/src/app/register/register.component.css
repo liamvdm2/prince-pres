@@ -135,7 +135,7 @@ input:optional {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 10px 0;
+    /*padding: 0px 0;*/
     font-size: 16px;
     color: #fff;
     pointer-events: none;
@@ -365,27 +365,22 @@ button:hover i::after {
     }
 }
 
-@media (max-width: 499px) {
+@media (max-width: 510px) {
     .register-box {
-        margin-top: 15%;
+        margin-top: 5%;
+        width: 80%;
+    }
+}
+
+@media (max-width: 376px) {
+    .register-box {
+        margin-top: 40%;
         width: 300px;
     }
 }
 
-@media (max-width: 375px) {
-    .register-box {
-        margin-top: 30%;
-        width: 300px;
+@media (max-width: 475px) {
+    .conditions {
+        font-size: 12px;
     }
 }
-
-
-
-/*@media (max-width: 500) {
-    .register-box {
-        margin-top: 70%;
-        left: 50%;
-        width: 300px;
-        padding: 40px;
-    }
-}*/

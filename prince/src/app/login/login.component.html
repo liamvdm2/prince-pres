@@ -8,10 +8,17 @@
         <input id="password" [(ngModel)]="password" name="password" type="password" name="" required>
         <label for="password">Password</label>
     </div>
-    <p>
-        <input type="checkbox" id="rememberMe" name="rememberMe">
+
+    <div class="conditions">
+        <p>
+         <!--<input type="checkbox" id="terms" name="terms" required/>
+         <label for="terms">I agree to the terms and conditions</label>-->
+
+         <input type="checkbox" id="rememberMe" name="rememberMe">
         <label for="rememberMe"> Remember Me</label>
-    </p>
+       </p>
+     </div>
+
     <button (click)="onSubmit()" style="--clr:#0FF0FC">
         <span>Login</span>
         <i></i>
