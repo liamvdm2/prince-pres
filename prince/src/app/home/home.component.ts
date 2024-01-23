@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit {
     this.getProducts();
   }
 }
-
+/* 
 @NgModule({
   imports: [CommonModule],
   providers: [ProductService]
-})
+}) */
 export class AppModule { }

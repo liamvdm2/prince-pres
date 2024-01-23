@@ -226,21 +226,47 @@ Route::post('/wishlist/{username}/{product_id}', function ($username, $product_i
 
 // CRUD genres
 
-Route::get('/genres', function () {
+Route::post('/genres', function (Request $request) {
+
+    $genreName = $request->input('genre_name');
+
+    $newGenre = Genre::create([
+        'genre_name' => $genreName,
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+
+    return response()->json(['message' => 'Genre created successfully'], 201);
+});
+
+Route::get('/genres', function (Request $request) {
     $genres = DB::table('Genres')->get();
     return response()->json($genres);
 });
 
-Route::post('/genres', function (Request $request) {
+Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
     $validatedData = $request->validate([
         'name' => 'required|max:255',
     ]);
 
-    $genre = Genre::create($validatedData);
+    $genre = Genre::find($id);
 
-    return response()->json(['message' => 'Genre created successfully', 'data' => $genre], 201);
+    if ($genre) {
+        $genre->update($validatedData);
+        return response()->json(['message' => 'Genre updated successfully', 'data' => $genre]);
+    } else {
+        return response()->json(['error' => 'Genre not found'], 404);
+    }
 });
 
+Route::delete('/genres/{id}', function ($id) {
+    $genre = Genre::find($id);
 
+    if ($genre) {
+        $genre->delete();
+        return response()->json(['message' => 'Genre deleted successfully']);
+    } else {
+        return response()->json(['error' => 'Genre not found'], 404);
+    }
+});
 
-//// we dont make an update or delete for genres. We just get them from our db.

@@ -11,5 +11,7 @@ class Genre extends Model
 
     protected $guarded = [];
 
+    protected $table = 'Genres';
+
 
 }
