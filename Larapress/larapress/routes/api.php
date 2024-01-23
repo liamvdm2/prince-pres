@@ -112,6 +112,9 @@ route::post('/comments', function (Request $request) {
 
 
 Route::get('/products', function (Request $request) {
+    $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
+
+Route::get('/products', function (Request $request) {
     $results = DB::table('products')
 /*         ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
         ->select('Products.*', 'Genres.genre_name') */
