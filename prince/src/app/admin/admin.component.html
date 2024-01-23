@@ -18,8 +18,7 @@
 
         <label for="image"> Image </label>
         <input  type="file"  (change)="onFileSelected($event)" id="image" name="image">
-        <!-- <img [src]="imagePath">
- -->
+
         <label for="releaseDate"> Release Date </label>
         <input id="releaseDate" [(ngModel)]="releaseDate" name="releaseDate" type="date">
 
@@ -38,4 +37,5 @@
         <p>type: {{type}}</p>
     </div>
 </div>
+
 
