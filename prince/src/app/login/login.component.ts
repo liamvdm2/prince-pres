@@ -22,13 +22,13 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
-  /*login() {
+  login() {
     // Assuming you get the user information after a successful login
-    const loggedInUser = { username: 'exampleUser' };
+    const loggedInUser = { username: this.username }; 
 
     // Set the logged-in user
     this.userService.setLoggedInUser(loggedInUser);
-  }*/
+  }
 
   onSubmit() {
 
