@@ -20,6 +20,17 @@ Route::get('/users', function (Request $request) {
     return response()->json($results);
 });
 
+Route::delete('/users/{username}', function ($username) {       // be careful with this route as it will delete all comments associated with the user
+    $user = User::where('username', $username)->first();
+
+    if ($user) {
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully']);
+    } else {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+});
+
 // Register and login
 
 Route::post('/users', function (Request $request) {
