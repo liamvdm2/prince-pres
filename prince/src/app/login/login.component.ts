@@ -26,6 +26,8 @@ export class LoginComponent {
     // Assuming you get the user information after a successful login
     const loggedInUser = { username: this.username }; 
 
+    localStorage.setItem('username', loggedInUser.username);
+
     // Set the logged-in user
     this.userService.setLoggedInUser(loggedInUser);
   }
