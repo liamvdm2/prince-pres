@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
+use App\Models\Genre;
 // Users
 
 Route::get('/users', function (Request $request) {
@@ -115,6 +116,22 @@ route::post('/comments', function (Request $request) {
     return response()->json(['message' => 'Comment created successfully'], 201);
 });
 
+Route::delete('/comments/{id}', function ($id) {        // user can delete his comment or the admin can
+    $comment = Comment::find($id);
+
+    if ($comment) {
+        // Check if the current user is the comment's owner or an admin
+        if (Auth::id() === $comment->user_id /* || Auth::user()->isAdmin() */) {
+            $comment->delete();
+            return response()->json(['message' => 'Comment deleted successfully']);
+        } else {
+            return response()->json(['error' => 'You do not have permission to delete this comment'], 403);
+        }
+    } else {
+        return response()->json(['error' => 'Comment not found'], 404);
+    }
+});
+
 
 
 
@@ -122,9 +139,6 @@ route::post('/comments', function (Request $request) {
 // Products
 
 
-Route::get('/products', function (Request $request) {
-    $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
-});
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
@@ -210,10 +224,24 @@ Route::post('/wishlist/{username}/{product_id}', function ($username, $product_i
     return response()->json(['message' => 'Product added to wishlist successfully'], 201);
 });
 
-// genres
+// CRUD genres
 
 Route::get('/genres', function () {
     $genres = DB::table('Genres')->get();
     return response()->json($genres);
 });
+
+Route::post('/genres', function (Request $request) {
+    $validatedData = $request->validate([
+        'name' => 'required|max:255',
+    ]);
+
+    $genre = Genre::create($validatedData);
+
+    return response()->json(['message' => 'Genre created successfully', 'data' => $genre], 201);
+});
+
+
+
+//// we dont make an update or delete for genres. We just get them from our db.
 
