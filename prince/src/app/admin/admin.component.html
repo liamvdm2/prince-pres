@@ -28,5 +28,14 @@
 
         <button (click)="createBook()">Create</button>
     </form>
+    <div id="preview">
+        <img [src]="imagePath">
+        <p>{{title}}</p>
+        <p>{{author}}</p>
+        <p>{{description}}</p>
+        <p>{{whereToBuy}}</p>
+        <p>{{releaseDate}}</p>
+        <p>{{type}}</p>
+    </div>
 </div>
 
