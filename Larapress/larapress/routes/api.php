@@ -159,22 +159,12 @@ Route::delete('/comments/{id}', function ($id) {        // user can delete his c
 
 // Products
 
-
-
-Route::get('/products', function (Request $request) {
-    $results = DB::table('products')
-        /*         ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
-        ->select('Products.*', 'Genres.genre_name') */
-        ->get();
-    return response()->json($results);
-});
-
 Route::post('/products', function (Request $request) {
     $title = $request->product_title;
     $desc = $request->product_desc;
     $type = $request->product_type;
     $author = $request->product_author;
-    /* $genreId = $request->genre_id; */
+    $genreId = $request->genre_id;
     $release = $request->product_release;
     $cover = $request->product_cover;
     $available = $request->available_at;
@@ -191,7 +181,7 @@ Route::post('/products', function (Request $request) {
         'product_desc' => $desc,
         'product_type' => $type,
         'product_author' => $author,
-        /* 'genre_id' => $validatedData['genre_id'], */
+        'genre_id' => $genreId,
         'product_release' => $release,
         'product_cover' => $cover,
         'available_at' => $available
@@ -201,7 +191,45 @@ Route::post('/products', function (Request $request) {
     return response()->json(['message' => 'Product added successfully'], 201);
 });
 
+Route::get('/products', function (Request $request) {
+    $results = DB::table('products')
+        ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
+        ->select('Products.*', 'Genres.genre_name') 
+        ->get();
+    return response()->json($results);
+});
 
+Route::put('/products/{id}', function ($id, Request $request) {
+    $product = Product::find($id);
+    if(!$product){
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    $product->update([
+        'product_title' => $request->product_title,
+        'product_desc' => $request->product_desc,
+        'product_type' => $request->product_type,
+        'product_author' => $request->product_author,
+        'genre_id' => $request->genre_id,
+        'product_release' => $request->product_release,
+        'product_cover' => $request->product_cover,
+        'available_at' => $request->available_at
+    ]);
+
+    return response()->json(['message' => 'Product updated successfully'], 200);
+});
+
+
+Route::delete('/products/{id}', function ($id) {
+    $product = Product::find($id);
+    if(!$product){
+        return response()->json(['message' => 'Product not found'], 404);
+    }
+
+    $product->delete();
+
+    return response()->json(['message' => 'Product deleted successfully'], 200);
+});
 
 // wishlist
 
