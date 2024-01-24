@@ -14,9 +14,7 @@ import { UserService } from '../shared/user.service';
 export class LoginComponent {
 
   username: any;
-  password!: string;
-
-
+  password: any;
   rememberMe: boolean = false;
 
 
@@ -25,43 +23,30 @@ export class LoginComponent {
 
   async onSubmit() {
 
-    const credentials = {
-      username: this.username,
-      password: this.password,
-      rememberMe: this.rememberMe
-    };
+    //console.log('Username:', this.username);
+    
+    const token = await this.userService.login(this.username, this.password);
+    if (token) {
+      console.log('Server Response:', token);
+      //Store token in local storage
+      localStorage.setItem('username', this.username.toString());
+      localStorage.setItem('token', token);
+      //Redirect to protected component
+      this.router.navigate(['/userprofile']);
+      console.log('Login successful for user:', this.username);
 
-    const  token  =  await this.userService.loggedInUser(this.username, this.password);
-		if (token) {
-			// Store token in local storage
-			localStorage.setItem('token', token);
-      console.log('You now have access to the protected component', 'Yay');
-			this.router.navigate(['/userprofile']);
-			// ...
-			} else {
-        console.log('Wrong credentials', 'Not Yay');
-			
-			}
+    } else {
+      alert('Invalid username or password.');
+      
+    }
 
-    console.log('Sending credentials:', credentials.username);
-
-    this.http.post('http://127.0.0.1:8000/api/login', credentials).subscribe(
-      (res:any) => {
-        console.log('Server response', res);
-        
-        const loggedInUser = res.user;
-
-
-        // Navigate to profile page
-        this.router.navigate(['/userprofile']);
-      },
-      err => {
-        console.error('Error during login', err);
-        // Handle failed login here
-      }
-    );
-
-    this.username = '';
-    this.password = '';
-}
+    //console.log('Login successful for user:', this.username);
+  }
+  
+// logout method
+	logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    console.log('Logged out successfully');
+    }
 }
