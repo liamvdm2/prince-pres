@@ -1,9 +1,95 @@
-<H1>Hello, prince admin</H1>
-<h2>This is the admin page</h2>
+<div class="main-content">
+    <!-- Page content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <!--AddBookOutput-->
+                <div class="card card-profile shadow">
+                    <div class="card-body pt-0 pt-md-4">
+                        <div id="preview">
+                            <h5>Overzicht</h5>
+                            <div class="btnAddClear">
+                                <button (click)="createBook()" type="button" class="btn btn-success">✓</button>
+                            <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button>
+                            </div>
+                            <hr>   
+                            <p>Title: 
+                                <label>{{title}}</label>
+                            </p>
+                            <p>Author: 
+                                <label>{{author}}</label>
+                            </p>
+                            <p>Description: 
+                                <label>{{description}}</label>
+                            </p>
+                            <p>WhereToBuy: 
+                                <label>{{whereToBuy}}</label>
+                            </p>
+                            <p>ReleaseDate: 
+                                <label>{{type}}</label>
+                            </p>
+                            <p>Type: 
+                                <label>{{releaseDate}}</label>
+                            </p>
 
-<!-- <p>Reported users : </p>
-<div>
-    <div id="reportedpeople" class="reportedpeople">            for in the future
+                            <p id="imgAdd">
+                                <i class="fa-regular fa-image"></i>
+                                Gekozen bestand:</p>
+                            <img class="addedImg" [src]="imagePath">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--AdminCard-->
+            <div class="col-xl-8 order-xl-1">
+                <div class="adminCard">
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0"><i class="fa-solid fa-user-tie"></i> Admin</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="new-book">
+                                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-book"></i> Create new
+                                    Book</h6>
+                                <form>
+                                    <label for="title"> Title </label>
+                                    <input id="title" [(ngModel)]="title" name="title" type="text" class="form-control">
 
+                                    <label for="Author"> Author </label>
+                                    <input id="author" [(ngModel)]="author" name="author" type="text"
+                                        class="form-control">
+
+                                    <label for="description"> Description </label>
+                                    <input id="description" [(ngModel)]="description" name="description" type="text"
+                                        class="form-control">
+
+                                    <label for="whereToBuy"> Where to buy </label>
+                                    <input id="whereToBuy" [(ngModel)]="whereToBuy" name="whereToBuy" type="text"
+                                        class="form-control">
+
+                                    <label for="image"> Image </label>
+                                    <input type="file" (change)="onFileSelected($event)" id="image" name="image"
+                                        class="form-control imgTest">
+
+                                    <label for="releaseDate"> Release Date </label>
+                                    <input id="releaseDate" [(ngModel)]="releaseDate" name="releaseDate" type="date"
+                                        class="form-control">
+
+                                    <label for="type"> Type </label>
+                                    <input id="type" [(ngModel)]="type" name="type" type="text" class="form-control">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div> -->
+</div>
