@@ -153,6 +153,8 @@ Route::delete('/comments/{id}', function ($id) {        // user can delete his c
     }
 });
 
+// we dont use update route for comments because we dont want to be able to edit comments
+
 
 
 
@@ -272,6 +274,29 @@ Route::post('/wishlist/{username}/{product_id}', function ($username, $product_i
     // Return a success message as a JSON response
     return response()->json(['message' => 'Product added to wishlist successfully'], 201);
 });
+
+Route::delete('/wishlist/{username}/{product_id}', function ($username, $product_id) {
+    // Fetch the user whose username matches the {username} parameter
+    $user = DB::table('users')->where('username', $username)->first();
+    // If the user does not exist, return an error
+    if (!$user) {
+        return response()->json(['message' => 'User not found'], 404);
+    }
+    // Remove the wishlist item linking this user and product
+    $removed = DB::table('wishlist')
+        ->where('user_id', $user->id)
+        ->where('product_id', $product_id)
+        ->delete();
+    // If no rows were deleted, return an error
+    if ($removed == 0) {
+        return response()->json(['message' => 'No such wishlist item'], 404);
+    }
+    // Return a success message as a JSON response
+    return response()->json(['message' => 'Product removed from wishlist successfully']);
+});
+
+
+// here we also dont use update because we update already the wishlist with the create and delete
 
 
 // CRUD genres
