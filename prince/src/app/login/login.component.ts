@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
-import { UserService } from '../userprofile/user.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { UserService } from '../userprofile/user.service';
 export class LoginComponent {
 
   username: any;
-  password: any;
+  password!: string;
 
 
   rememberMe: boolean = false;
@@ -22,21 +22,26 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
 
-  /*login() {
-    // Assuming you get the user information after a successful login
-    const loggedInUser = { username: 'exampleUser' };
 
-    // Set the logged-in user
-    this.userService.setLoggedInUser(loggedInUser);
-  }*/
-
-  onSubmit() {
+  async onSubmit() {
 
     const credentials = {
       username: this.username,
       password: this.password,
       rememberMe: this.rememberMe
     };
+
+    const  token  =  await this.userService.loggedInUser(this.username, this.password);
+		if (token) {
+			// Store token in local storage
+			localStorage.setItem('token', token);
+      console.log('You now have access to the protected component', 'Yay');
+			this.router.navigate(['/userprofile']);
+			// ...
+			} else {
+        console.log('Wrong credentials', 'Not Yay');
+			
+			}
 
     console.log('Sending credentials:', credentials.username);
 
@@ -45,7 +50,6 @@ export class LoginComponent {
         console.log('Server response', res);
         
         const loggedInUser = res.user;
-        this.userService.setLoggedInUser(loggedInUser);
 
 
         // Navigate to profile page
