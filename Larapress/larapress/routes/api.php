@@ -21,12 +21,33 @@ Route::get('/users', function (Request $request) {
     return response()->json($results);
 });
 
-Route::delete('/users/{username}', function ($username) {       // be careful with this route as it will delete all comments associated with the user
+Route::delete('/users/{username}', function ($username) {       // be careful with this route as it will delete all comments and user info associated with the user
     $user = User::where('username', $username)->first();
 
     if ($user) {
         $user->delete();
         return response()->json(['message' => 'User deleted successfully']);
+    } else {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+});
+
+Route::put('/users/{id}', function ($id, Request $request) {
+
+    $user = User::find($id);
+
+    if ($user) {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'required',
+            'username' => 'required',
+        ]);
+
+        $user->update($validatedData);
+
+        return response()->json(['message' => 'User updated successfully']);
     } else {
         return response()->json(['error' => 'User not found'], 404);
     }
@@ -55,9 +76,9 @@ Route::post('/users', function (Request $request) {
         'name' => $validatedData['name'],
         'surname' => $validatedData['surname'],
         'email' => $validatedData['email'],
-        'password' => $validatedData['password'], 
+        'password' => $validatedData['password'],
         'username' => $validatedData['username'],
-        'updated_at' => now(),                   
+        'updated_at' => now(),
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'User created successfully'], 201);
@@ -142,7 +163,7 @@ Route::delete('/comments/{id}', function ($id) {        // user can delete his c
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
-/*         ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
+        /*         ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
         ->select('Products.*', 'Genres.genre_name') */
         ->get();
     return response()->json($results);
@@ -158,9 +179,9 @@ Route::post('/products', function (Request $request) {
     $cover = $request->product_cover;
     $available = $request->available_at;
 
-  
 
-  /*   if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $cover, $matches)) {
+
+    /*   if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $cover, $matches)) {
         return response()->json(['message' => 'Invalid image data'], 422);
     } */
 
@@ -224,6 +245,7 @@ Route::post('/wishlist/{username}/{product_id}', function ($username, $product_i
     return response()->json(['message' => 'Product added to wishlist successfully'], 201);
 });
 
+
 // CRUD genres
 
 Route::post('/genres', function (Request $request) {
@@ -269,4 +291,3 @@ Route::delete('/genres/{id}', function ($id) {
         return response()->json(['error' => 'Genre not found'], 404);
     }
 });
-
