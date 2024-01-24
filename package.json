@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "yarn": "^1.22.21"
+  },
+  "name": "prince-pres",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6"
+  }
+}
