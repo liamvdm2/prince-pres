@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
@@ -7,7 +6,7 @@ import { UserService } from '../shared/user.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,7 +17,7 @@ export class LoginComponent {
   rememberMe: boolean = false;
 
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
 
 
