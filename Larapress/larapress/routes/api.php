@@ -63,6 +63,7 @@ Route::post('/users', function (Request $request) {
     $password = $request->password;
     $username = $request->username;
     $birthday = $request->birthday;
+    $role = $request->role;
 
 
     $validatedData = $request->validate([
@@ -72,6 +73,7 @@ Route::post('/users', function (Request $request) {
         'password' => 'required',                     // password is automatically hashed by Laravel
         'username' => 'required',
         'birthday' => 'required| date_format:Y-m-d',
+        'role' => 'required',
 
     ]);
 
@@ -82,6 +84,7 @@ Route::post('/users', function (Request $request) {
         'password' => $validatedData['password'],
         'username' => $validatedData['username'],
         'birthday' => $validatedData['birthday'],
+        'role' => $validatedData['role'],
         'updated_at' => now(),
         'created_at' => now(),
     ]);

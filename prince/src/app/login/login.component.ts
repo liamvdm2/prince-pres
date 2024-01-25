@@ -25,7 +25,7 @@ export class LoginComponent {
 
     console.log('Username:', this.username + 'Password:', this.password);
     
-    const user = await this.userService.login(this.username, this.password);
+    const user = await this.userService.login(this.username, this.password , 'admin');
     console.log(user);
     if (user) {
       console.log('Server Response:', user);
