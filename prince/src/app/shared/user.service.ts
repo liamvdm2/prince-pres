@@ -71,7 +71,7 @@ export class UserService {
 		console.log (password, user.password);	
 		console.log (bcrypt.compareSync(password, user.password));
 		if (bcrypt.compareSync(password, user.password)) {
-		   return user.id.toString();
+		   return user;
 		}
 		return null
 	   }

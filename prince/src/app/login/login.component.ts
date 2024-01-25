@@ -25,13 +25,15 @@ export class LoginComponent {
 
     console.log('Username:', this.username + 'Password:', this.password);
     
-    const token = await this.userService.login(this.username, this.password);
-    console.log(token);
-    if (token) {
-      console.log('Server Response:', token);
+    const user = await this.userService.login(this.username, this.password);
+    console.log(user);
+    if (user) {
+      console.log('Server Response:', user);
       //Store token in local storage
-      localStorage.setItem('username', this.username.toString());
-      localStorage.setItem('token', token);
+      const userjson = JSON.stringify(user)
+
+      localStorage.setItem('username', userjson);
+      localStorage.setItem('token', userjson);
       //Redirect to protected component
       this.router.navigate(['/userprofile']);
       console.log('Login successful for user:', this.username);

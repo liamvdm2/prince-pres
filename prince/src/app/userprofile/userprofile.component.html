@@ -32,7 +32,7 @@
                 </div>
               </div>
               <div class="text-center">
-                <h3> *ngIf="isLoggedIn()">Logged in as {{ getUsername() }} <span class="font-weight-light">
+                <h3>Logged in as {{ getUser.username }} <span class="font-weight-light">
                     <a><i class="fa-regular fa-pen-to-square"></i></a>
                 </span></h3>
                 <hr class="my-4">
@@ -67,7 +67,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="Firstname" [disabled]="!editMode">
+                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.name" [disabled]="!editMode">
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
                             </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="Surname" [disabled]="!editMode">
+                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.surname" [disabled]="!editMode">
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                           <div class="input-group-prepend">
                               <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
                           </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="email.email@outlook.com" [disabled]="!editMode">
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="email.email@outlook.com" [value]="getUser.email" [disabled]="!editMode">
                       </div>
                   </div>
 

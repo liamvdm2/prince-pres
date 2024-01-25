@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css'
 })
 export class UserprofileComponent {
   editMode = false;
+  getUser: any = {}; // Initialize getUser to an empty object
 
   toggleEditMode() {
     this.editMode = !this.editMode;
@@ -20,21 +22,16 @@ export class UserprofileComponent {
     return token !== null; // Return true if a token is found
   }
 
-  getUsername() {
-    // Implement logic to get the username of the logged-in user
-    try {
-      const username = localStorage.getItem('username');
-      if (username) {
-        return username;
-      } else {
-        // Handle case where username is not set
-        return 'Unknown User'; // Placeholder, update as needed
-      }
-    } catch (e) {
-      console.error('Error accessing local storage:', e);
-      return 'Unknown User'; // Placeholder, handle this as per your application's logic
-    }
-  }
+ ngOnInit () {
+   // get the userdetails from localstorage and parse to object
+   let userDetails = localStorage.getItem('username');
+   if (userDetails) {
+       this.getUser = JSON.parse(userDetails);
+       console.log(this.getUser);
+   }
+
+}
+
 }
 
 /*SUBMIT BUTTON */
