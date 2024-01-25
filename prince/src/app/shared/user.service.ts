@@ -6,7 +6,7 @@ import * as bcrypt from 'bcryptjs';
 })
 export class UserService {
 
-	async register(username: any, password: any, surname: any, name: any, email: any) {
+	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
 	
 	/* 	
 		Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
@@ -28,7 +28,8 @@ export class UserService {
 			password: password,
 			surname: surname,
 			name: name,
-			email: email
+			email: email,
+			birthdate: birthday,
 		};
 		const result = await fetch('http://127.0.0.1:8000/api/users', {
 			method: 'POST',
