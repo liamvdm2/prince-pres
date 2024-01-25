@@ -23,9 +23,10 @@ export class LoginComponent {
 
   async onSubmit() {
 
-    //console.log('Username:', this.username);
+    console.log('Username:', this.username + 'Password:', this.password);
     
     const token = await this.userService.login(this.username, this.password);
+    console.log(token);
     if (token) {
       console.log('Server Response:', token);
       //Store token in local storage
@@ -37,16 +38,15 @@ export class LoginComponent {
 
     } else {
       alert('Invalid username or password.');
-      
-    }
 
+    }
     //console.log('Login successful for user:', this.username);
   }
-  
-// logout method
-	logout() {
+
+  // logout method
+  logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     console.log('Logged out successfully');
-    }
+  }
 }
