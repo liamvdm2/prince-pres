@@ -77,5 +77,30 @@ export class UserService {
 		}
 		return null
 	   }
+
+	   async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any) {
+		// Construct the user object
+		const updatedUser = {
+		   id: id,
+		   name: name,
+		   surname: surname,
+		   email: email,
+		   birthday: birthday,
+		   // Add any other properties you want to update
+		};
 	   
+		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
+		   method: 'PUT',
+		   headers: {
+			 'Content-Type': 'application/json',
+		   },
+		   body: JSON.stringify(updatedUser),
+		});
+	   
+		if (!result.ok) {
+		   throw new Error('Failed to update user');
+		}
+	   
+		return result.json();
+	   }
 }
