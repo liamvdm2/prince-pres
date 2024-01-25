@@ -113,6 +113,7 @@ route::post('/comments', function (Request $request) {
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
+});
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
@@ -204,4 +205,3 @@ Route::get('/genres', function () {
     $genres = DB::table('Genres')->get();
     return response()->json($genres);
 });
-

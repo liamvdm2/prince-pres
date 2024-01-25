@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   getProducts() {
     this.productService.getProducts().then(data => {
+      this.products = data;
       console.log(data);
     }).catch(error => console.log(error));
   }
