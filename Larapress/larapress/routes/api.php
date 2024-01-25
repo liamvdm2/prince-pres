@@ -14,9 +14,8 @@ use App\Models\Genre;
 // Users
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')
-        ->orderBy('created_at', 'desc')        // select * from products order by created_at desc and  
-        ->paginate(10);                        // limit to 10 per page from newest to oldest so the app can run faster
+    // Using the db face
+    $results = DB::table('users')->get();
 
     return response()->json($results);
 });
