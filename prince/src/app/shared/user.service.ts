@@ -6,7 +6,7 @@ import * as bcrypt from 'bcryptjs';
 })
 export class UserService {
 
-	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
+	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any, role: string) {
 	
 	/* 	
 		Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
@@ -30,6 +30,7 @@ export class UserService {
 			name: name,
 			email: email,
 			birthdate: birthday,
+			role: role,
 		};
 		const result = await fetch('http://127.0.0.1:8000/api/users', {
 			method: 'POST',
@@ -62,12 +63,12 @@ export class UserService {
 		}
 	}
 	// Checks user credentials and returns a valid token or null
-	async login(username: string, password: string): Promise<string | null> {
+	async login(username: string, password: string, role: string): Promise<string | null> {
 		const body = { username, password };
 		console.log(body);
 		let users = await this.getUsers();
 		console.log(users);
-		let user = users.find((u: { username: string; password: string; }) => u.username === username);
+		let user = users.find((u: { username: string; password: string;  role: string;}) => u.username === username && u.role === 'admin');
 		console.log (user);
 		console.log (password, user.password);	
 		console.log (bcrypt.compareSync(password, user.password));
