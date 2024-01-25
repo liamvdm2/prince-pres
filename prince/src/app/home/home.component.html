@@ -48,10 +48,8 @@
                 <h2 class="titleLabelText display-7 text-uppercase">Our Selection</h2>
             </div>
             <div class="book-grid">
-                <div>
-                   
-                    {{products}}
-                    <img class="book-cover" [src]="">
+                <div *ngFor="let product of products">
+                    <img class="book-cover" [src]="product.product_cover">
                 </div>
             </div>
         </div>

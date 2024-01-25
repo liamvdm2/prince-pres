@@ -159,6 +159,11 @@ Route::delete('/comments/{id}', function ($id) {        // user can delete his c
 
 
 
+Route::get('/products', function (Request $request) {
+    $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
+});
+
+
 // Products
 
 Route::post('/products', function (Request $request) {
@@ -317,6 +322,9 @@ Route::post('/genres', function (Request $request) {
 Route::get('/genres', function (Request $request) {
     $genres = DB::table('Genres')->get();
     return response()->json($genres);
+
+});
+
 });
 
 Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
@@ -344,3 +352,4 @@ Route::delete('/genres/{id}', function ($id) {
         return response()->json(['error' => 'Genre not found'], 404);
     }
 });
+
