@@ -1,12 +1,12 @@
-# PrincePress - Your Ultimate Anime Bookstore
+# PrincePress - Stories more unique than the contrast of black on white.
 
-PrincePress is a web application developed by three passionate frontend developers. It allows users to search for anime books and find out where they can purchase them. The platform also provides a space for users to register, log in, and leave their own reviews and comments on the books they've read.
+PrincePress is a web application developed by three passionate frontend developers. It introduces users to Light Novels and Manga that convey stories that will take you on a one-of-a-kind journey. The web-platform itself provides a space for users to dive into these stories and leave their own reviews and comments on the books they've read after creating their very own account by registering.
 
 ## Features
 
-* **Anime Book Search**: Users can search for anime books using various filters.
-* **Buy Locations**: Once a book is found, users can see where they can purchase it.
-* **User Registration and Login**: Registered users can leave their own reviews and comments on the books.
+* **Explore Stories:** Find the stories that intrigue you or get into the seasons mood by exploring the seasonal favorites! Find Light Novels & Manga filtered by their genre to your choice.
+* **Various Purchase Locations**: You're not limited to one point of purchase. We provide multiple access points to our stories. Reading them on paper or digitally is up to your choice!
+* **User Registration and Login**: After registering, users can update their profile, leave their own reviews and comments on the books they read and obtain achievements this way.
 
 ## Technologies Used
 
@@ -22,8 +22,17 @@ This project was built using a variety of technologies:
 
 ## Challenges and Solutions
 
-One of the main challenges we faced during development was learning and integrating PHP into our project. As we primarily focused on frontend development, we had to quickly learn PHP to handle server-side operations. After spending time understanding the basics of PHP and Laravel, we were able to successfully integrate PHP into our project.
+* One of the main challenges we faced during development was learning and integrating PHP into our project. As we primarily focused on frontend development, we had to quickly learn PHP to handle server-side operations. After spending time understanding the basics of PHP and Laravel, we were able to successfully integrate PHP into our project.
+* An honorable mention would definitely be Angular 17. Since our development process began as early as the first month of Angular 17's release, we've marched through a difficult production. However, with the help of each other, artificial intelligence and our teacher, we were able to reach the finish line after lots of trial and error.
 
 ## Future Plans
 
-In the future, we plan to add more features to PrincePress, such as chat functions, book recommendations based on user preferences, and more. We believe that these features will enhance the user experience and make PrincePress a go-to platform for anime book lovers.
+In the future, we plan to add more features to PrincePress, such as chat functions, book recommendations based on user preferences, a gallery, and more. We believe that these features will enhance the user experience and make PrincePress a go-to platform for Light Novel and Manga enthousiasts.
+
+## Developed by:
+* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ugurkan Karaca](https://www.linkedin.com/in/ugurkan-karaca/)
+&nbsp;
+* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Liam Vandermaesen](https://www.linkedin.com/in/liam-vandermaesen/)
+&nbsp;
+* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Eline Boffin](https://www.linkedin.com/in/eline-boffin/)
+&nbsp;
