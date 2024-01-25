@@ -325,7 +325,7 @@ Route::get('/genres', function (Request $request) {
 
 });
 
-});
+
 
 Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
     $validatedData = $request->validate([
