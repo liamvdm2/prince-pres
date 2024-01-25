@@ -42,6 +42,7 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required',
             'username' => 'required',
+            'birthday' => 'required| date_format:Y-m-d',
         ]);
 
         $user->update($validatedData);
@@ -61,6 +62,7 @@ Route::post('/users', function (Request $request) {
     $surname = $request->surname;
     $password = $request->password;
     $username = $request->username;
+    $birthday = $request->birthday;
 
 
     $validatedData = $request->validate([
@@ -69,6 +71,8 @@ Route::post('/users', function (Request $request) {
         'email' => 'required|email|unique:users',     // email must be unique in users table
         'password' => 'required',                     // password is automatically hashed by Laravel
         'username' => 'required',
+        'birthday' => 'required| date_format:Y-m-d',
+
     ]);
 
     $user = User::create([
@@ -77,6 +81,7 @@ Route::post('/users', function (Request $request) {
         'email' => $validatedData['email'],
         'password' => $validatedData['password'],
         'username' => $validatedData['username'],
+        'birthday' => $validatedData['birthday'],
         'updated_at' => now(),
         'created_at' => now(),
     ]);
