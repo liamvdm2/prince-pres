@@ -44,11 +44,4 @@ export class LoginComponent {
     }
     //console.log('Login successful for user:', this.username);
   }
-
-  // logout method
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    console.log('Logged out successfully');
-  }
 }

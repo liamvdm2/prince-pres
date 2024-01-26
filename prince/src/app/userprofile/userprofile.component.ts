@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -13,15 +14,26 @@ export class UserprofileComponent {
   editMode = false;
   getUser: any = {};
 
-  constructor(private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
-  toggleEditMode() {
+  async toggleEditMode() {
     if (this.editMode) {
       // TODO: Edit and save function
-      alert('TEST TEST TEST')
+      try {
+        const result = await this.userService.updateUser(
+          this.getUser.id, 
+          this.getUser,
+          this.getUser.name,
+          this.getUser.surname,
+          this.getUser.email,
+          this.getUser.birthday
+        );
+        console.log(result);
+      } catch (error) {
+        console.error('Error updating user:', error);
+      }
       this.editMode = !this.editMode;
     } else {
-      // If in edit mode, toggle the editMode property
       this.editMode = !this.editMode;
     }
   }
@@ -39,9 +51,8 @@ export class UserprofileComponent {
     }
   }
 
-  async updateUser() {
+  /*async updateUser() {
     try {
-      // Assuming 'id' is a property in the getUser object
       const result = await this.userService.updateUser(
         this.getUser.id, 
         this.getUser,
@@ -50,11 +61,18 @@ export class UserprofileComponent {
         this.getUser.email,
         this.getUser.birthday
       );
-      console.log(result); // Log the result from the server
-      // You may want to handle success or show a message to the user
+      console.log(result);
     } catch (error) {
       console.error('Error updating user:', error);
-      // Handle error, show an error message, etc.
     }
+  }*/
+
+  // logout method
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    console.log('Logged out successfully');
+    this.getUser.name = ' ';
+    this.router.navigate(['/login']);
   }
 }

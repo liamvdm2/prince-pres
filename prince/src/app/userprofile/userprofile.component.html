@@ -20,21 +20,29 @@
             <div class="row">
               <div class="col">
                 <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                  <div>
+                  <!--<div>
                     <span class="heading">7</span>
                     <span class="description">Books</span>
                   </div>
                   <div>
                     <span class="heading">12</span>
                     <span class="description">Wishlist</span>
-                  </div>
+                  </div>-->
+
+                  <a class="btn btn-sm btn-danger" (click)="logout()">Logout</a>
                 </div>
               </div>
             </div>
             <div class="text-center">
-              <h3>Logged in as {{ getUser.username }} <span class="font-weight-light">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa-solid fa-circle-user"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.username" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
+            </div>
+              <!--<h3>{{ getUser.username }} <span class="font-weight-light">
                   <a><i class="fa-regular fa-pen-to-square"></i></a>
-              </span></h3>
+              </span></h3>-->
               <hr class="my-4">
               <p>Badges</p>
               <div class="badge-container">
@@ -53,8 +61,8 @@
                 <h3 class="mb-0">My account</h3>
               </div>
               <div class="col-4 text-right">
-                <!--<a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="toggleEditMode()">{{ editMode ? 'Save' : 'Edit' }}</a>-->
-                <a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="updateUser()">Save</a>
+                <a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="toggleEditMode()">{{ editMode ? 'Save' : 'Edit' }}</a>
+                <!--<a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="updateUser()">Save</a>-->
               </div>
             </div>
           </div>
@@ -68,7 +76,7 @@
                           <div class="input-group-prepend">
                               <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
                           </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.name"> <!--[disabled]="!editMode"-->
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.name" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                       </div>
                   </div>
 
@@ -77,7 +85,7 @@
                           <div class="input-group-prepend">
                               <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
                           </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.surname"> <!--[disabled]="!editMode"-->
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.surname" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                       </div>
                   </div>
 
@@ -86,7 +94,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
                         </div>
-                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.email"> <!--[disabled]="!editMode"-->
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.email" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                     </div>
                 </div>
 
@@ -95,7 +103,7 @@
                           <div class="input-group-prepend">
                               <div class="input-group-text"><i class="fa-solid fa-cake-candles"></i></div>
                           </div>
-                          <input type="date" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.birthday"> <!--[disabled]="!editMode"-->
+                          <input type="date" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.birthday" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                       </div>
                   </div>
 

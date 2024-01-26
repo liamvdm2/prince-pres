@@ -88,18 +88,23 @@ export class UserService {
 		   // Add any other properties you want to update
 		};
 	   
+		console.log(updatedUser)
+
 		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
 		   method: 'PUT',
 		   headers: {
 			 'Content-Type': 'application/json',
 		   },
 		   body: JSON.stringify(updatedUser),
+		   
 		});
 	   
 		if (!result.ok) {
 		   throw new Error('Failed to update user');
+		   
 		}
 	   
 		return result.json();
 	   }
+
 }
