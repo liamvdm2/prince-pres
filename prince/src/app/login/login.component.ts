@@ -51,4 +51,6 @@ export class LoginComponent {
     localStorage.removeItem('username');
     console.log('Logged out successfully');
   }
+
+  /* test */
 }
