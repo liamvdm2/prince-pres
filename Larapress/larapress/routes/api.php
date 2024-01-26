@@ -11,6 +11,32 @@ use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Genre;
+use App\Models\buzz;
+
+// buzz
+
+Route::get('/buzz', function (Request $request) {
+    $results = DB::table('buzzs')->get();
+    return response()->json($results);
+    
+});
+
+route::post('/buzz', function (Request $request) {
+    $title = $request->title;
+    $description = $request->description;
+    $author = $request->author;
+
+    $products = Buzz::create([
+        'title' => $title,
+        'description' => $description,
+        'author' => $author,
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+
+    // Return a response
+    return response()->json(['message' => 'buzz added successfully'], 201);
+});
 // Users
 
 Route::get('/users', function (Request $request) {
