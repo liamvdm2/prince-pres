@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './user.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-userprofile',
@@ -8,25 +8,33 @@ import { UserService } from './user.service';
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css'
 })
-export class UserprofileComponent implements OnInit {
+export class UserprofileComponent {
   editMode = false;
-  loggedInUser: any;
 
   toggleEditMode() {
     this.editMode = !this.editMode;
   }
 
-  constructor(private userService: UserService) {
-    // Retrieve the logged-in user information when the component is initialized
-    this.loggedInUser = this.userService.getLoggedInUser();
+  isLoggedIn() {
+    const token = localStorage.getItem('token');
+    return token !== null; // Return true if a token is found
   }
 
-  ngOnInit() {
-    this.loggedInUser = this.userService.getLoggedInUser();
-    console.log('Logged-in User:', this.loggedInUser?.username);
-    
+  getUsername() {
+    // Implement logic to get the username of the logged-in user
+    try {
+      const username = localStorage.getItem('username');
+      if (username) {
+        return username;
+      } else {
+        // Handle case where username is not set
+        return 'Unknown User'; // Placeholder, update as needed
+      }
+    } catch (e) {
+      console.error('Error accessing local storage:', e);
+      return 'Unknown User'; // Placeholder, handle this as per your application's logic
+    }
   }
 }
 
 /*SUBMIT BUTTON */
-
