@@ -1,40 +1,78 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-userprofile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './userprofile.component.html',
   styleUrl: './userprofile.component.css'
 })
 export class UserprofileComponent {
   editMode = false;
+  getUser: any = {};
 
-  toggleEditMode() {
-    this.editMode = !this.editMode;
+  constructor(private router: Router, private userService: UserService) { }
+
+  async toggleEditMode() {
+    if (this.editMode) {
+      // TODO: Edit and save function
+      try {
+        const result = await this.userService.updateUser(
+          this.getUser.id, 
+          this.getUser,
+          this.getUser.name,
+          this.getUser.surname,
+          this.getUser.email,
+          this.getUser.birthday
+        );
+        console.log(result);
+      } catch (error) {
+        console.error('Error updating user:', error);
+      }
+      this.editMode = !this.editMode;
+    } else {
+      this.editMode = !this.editMode;
+    }
   }
 
   isLoggedIn() {
     const token = localStorage.getItem('token');
-    return token !== null; // Return true if a token is found
+    return token !== null;
   }
 
-  getUsername() {
-    // Implement logic to get the username of the logged-in user
-    try {
-      const username = localStorage.getItem('username');
-      if (username) {
-        return username;
-      } else {
-        // Handle case where username is not set
-        return 'Unknown User'; // Placeholder, update as needed
-      }
-    } catch (e) {
-      console.error('Error accessing local storage:', e);
-      return 'Unknown User'; // Placeholder, handle this as per your application's logic
+  ngOnInit() {
+    let userDetails = localStorage.getItem('username');
+    if (userDetails) {
+      this.getUser = JSON.parse(userDetails);
+      console.log(this.getUser);
     }
   }
-}
 
-/*SUBMIT BUTTON */
+  /*async updateUser() {
+    try {
+      const result = await this.userService.updateUser(
+        this.getUser.id, 
+        this.getUser,
+        this.getUser.name,
+        this.getUser.surname,
+        this.getUser.email,
+        this.getUser.birthday
+      );
+      console.log(result);
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  }*/
+
+  // logout method
+  logout() {
+    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    console.log('Logged out successfully');
+    this.getUser.name = ' ';
+    this.router.navigate(['/login']);
+  }
+}

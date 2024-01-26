@@ -14,9 +14,8 @@ use App\Models\Genre;
 // Users
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')
-        ->orderBy('created_at', 'desc')        // select * from products order by created_at desc and  
-        ->paginate(10);                        // limit to 10 per page from newest to oldest so the app can run faster
+    // Using the db face
+    $results = DB::table('users')->get();
 
     return response()->json($results);
 });
@@ -43,6 +42,7 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required',
             'username' => 'required',
+            'birthday' => 'required| date_format:Y-m-d',
         ]);
 
         $user->update($validatedData);
@@ -62,6 +62,7 @@ Route::post('/users', function (Request $request) {
     $surname = $request->surname;
     $password = $request->password;
     $username = $request->username;
+    $birthday = $request->birthday;
 
 
     $validatedData = $request->validate([
@@ -70,6 +71,8 @@ Route::post('/users', function (Request $request) {
         'email' => 'required|email|unique:users',     // email must be unique in users table
         'password' => 'required',                     // password is automatically hashed by Laravel
         'username' => 'required',
+        'birthday' => 'required| date_format:Y-m-d',
+
     ]);
 
     $user = User::create([
@@ -78,6 +81,7 @@ Route::post('/users', function (Request $request) {
         'email' => $validatedData['email'],
         'password' => $validatedData['password'],
         'username' => $validatedData['username'],
+        'birthday' => $validatedData['birthday'],
         'updated_at' => now(),
         'created_at' => now(),
     ]);

@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,36 +17,31 @@ export class LoginComponent {
   rememberMe: boolean = false;
 
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
 
 
   async onSubmit() {
 
-    //console.log('Username:', this.username);
+    console.log('Username:', this.username + 'Password:', this.password);
     
-    const token = await this.userService.login(this.username, this.password);
-    if (token) {
-      console.log('Server Response:', token);
+    const user = await this.userService.login(this.username, this.password);
+    console.log(user);
+    if (user) {
+      console.log('Server Response:', user);
       //Store token in local storage
-      localStorage.setItem('username', this.username.toString());
-      localStorage.setItem('token', token);
+      const userjson = JSON.stringify(user)
+
+      localStorage.setItem('username', userjson);
+      localStorage.setItem('token', userjson);
       //Redirect to protected component
       this.router.navigate(['/userprofile']);
       console.log('Login successful for user:', this.username);
 
     } else {
       alert('Invalid username or password.');
-      
-    }
 
+    }
     //console.log('Login successful for user:', this.username);
   }
-  
-// logout method
-	logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    console.log('Logged out successfully');
-    }
 }

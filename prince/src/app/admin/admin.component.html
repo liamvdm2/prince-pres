@@ -7,35 +7,35 @@
                 <div class="card card-profile shadow">
                     <div class="card-body pt-0 pt-md-4">
                         <div id="preview">
-                            <h5>Overzicht</h5>
-                            <div class="btnAddClear">
-                                <button (click)="createBook()" type="button" class="btn btn-success">✓</button>
-                            <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button>
-                            </div>
+                            <h5><i class="fa-solid fa-list"></i> Overzicht</h5>
                             <hr>   
-                            <p>Title: 
-                                <label>{{title}}</label>
-                            </p>
-                            <p>Author: 
-                                <label>{{author}}</label>
-                            </p>
-                            <p>Description: 
-                                <label>{{description}}</label>
-                            </p>
-                            <p>WhereToBuy: 
-                                <label>{{whereToBuy}}</label>
-                            </p>
-                            <p>ReleaseDate: 
-                                <label>{{type}}</label>
-                            </p>
-                            <p>Type: 
-                                <label>{{releaseDate}}</label>
-                            </p>
+                            <label>Title:</label>
+                            <p>{{title}}</p>
+
+                            <label>Author:</label>
+                            <p>{{author}}</p>
+
+                            <label>Description:</label>
+                            <p>{{description}}</p>
+
+                            <label>WhereToBuy:</label>
+                            <p>{{whereToBuy}}</p>
+
+                            <label>ReleaseDate:</label>
+                            <p>{{releaseDate}}</p>
+
+                            <label>Type:</label>
+                            <p>{{type}}</p>
 
                             <p id="imgAdd">
                                 <i class="fa-regular fa-image"></i>
                                 Gekozen bestand:</p>
                             <img class="addedImg" [src]="imagePath">
+                        </div>
+                        <hr>
+                        <div class="btnAddClear">
+                            <button (click)="createBook()" type="button" class="btn btn-success">✓</button>
+                        <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button>
                         </div>
                     </div>
                 </div>

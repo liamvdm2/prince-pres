@@ -17,12 +17,16 @@ export class RegisterComponent {
   email:string='';
   password:string='';
   username:string='';
+  birthday:string='';
   showPassword: boolean = false;
+  
 
   constructor(private userService: UserService, private router: Router) {}
 
+  
   onSubmit() {
     this.router.navigate(['/login']);
+
     const options = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0'},
@@ -31,7 +35,8 @@ export class RegisterComponent {
          "email": this.email,
          "password": this.password,
          "name": this.name,
-         "usernhame": this.username
+         "username": this.username,
+         "birthday": this.birthday,
       })
      };
     
@@ -45,11 +50,12 @@ export class RegisterComponent {
       name: this.name,
       email: this.email,
       password: this.password,
-      username: this.username
+      username: this.username,
+      birthday: this.birthday
     });
 
     // acces the service and send username and password
-    this.userService.register(this.username, this.password, this.surname, this.name, this.email);
+    this.userService.register(this.username, this.password, this.surname, this.name, this.email, this.birthday);
     alert('Registration successful!'); // Show a notification
     console.log('You have been registered'); // Log to console
   
@@ -59,6 +65,8 @@ export class RegisterComponent {
       this.surname = '';
       this.name = '';
       this.email = '';
+      this.birthday = '';
+      
       
   }
 
@@ -67,4 +75,3 @@ export class RegisterComponent {
   }
 }
 
-// TODO : when database is connected put this in the database instead of the console log
