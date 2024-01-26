@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [FormsModule, RouterModule, HttpClientModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+ selector: 'app-register',
+ templateUrl: './register.component.html',
+ styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   surname:string ='';
@@ -17,7 +14,7 @@ export class RegisterComponent {
   email:string='';
   password:string='';
   username:string='';
-  birthday: Date = new Date();
+  birthday:string='';
   showPassword: boolean = false;
   
 
@@ -65,7 +62,7 @@ export class RegisterComponent {
       this.surname = '';
       this.name = '';
       this.email = '';
-      this.birthday = new Date();
+      this.birthday = '';
       
       
   }
