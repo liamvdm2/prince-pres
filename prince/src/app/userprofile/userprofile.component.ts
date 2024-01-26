@@ -26,7 +26,8 @@ export class UserprofileComponent {
           this.getUser.name,
           this.getUser.surname,
           this.getUser.email,
-          this.getUser.birthday
+          this.getUser.birthday,
+          this.getUser.username
         );
         console.log(result);
       } catch (error) {
@@ -51,7 +52,7 @@ export class UserprofileComponent {
     }
   }
 
-  /*async updateUser() {
+/*   async updateUser() {
     try {
       const result = await this.userService.updateUser(
         this.getUser.id, 
@@ -59,13 +60,14 @@ export class UserprofileComponent {
         this.getUser.name,
         this.getUser.surname,
         this.getUser.email,
-        this.getUser.birthday
+        this.getUser.birthday,
+        this.getUser.username
       );
       console.log(result);
     } catch (error) {
       console.error('Error updating user:', error);
     }
-  }*/
+  } */
 
   // logout method
   logout() {
