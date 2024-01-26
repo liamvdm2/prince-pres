@@ -319,37 +319,38 @@ Route::post('/genres', function (Request $request) {
     return response()->json(['message' => 'Genre created successfully'], 201);
 });
 
-Route::get('/genres', function (Request $request) {
-    $genres = DB::table('Genres')->get();
-    return response()->json($genres);
+// Route::get('/genres', function (Request $request) {
+//     $genres = DB::table('Genres')->get();
+//     return response()->json(['message' => 'Genre created successfully'], 201);
+// });
 
-});
+// Route::get('/genres', function (Request $request) {
+//     $genres = DB::table('Genres')->get();
+//     return response()->json($genres);
+// });
 
-});
+// Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
+//     $validatedData = $request->validate([
+//         'name' => 'required|max:255',
+//     ]);
 
-Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
-    $validatedData = $request->validate([
-        'name' => 'required|max:255',
-    ]);
+//     $genre = Genre::find($id);
 
-    $genre = Genre::find($id);
+//     if ($genre) {
+//         $genre->update($validatedData);
+//         return response()->json(['message' => 'Genre updated successfully', 'data' => $genre]);
+//     } else {
+//         return response()->json(['error' => 'Genre not found'], 404);
+//     }
 
-    if ($genre) {
-        $genre->update($validatedData);
-        return response()->json(['message' => 'Genre updated successfully', 'data' => $genre]);
-    } else {
-        return response()->json(['error' => 'Genre not found'], 404);
-    }
-});
+// Route::delete('/genres/{id}', function ($id) {
+//     $genre = Genre::find($id);
 
-Route::delete('/genres/{id}', function ($id) {
-    $genre = Genre::find($id);
-
-    if ($genre) {
-        $genre->delete();
-        return response()->json(['message' => 'Genre deleted successfully']);
-    } else {
-        return response()->json(['error' => 'Genre not found'], 404);
-    }
-});
+//     if ($genre) {
+//         $genre->delete();
+//         return response()->json(['message' => 'Genre deleted successfully']);
+//     } else {
+//         return response()->json(['error' => 'Genre not found'], 404);
+//     }
+// });
 
