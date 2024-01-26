@@ -1,0 +1,16 @@
+<section id="news-selection" class="overflow-hidden mt-5 padding-xlarge">
+    <div class="container">
+        <div class="row">
+            <div class="display-header d-flex justify-content-between pb-3">
+                <h2 class="titleLabelText display-7 text-uppercase">Our Selection</h2>
+            </div>
+            <div class="news-grid">
+                <div *ngFor="let Newsitem of buzz">
+                   <p>{{Newsitem.title}}</p>
+                   <p>{{Newsitem.description}}</p>
+                   <p>{{Newsitem.author}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
