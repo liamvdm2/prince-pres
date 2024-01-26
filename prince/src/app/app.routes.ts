@@ -51,6 +51,8 @@ export const routes: Routes = [
         path: 'news',
         component: NewsComponent
     }
+    ,
+    {
 
         path: 'details/:id',
         component: DetailsComponent
