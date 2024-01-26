@@ -1,3 +1,4 @@
+<!-- //////////////////// display page banner //////////////////// -->
 <section id="banner" class="pageBanner position-relative overflow-hidden"
     style="background-image: url('../../assets/crown.png'); background-position: center; background-size: contain; background-repeat: no-repeat; padding-bottom: 50px;">
     <div class="container">
@@ -10,6 +11,7 @@
     </div>
 </section>
 
+<!-- //////////////////// centered navigation //////////////////// -->
 <nav class="navigation navbar navbar-expand-lg navbar-dark text-uppercase">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -41,6 +43,7 @@
     </div>
 </nav>
 
+<!-- //////////////////// our selection //////////////////// -->
 <section id="book-selection" class="overflow-hidden mt-5 padding-xlarge">
     <div class="container">
         <div class="row">
@@ -48,7 +51,7 @@
                 <h2 class="titleLabelText display-7 text-uppercase">Our Selection</h2>
             </div>
             <div class="book-grid">
-                <div *ngFor="let product of products">
+                <div *ngFor="let product of products" (click)="goToDetailsPage(product.id)">
                     <img class="book-cover" [src]="product.product_cover">
                 </div>
             </div>
@@ -56,13 +59,13 @@
     </div>
 </section>
 
+<!-- //////////////////// seasons banner //////////////////// -->
 <section id="our-selection" class="overflow-hidden mt-5 padding-xlarge">
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-sm-12">
-            <div class="text-content offset-4 padding-medium">
+            <div class="text-content padding-medium">
                 <h3>Get cozy &</h3>
-                <h2 id="discoverText" class="display-2 pb-5 text-uppercase text-dark">Discover seasonal favorites!</h2>
-                <a href="#more-books" class="btn btn-medium btn-dark text-uppercase btn-rounded-none mt-4">DISCOVER</a>
+                <h2 class="display-2 pb-5 text-uppercase text-dark">Discover seasonal favorites!</h2>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -70,36 +73,18 @@
     </div>
 </section>
 
+<!-- //////////////////// seasonal products //////////////////// -->
 <section id="more-books" class="overflow-hidden">
     <div class="container">
         <div class="row">
             <div class="display-header d-flex justify-content-between pb-3">
-                <h2 class="display-7 text-dark text-uppercase">More Books to Explore</h2>
+                <h2 class="display-7 text-dark text-uppercase">Get in the {{currentSeason}} spirit!</h2>
             </div>
             <div id="moreBooksContainer" class="swiper-container">
                 <div class="swiper-wrapper books-wrapper">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book1.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book2.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book3.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book4.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book5.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book6.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book7.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book8.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book9.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book10.png"
-                        href="../../app/details/details.component.html">
-                    <img class="book-cover swiper-book-cover" src="../../assets/book11.png"
-                        href="../../app/details/details.component.html">
+                    <div *ngFor="let product of seasonalProducts">
+                        <img class="book-cover swiper-book-cover" [src]="product.product_cover">
+                    </div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -111,7 +96,7 @@
     <p>&copy; 2024 PrincePress. All rights reserved.</p>
 </footer>
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -137,4 +122,4 @@
             });
         });
     });
-</script>
+</script> -->
