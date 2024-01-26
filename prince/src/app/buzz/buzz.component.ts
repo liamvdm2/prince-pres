@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { BuzzService } from '../shared/buzz.service';
 
 @Component({
   selector: 'app-buzz',
@@ -12,17 +13,18 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class BuzzComponent {
 
-  title: any;
-  author: any;
-  description: any;
+  title: string = '';
+  author: string = '';
+  description: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private buzzService: BuzzService) { }
 
-  createBuzz() {
+  onSubmit() {
+
     const buzzData = {
-      product_title: this.title,
-      product_desc: this.description,
-      product_author: this.author,
+      news_title: this.title,
+      news_description: this.description,
+      news_author: this.author
     };
 
     // Send a POST request to the server with the book data
@@ -32,14 +34,13 @@ export class BuzzComponent {
         this.title = '';
         this.author = '';
         this.description = '';
+
       },
       err => {
         console.error(err);
       }
-    )
-  };
-
-
+    );
+  }
   clearInput() {
     const isConfirmed = window.confirm('Are you sure you want to clear the input fields?');
     if (isConfirmed) {

@@ -22,14 +22,20 @@ Route::get('/buzz', function (Request $request) {
 });
 
 route::post('/buzz', function (Request $request) {
-    $title = $request->title;
-    $description = $request->description;
-    $author = $request->author;
+    $news_title = $request->news_title;
+    $news_description = $request->news_description;
+    $news_author = $request->news_author;
 
-    $products = Buzz::create([
-        'title' => $title,
-        'description' => $description,
-        'author' => $author,
+    $validatedData = $request->validate([
+        'news_title' => 'required|max:255',
+        'news_description' => 'required|max:255',
+        'news_author' => 'required|max:255',
+    ]);
+
+    $Buzz = Buzz::create([
+        'news_title' => $news_title,
+        'news_description' => $news_description,
+        'news_author' => $news_author,
         'updated_at' => now(),
         'created_at' => now(),
     ]);
