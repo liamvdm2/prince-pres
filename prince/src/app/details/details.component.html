@@ -11,20 +11,20 @@
 </script>
 
 <!-- //////////////////// display page banner //////////////////// -->
-<section class="banner">
+<!-- <section class="banner">
     <img src="media/seriesBanner.png" alt="Series Banner">
-</section>
+</section> -->
 
 <!-- //////////////////// display book info //////////////////// -->
 <section class="container mt-5">
     <div class="book-details">
-        <img id="book-cover" class="book-cover" alt="Book Cover">
+        <img id="book-cover" class="book-cover" alt="Book Cover" [src]="products?.product_cover">
         <div class="book-info">
-            <h2 class="book-title">Book Title</h2>
-            <p class="book-description">Book Description</p>
+            <h2 class="book-title">{{ products?.title }} Volume {{ products?.volume }}</h2>
+            <p class="book-description">{{ products?.description }}</p>
             <div class="purchase-links">
                 <h5>Available at:</h5>
-                <a href="#" class="btn btn-dark">Amazon</a>
+                <a [href]="products?.available_at" class="btn btn-dark">Buy Now</a>
             </div>
         </div>
     </div>
