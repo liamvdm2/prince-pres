@@ -32,7 +32,7 @@ route::post('/buzz', function (Request $request) {
         'news_author' => 'required|max:255',
     ]);
 
-    $Buzz = Buzz::create([
+    $Buzz = buzz::create([
         'news_title' => $news_title,
         'news_description' => $news_description,
         'news_author' => $news_author,
