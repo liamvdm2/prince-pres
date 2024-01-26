@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
 
 @Component({
- selector: 'app-register',
- templateUrl: './register.component.html',
- styleUrls: ['./register.component.css']
+  selector: 'app-register',
+  standalone: true,
+  imports: [FormsModule, RouterModule, HttpClientModule],
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   surname:string ='';
