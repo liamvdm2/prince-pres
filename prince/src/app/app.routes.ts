@@ -39,8 +39,9 @@ export const routes: Routes = [
     },
     {
         path: ':id/details',
-
-
+        component: DetailsComponent
+    },
+    {
         path: 'buzz',
         component: BuzzComponent
     },

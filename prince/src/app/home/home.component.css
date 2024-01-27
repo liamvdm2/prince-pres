@@ -138,14 +138,15 @@ footer {
 }
 
 .navbar-nav .nav-link {
-    color: black;
-    transition: color 0.3s, text-shadow 0.3s;
+    color: white;
+    transition: color 0.2s, text-shadow 0.2s;
+    font-weight: 400;
 }
 
 .navbar-nav .nav-link:hover {
     color: black;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    /* Adjust the glow effect as needed */
+    text-shadow: 0 0 10px rgb(255, 255, 255);
+    font-weight: 400;
 }
 
 .glowLabel {
