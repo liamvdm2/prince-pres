@@ -38,6 +38,8 @@ export const routes: Routes = [
         component: UserprofileComponent
     },
     {
+        path: ':id/details',
+
 
         path: 'buzz',
         component: BuzzComponent
@@ -51,11 +53,4 @@ export const routes: Routes = [
         path: 'news',
         component: NewsComponent
     }
-    ,
-    {
-
-        path: 'details/:id',
-        component: DetailsComponent
-     },
-
 ]
