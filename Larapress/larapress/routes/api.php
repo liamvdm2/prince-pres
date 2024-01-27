@@ -72,7 +72,6 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required',
             'username' => 'required',
             'birthday' => 'required| date_format:Y-m-d',
         ]);
