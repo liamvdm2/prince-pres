@@ -204,8 +204,8 @@ Route::post('/products', function (Request $request) {
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
-        ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
-        ->select('Products.*', 'Genres.genre_name') 
+        // ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
+        // ->select('Products.*', 'Genres.genre_name') 
         ->get();
     return response()->json($results);
 });
