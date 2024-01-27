@@ -7,21 +7,21 @@ import * as bcrypt from 'bcryptjs';
 export class UserService {
 
 	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
+
+		/* 	
+			Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
+			The example provided by me was with the json server... there we had no auto password hashing!
 	
-	/* 	
-		Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
-		The example provided by me was with the json server... there we had no auto password hashing!
-
-		Sooooo... in the end, it does matter ;)
-
-		We where double encrypting the password (once in angular, and again in laravel)
-		Our password would never been true this way...
-		Laravel also uses the same hasing bcrypt hashing algoritm -> so perfecly compatable with our login check routine in angular.
-
-		// Not needed with the laravel api
-		const salt = bcrypt.genSaltSync(10);
-		const hashedPassword = bcrypt.hashSync(password, salt);
-	 */
+			Sooooo... in the end, it does matter ;)
+	
+			We where double encrypting the password (once in angular, and again in laravel)
+			Our password would never been true this way...
+			Laravel also uses the same hasing bcrypt hashing algoritm -> so perfecly compatable with our login check routine in angular.
+	
+			// Not needed with the laravel api
+			const salt = bcrypt.genSaltSync(10);
+			const hashedPassword = bcrypt.hashSync(password, salt);
+		 */
 
 		const user = {
 			username: username,
@@ -68,43 +68,47 @@ export class UserService {
 		let users = await this.getUsers();
 		console.log(users);
 		let user = users.find((u: { username: string; password: string; }) => u.username === username);
-		console.log (user);
-		console.log (password, user.password);	
-		console.log (bcrypt.compareSync(password, user.password));
+		console.log(user);
+		console.log(password, user.password);
+		console.log(bcrypt.compareSync(password, user.password));
 		if (bcrypt.compareSync(password, user.password)) {
-		   return user;
+			return user;
 		}
 		return null
-	   }
+	}
 
-	   async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any) {
+	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any, password: any) {
 		// Construct the user object
 		const updatedUser = {
-		   id: id,
-		   name: name,
-		   surname: surname,
-		   email: email,
-		   birthday: birthday,
-		   // Add any other properties you want to update
+			id: id,
+			name: name,
+			surname: surname,
+			email: email,
+			birthday: birthday,
+			password: user.password,
+			username: user.username
+
+			// Add any other properties you want to update
 		};
-	   
-		console.log(updatedUser)
 
 		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
-		   method: 'PUT',
-		   headers: {
-			 'Content-Type': 'application/json',
-		   },
-		   body: JSON.stringify(updatedUser),
-		   
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(updatedUser),
 		});
-	   
-		if (!result.ok) {
-		   throw new Error('Failed to update user');
-		   
-		}
-	   
-		return result.json();
-	   }
 
+		if (!result.ok) {
+			console.error('HTTP response status:', result.status);
+			console.error('HTTP response body:', await result.text());
+			throw new Error('Failed to update user');
+		}
+
+		const data = await result.json();
+		/* console.log('Updated user data:', data); */
+
+		return data;
+	}
 }
+

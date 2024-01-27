@@ -11,6 +11,38 @@ use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Genre;
+use App\Models\buzz;
+
+// buzz
+
+Route::get('/buzz', function (Request $request) {
+    $results = DB::table('buzzs')->get();
+    return response()->json($results);
+    
+});
+
+route::post('/buzz', function (Request $request) {
+    $news_title = $request->news_title;
+    $news_description = $request->news_description;
+    $news_author = $request->news_author;
+
+    $validatedData = $request->validate([
+        'news_title' => 'required|max:255',
+        'news_description' => 'required|max:255',
+        'news_author' => 'required|max:255',
+    ]);
+
+    $Buzz = buzz::create([
+        'news_title' => $news_title,
+        'news_description' => $news_description,
+        'news_author' => $news_author,
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+
+    // Return a response
+    return response()->json(['message' => 'buzz added successfully'], 201);
+});
 // Users
 
 Route::get('/users', function (Request $request) {
@@ -40,7 +72,6 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required',
             'username' => 'required',
             'birthday' => 'required| date_format:Y-m-d',
         ]);

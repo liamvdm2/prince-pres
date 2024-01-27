@@ -18,21 +18,29 @@ export class UserprofileComponent {
 
   async toggleEditMode() {
     if (this.editMode) {
-      // TODO: Edit and save function
       try {
-        const result = await this.userService.updateUser(
-          this.getUser.id, 
-          this.getUser,
-          this.getUser.name,
-          this.getUser.surname,
-          this.getUser.email,
-          this.getUser.birthday
-        );
-        console.log(result);
+        const result = await fetch('/api/users/' + this.getUser.id, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: this.getUser.name,
+            surname: this.getUser.surname,
+            email: this.getUser.email,
+            birthday: this.getUser.birthday,
+            username: this.getUser.username,
+            password: this.getUser.password,
+          }),
+        });
+        const updatedUser = await result.json();
+        this.getUser = updatedUser;
+        console.log('User updated successfully');
+        this.editMode = !this.editMode;
       } catch (error) {
         console.error('Error updating user:', error);
       }
-      this.editMode = !this.editMode;
     } else {
       this.editMode = !this.editMode;
     }
@@ -51,21 +59,6 @@ export class UserprofileComponent {
     }
   }
 
-  /*async updateUser() {
-    try {
-      const result = await this.userService.updateUser(
-        this.getUser.id, 
-        this.getUser,
-        this.getUser.name,
-        this.getUser.surname,
-        this.getUser.email,
-        this.getUser.birthday
-      );
-      console.log(result);
-    } catch (error) {
-      console.error('Error updating user:', error);
-    }
-  }*/
 
   // logout method
   logout() {

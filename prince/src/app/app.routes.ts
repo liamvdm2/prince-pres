@@ -5,7 +5,12 @@ import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+
+import { BuzzComponent } from './buzz/buzz.component';
+import { NewsComponent } from './news/news.component';
+
 import { DetailsComponent } from './details/details.component';
+
 
 export const routes: Routes = [
     {
@@ -34,6 +39,18 @@ export const routes: Routes = [
     },
     {
         path: ':id/details',
-        component: DetailsComponent
-     },
+
+
+        path: 'buzz',
+        component: BuzzComponent
+    },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: 'news',
+        component: NewsComponent
+    }
 ]
