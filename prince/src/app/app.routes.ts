@@ -33,7 +33,7 @@ export const routes: Routes = [
         component: UserprofileComponent
     },
     {
-        path: 'details/:id',
+        path: ':id/details',
         component: DetailsComponent
      },
 ]
