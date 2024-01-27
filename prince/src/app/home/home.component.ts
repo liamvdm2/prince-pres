@@ -21,16 +21,16 @@ export class HomeComponent implements OnInit {
   seasonalProducts: any[] = [];
 
   getProducts() {
-    this.productService.getProducts().then(data => {
-      this.products = data;
-      this.currentSeason = this.getCurrentSeason();
-      this.seasonalProducts = this.filterBySeason(this.currentSeason);
-      console.log('All products:', this.products);
-      console.log('Filtered products:', this.seasonalProducts);
-    }).catch(error => console.log(error));
+    this.productService.getProducts()
+      .then(data => {
+        this.products = data;
+        this.currentSeason = this.getCurrentSeason();
+        this.seasonalProducts = this.filterBySeason(this.currentSeason);
+        console.log('All products:', this.products);
+        console.log('Filtered products:', this.seasonalProducts);
+      })
+      .catch(error => console.error('Error fetching products:', error));
   }
-
-
   getCurrentSeason(): string {
     const today = new Date();
     const month = today.getMonth() + 1;
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
   goToDetailsPage(id: string): void {
     console.log(`Navigating to details page with ID: ${id}`);
     this.router.navigate(['/details', id]);
-   }
+  }
 
   ngOnInit() {
     this.getProducts();
