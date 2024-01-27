@@ -8,21 +8,6 @@ export class UserService {
 
 	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
 
-		/* 	
-			Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
-			The example provided by me was with the json server... there we had no auto password hashing!
-	
-			Sooooo... in the end, it does matter ;)
-	
-			We where double encrypting the password (once in angular, and again in laravel)
-			Our password would never been true this way...
-			Laravel also uses the same hasing bcrypt hashing algoritm -> so perfecly compatable with our login check routine in angular.
-	
-			// Not needed with the laravel api
-			const salt = bcrypt.genSaltSync(10);
-			const hashedPassword = bcrypt.hashSync(password, salt);
-		 */
-
 		const user = {
 			username: username,
 			password: password,
@@ -61,16 +46,21 @@ export class UserService {
 			throw error; // Propagate the error
 		}
 	}
-	// Checks user credentials and returns a valid token or null
+	// Authenticates a user credentials and returns a valid token or null
 	async login(username: string, password: string): Promise<string | null> {
+		// Create the request body with the username and password
 		const body = { username, password };
 		console.log(body);
+		// Get the list of users from the database
 		let users = await this.getUsers();
 		console.log(users);
+		 // Find the user with the matching username
 		let user = users.find((u: { username: string; password: string; }) => u.username === username);
 		console.log(user);
+		 // Check if the input password matches the user's password
 		console.log(password, user.password);
 		console.log(bcrypt.compareSync(password, user.password));
+		// If the passwords match, return the user, else return null
 		if (bcrypt.compareSync(password, user.password)) {
 			return user;
 		}
@@ -87,8 +77,6 @@ export class UserService {
 			birthday: birthday,
 			password: user.password,
 			username: user.username
-
-			// Add any other properties you want to update
 		};
 
 		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
