@@ -77,7 +77,7 @@ export class UserService {
 		return null
 	}
 
-	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any) {
+	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any, password: any) {
 		// Construct the user object
 		const updatedUser = {
 			id: id,
