@@ -3,12 +3,12 @@
 .bg-secondary {
     background-color: #f7fafc !important;
 }
-  
-  .text {
+
+.text {
     color: black;
     font-size: 16px;
     padding: 16px 32px;
-  }
+}
 
 /*.adminCard {
     width: 50vw;
@@ -50,18 +50,13 @@
 }
 
 .btnAddClear {
-    float: right;
-    margin-top: -18%;
+    /*float: right;*/
+    text-align: center;
 }
 
-#preview p {
+p {
+    padding: 5px;
     border: 1px solid slategray;
-    /*border-radius: 50px;*/
-    padding-left: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: slategray;
-    height: 5vh;
 }
 
 .output-container {
@@ -69,27 +64,12 @@
     align-items: center;
 }
 
-#preview label {
-    /*margin-right: 8px; /* Adjust the margin as needed for spacing */
-    color: black;
-    margin-left: 5%;
+#imgAdd {
+    border: none !important;
+}
+
+label,
+#imgAdd {
+    color: slategray;
     font-weight: bold;
-
-    
-  }
-
-  .test {
-    width: 20vw;
-    margin-top: 10px;
-    height: 5vh;
-  }
-
-  #imgAdd {
-    border: none!important;
-  }
-
-/*p {
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.7;
-}*/
+}

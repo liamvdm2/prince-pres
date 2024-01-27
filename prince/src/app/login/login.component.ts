@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
 import { RouterModule, Router } from '@angular/router';
-import { UserService } from '../userprofile/user.service';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, RouterModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -15,51 +14,34 @@ export class LoginComponent {
 
   username: any;
   password: any;
-
-
   rememberMe: boolean = false;
 
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
-  login() {
-    // Assuming you get the user information after a successful login
-    const loggedInUser = { username: this.username }; 
 
-    localStorage.setItem('username', loggedInUser.username);
 
-    // Set the logged-in user
-    this.userService.setLoggedInUser(loggedInUser);
+  async onSubmit() {
+
+    console.log('Username:', this.username + 'Password:', this.password);
+    
+    const user = await this.userService.login(this.username, this.password);
+    console.log(user);
+    if (user) {
+      console.log('Server Response:', user);
+      //Store token in local storage
+      const userjson = JSON.stringify(user)
+
+      localStorage.setItem('username', userjson);
+      localStorage.setItem('token', userjson);
+      //Redirect to protected component
+      this.router.navigate(['/userprofile']);
+      console.log('Login successful for user:', this.username);
+
+    } else {
+      alert('Invalid username or password.');
+
+    }
+    //console.log('Login successful for user:', this.username);
   }
-
-  onSubmit() {
-
-    const credentials = {
-      username: this.username,
-      password: this.password,
-      rememberMe: this.rememberMe
-    };
-
-    console.log('Sending credentials:', credentials.username);
-
-    this.http.post('http://127.0.0.1:8000/api/login', credentials).subscribe(
-      (res:any) => {
-        console.log('Server response', res);
-        
-        const loggedInUser = res.user;
-        this.userService.setLoggedInUser(loggedInUser);
-
-
-        // Navigate to profile page
-        this.router.navigate(['/userprofile']);
-      },
-      err => {
-        console.error('Error during login', err);
-        // Handle failed login here
-      }
-    );
-
-    this.username = '';
-    this.password = '';
-}
 }

@@ -11,12 +11,43 @@ use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Wishlist;
 use App\Models\Genre;
+use App\Models\buzz;
+
+// buzz
+
+Route::get('/buzz', function (Request $request) {
+    $results = DB::table('buzzs')->get();
+    return response()->json($results);
+    
+});
+
+route::post('/buzz', function (Request $request) {
+    $news_title = $request->news_title;
+    $news_description = $request->news_description;
+    $news_author = $request->news_author;
+
+    $validatedData = $request->validate([
+        'news_title' => 'required|max:255',
+        'news_description' => 'required|max:255',
+        'news_author' => 'required|max:255',
+    ]);
+
+    $Buzz = buzz::create([
+        'news_title' => $news_title,
+        'news_description' => $news_description,
+        'news_author' => $news_author,
+        'updated_at' => now(),
+        'created_at' => now(),
+    ]);
+
+    // Return a response
+    return response()->json(['message' => 'buzz added successfully'], 201);
+});
 // Users
 
 Route::get('/users', function (Request $request) {
-    $results = DB::table('users')
-        ->orderBy('created_at', 'desc')        // select * from products order by created_at desc and  
-        ->paginate(10);                        // limit to 10 per page from newest to oldest so the app can run faster
+    // Using the db face
+    $results = DB::table('users')->get();
 
     return response()->json($results);
 });
@@ -41,8 +72,8 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'name' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required',
             'username' => 'required',
+            'birthday' => 'required| date_format:Y-m-d',
         ]);
 
         $user->update($validatedData);
@@ -62,6 +93,7 @@ Route::post('/users', function (Request $request) {
     $surname = $request->surname;
     $password = $request->password;
     $username = $request->username;
+    $birthday = $request->birthday;
 
 
     $validatedData = $request->validate([
@@ -70,6 +102,8 @@ Route::post('/users', function (Request $request) {
         'email' => 'required|email|unique:users',     // email must be unique in users table
         'password' => 'required',                     // password is automatically hashed by Laravel
         'username' => 'required',
+        'birthday' => 'required| date_format:Y-m-d',
+
     ]);
 
     $user = User::create([
@@ -78,6 +112,7 @@ Route::post('/users', function (Request $request) {
         'email' => $validatedData['email'],
         'password' => $validatedData['password'],
         'username' => $validatedData['username'],
+        'birthday' => $validatedData['birthday'],
         'updated_at' => now(),
         'created_at' => now(),
     ]);
@@ -159,6 +194,11 @@ Route::delete('/comments/{id}', function ($id) {        // user can delete his c
 
 
 
+Route::get('/products', function (Request $request) {
+    $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
+});
+
+
 // Products
 
 Route::post('/products', function (Request $request) {
@@ -195,8 +235,8 @@ Route::post('/products', function (Request $request) {
 
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')
-        ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
-        ->select('Products.*', 'Genres.genre_name') 
+        // ->join('Genres', 'Products.genre_id', '=', 'Genres.id')
+        // ->select('Products.*', 'Genres.genre_name') 
         ->get();
     return response()->json($results);
 });
@@ -314,33 +354,38 @@ Route::post('/genres', function (Request $request) {
     return response()->json(['message' => 'Genre created successfully'], 201);
 });
 
-Route::get('/genres', function (Request $request) {
-    $genres = DB::table('Genres')->get();
-    return response()->json($genres);
-});
+// Route::get('/genres', function (Request $request) {
+//     $genres = DB::table('Genres')->get();
+//     return response()->json(['message' => 'Genre created successfully'], 201);
+// });
 
-Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
-    $validatedData = $request->validate([
-        'name' => 'required|max:255',
-    ]);
+// Route::get('/genres', function (Request $request) {
+//     $genres = DB::table('Genres')->get();
+//     return response()->json($genres);
+// });
 
-    $genre = Genre::find($id);
+// Route::put('/genres/{id}', function (Request $request, $id) { // not working yet
+//     $validatedData = $request->validate([
+//         'name' => 'required|max:255',
+//     ]);
 
-    if ($genre) {
-        $genre->update($validatedData);
-        return response()->json(['message' => 'Genre updated successfully', 'data' => $genre]);
-    } else {
-        return response()->json(['error' => 'Genre not found'], 404);
-    }
-});
+//     $genre = Genre::find($id);
 
-Route::delete('/genres/{id}', function ($id) {
-    $genre = Genre::find($id);
+//     if ($genre) {
+//         $genre->update($validatedData);
+//         return response()->json(['message' => 'Genre updated successfully', 'data' => $genre]);
+//     } else {
+//         return response()->json(['error' => 'Genre not found'], 404);
+//     }
 
-    if ($genre) {
-        $genre->delete();
-        return response()->json(['message' => 'Genre deleted successfully']);
-    } else {
-        return response()->json(['error' => 'Genre not found'], 404);
-    }
-});
+// Route::delete('/genres/{id}', function ($id) {
+//     $genre = Genre::find($id);
+
+//     if ($genre) {
+//         $genre->delete();
+//         return response()->json(['message' => 'Genre deleted successfully']);
+//     } else {
+//         return response()->json(['error' => 'Genre not found'], 404);
+//     }
+// });
+

@@ -1,1 +1,66 @@
-<p>buzz works!</p>
+<div class="main-content">
+    <!-- Page content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <!--AddBookOutput-->
+                <div class="card card-profile shadow">
+                    <div class="card-body pt-0 pt-md-4">
+                        <div id="preview">
+                            <h5><i class="fa-solid fa-list"></i> Overzicht</h5>
+                            <hr>   
+                            <label>Title:</label>
+                            <p>{{title}}</p>
+
+                            <label>Author:</label>
+                            <p>{{author}}</p>
+
+                            <label>Description:</label>
+                            <p>{{description}}</p>
+                        </div>
+                        <hr>
+                        <div class="btnAddClear">
+                            <button (click)="onSubmit()" type="button" class="btn btn-success">✓</button>
+                        <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--AdminCard-->
+            <div class="col-xl-8 order-xl-1">
+                <div class="adminCard">
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0"><i class="fa-solid fa-user-tie"></i> Admin</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="new-book">
+                                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-book"></i> Create new
+                                    post</h6>
+                                <form>
+                                    <label for="title"> Title </label>
+                                    <input id="title" [(ngModel)]="title" name="title" type="text" class="form-control">
+
+                                    <label for="Author"> Author </label>
+                                    <input id="author" [(ngModel)]="author" name="author" type="text"
+                                        class="form-control">
+
+                                    <label for="description"> Description </label>
+                                    <input id="description" [(ngModel)]="description" name="description" type="text"
+                                        class="form-control">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

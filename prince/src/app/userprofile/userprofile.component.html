@@ -1,141 +1,150 @@
 <div class="main-content">
-    <!-- Page content -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-            <!--Card profile right-->
-          <div class="card card-profile shadow">
-            <div class="row justify-content-center">
-              <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle">
-                  </a>
-                </div>
+  <!-- Page content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <!--Card profile right-->
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="#">
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="rounded-circle">
+                </a>
               </div>
             </div>
-            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            </div>
-            <div class="card-body pt-0 pt-md-4">
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                    <div>
-                      <span class="heading">7</span>
-                      <span class="description">Books</span>
-                    </div>
-                    <div>
-                      <span class="heading">12</span>
-                      <span class="description">Wishlist</span>
-                    </div>
+          </div>
+          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="row">
+              <div class="col">
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                  <!--<div>
+                    <span class="heading">7</span>
+                    <span class="description">Books</span>
                   </div>
+                  <div>
+                    <span class="heading">12</span>
+                    <span class="description">Wishlist</span>
+                  </div>-->
+
+                  <a class="btn btn-sm btn-danger" (click)="logout()">Logout</a>
                 </div>
               </div>
-              <div class="text-center">
-                <h3> {{ loggedInUser }} <span class="font-weight-light">
-                    <a><i class="fa-regular fa-pen-to-square"></i></a>
-                </span></h3>
-                <hr class="my-4">
-                <p>Badges</p>
-                <div class="badge-container">
-                    <img class="badge-one" src="../../assets/Badge1.png">
-                    <img class="badge-one" src="../../assets/Bookworm1.png">
+            </div>
+            <div class="text-center">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa-solid fa-circle-user"></i></div>
                 </div>
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.username" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
+            </div>
+              <!--<h3>{{ getUser.username }} <span class="font-weight-light">
+                  <a><i class="fa-regular fa-pen-to-square"></i></a>
+              </span></h3>-->
+              <hr class="my-4">
+              <p>Badges</p>
+              <div class="badge-container">
+                  <img class="badge-one" src="../../assets/Badge1.png">
+                  <img class="badge-one" src="../../assets/Bookworm1.png">
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-header bg-white border-0">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
-                </div>
-                <div class="col-4 text-right">
-                  <a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="toggleEditMode()">{{ editMode ? 'Save' : 'Edit' }}</a>
-                </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">My account</h3>
+              </div>
+              <div class="col-4 text-right">
+                <a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="toggleEditMode()">{{ editMode ? 'Save' : 'Edit' }}</a>
+                <!--<a class="btn btn-sm btn-primary" id="saveChangesBtn" (click)="updateUser()">Save</a>-->
               </div>
             </div>
-            <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-user titleIcon"></i> User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
-                            </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="Firstname" [disabled]="!editMode">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
-                            </div>
-                            <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="Surname" [disabled]="!editMode">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-user titleIcon"></i> User information</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
                       <div class="input-group">
                           <div class="input-group-prepend">
-                              <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
+                              <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
                           </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" value="email.email@outlook.com" [disabled]="!editMode">
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.name" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                       </div>
                   </div>
 
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa-solid fa-cake-candles"></i></div>
-                            </div>
-                            <input type="date" class="form-control" id="inlineFormInputGroupUsername" value="" [disabled]="!editMode">
+                  <div class="col-lg-6">
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text"><i class="fa-solid fa-user"></i></div>
+                          </div>
+                          <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.surname" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
+                      </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
                         </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.email" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
                     </div>
-
-                  </div>
-                </div>
-                <hr class="my-4">
-                <!-- Wishlist -->
-                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-heart"></i> Wishlist</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-
-                    <!--Add wishlist-->
-
-                  </div>
                 </div>
 
-                <hr class="my-4">
-                <!--Favorites-->
-                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-star"></i> Favorites</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-
-                    <!--Add favorites-->
-
+                  <div class="col-lg-6">
+                      <div class="input-group">
+                          <div class="input-group-prepend">
+                              <div class="input-group-text"><i class="fa-solid fa-cake-candles"></i></div>
+                          </div>
+                          <input type="date" class="form-control" id="inlineFormInputGroupUsername" [value]="getUser.birthday" [disabled]="!editMode"> <!--[disabled]="!editMode"-->
+                      </div>
                   </div>
+
                 </div>
+              </div>
+              <hr class="my-4">
+              <!-- Wishlist -->
+              <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-heart"></i> Wishlist</h6>
+              <div class="pl-lg-4">
+                <div class="row">
 
-                <hr class="my-4">
-                <!--Personal list-->
-                <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-check"></i> Personal list</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
+                  <!--Add wishlist-->
 
-                    <!--Add personal list-->
-
-                  </div>
                 </div>
-              </form>
-            </div>
+              </div>
+
+              <hr class="my-4">
+              <!--Favorites-->
+              <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-star"></i> Favorites</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+
+                  <!--Add favorites-->
+
+                </div>
+              </div>
+
+              <hr class="my-4">
+              <!--Personal list-->
+              <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-check"></i> Personal list</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+
+                  <!--Add personal list-->
+
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,32 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../product.service';
+import { ProductService } from './product.service';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  imports: [CommonModule],
+  providers: [ProductService, CommonModule],
 })
 export class HomeComponent implements OnInit {
-  products: any;
-  productsUrl = this.productService.productsUrl;
+  constructor(private productService: ProductService, private router: Router) { }
 
-  constructor(private productService: ProductService) { }
+  products: any;
+  productsUrl = this.productService.productsUrl
+  currentSeason: string = '';
+  seasonalProducts: any[] = [];
 
   getProducts() {
-    this.productService.getProducts().then(data => {
-      console.log(data);
-    }).catch(error => console.log(error));
+    this.productService.getProducts()
+      .then(data => {
+        this.products = data;
+        this.currentSeason = this.getCurrentSeason();
+        this.seasonalProducts = this.filterBySeason(this.currentSeason);
+        console.log('All products:', this.products);
+        console.log('Filtered products:', this.seasonalProducts);
+      })
+      .catch(error => console.error('Error fetching products:', error));
+  }
+  getCurrentSeason(): string {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+
+    let season = '';
+    if (month === 3 && day >= 21 || month === 4 || month === 5) {
+      season = 'spring';
+    } else if (month === 6 && day >= 21 || month === 7 || month === 8) {
+      season = 'summer';
+    } else if (month === 9 && day >= 21 || month === 10 || month === 11) {
+      season = 'autumn';
+    } else {
+      season = 'winter';
+    }
+    return season;
+  }
+
+  filterBySeason(season: string): any[] {
+    return this.products.filter((product: any) => product.season === season);
+  }
+
+  goToDetailsPage(id: string): void {
+    console.log(`Navigating to details page with ID: ${id}`);
+    this.router.navigate(['/details', id]);
   }
 
   ngOnInit() {
     this.getProducts();
   }
 }
-/* 
-@NgModule({
-  imports: [CommonModule],
-  providers: [ProductService]
-}) */
-export class AppModule { }

@@ -6,6 +6,12 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 
+import { BuzzComponent } from './buzz/buzz.component';
+import { NewsComponent } from './news/news.component';
+
+import { DetailsComponent } from './details/details.component';
+
+
 export const routes: Routes = [
     {
         path: 'register',
@@ -30,5 +36,21 @@ export const routes: Routes = [
     {
         path: 'userprofile',
         component: UserprofileComponent
+    },
+    {
+        path: ':id/details',
+
+
+        path: 'buzz',
+        component: BuzzComponent
+    },
+    {
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+    },
+    {
+        path: 'news',
+        component: NewsComponent
     }
 ]
