@@ -5,8 +5,8 @@ import * as bcrypt from 'bcryptjs';
 	providedIn: 'root'
 })
 export class UserService {
-
-	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
+	userRole: any;
+	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any, role_id: number = 2) {
 
 		const user = {
 			username: username,
@@ -15,6 +15,7 @@ export class UserService {
 			name: name,
 			email: email,
 			birthdate: birthday,
+			role_id: role_id
 		};
 		const result = await fetch('http://127.0.0.1:8000/api/users', {
 			method: 'POST',
@@ -48,23 +49,15 @@ export class UserService {
 	}
 	// Authenticates a user credentials and returns a valid token or null
 	async login(username: string, password: string): Promise<string | null> {
-		// Create the request body with the username and password
 		const body = { username, password };
-		console.log(body);
-		// Get the list of users from the database
 		let users = await this.getUsers();
-		console.log(users);
-		 // Find the user with the matching username
 		let user = users.find((u: { username: string; password: string; }) => u.username === username);
-		console.log(user);
-		 // Check if the input password matches the user's password
-		console.log(password, user.password);
-		console.log(bcrypt.compareSync(password, user.password));
-		// If the passwords match, return the user, else return null
 		if (bcrypt.compareSync(password, user.password)) {
+			this.userRole = user.role_id; // Set the userRole property
+			localStorage.setItem('userRole', user.role_id.toString()); // Store userRole in local storage
 			return user;
 		}
-		return null
+		return null;
 	}
 
 	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any, password: any) {
