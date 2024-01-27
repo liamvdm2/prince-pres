@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-                <!--AddBookOutput-->
+                <!--AddBookOutput--> <!-- show a preview of the new book -->
                 <div class="card card-profile shadow">
                     <div class="card-body pt-0 pt-md-4">
                         <div id="preview">
@@ -35,7 +35,7 @@
                         <hr>
                         <div class="btnAddClear">
                             <button (click)="createBook()" type="button" class="btn btn-success">✓</button>
-                        <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button>
+                        <button (click)="clearInput()" type="button" class="btn btn-danger">✘</button> <!-- when pressed on button clear the input fields -->
                         </div>
                     </div>
                 </div>
@@ -54,6 +54,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- input for the new book -->
                         <div class="card-body">
                             <div class="new-book">
                                 <h6 class="heading-small text-muted mb-4"><i class="fa-solid fa-book"></i> Create new
@@ -74,8 +75,10 @@
                                     <input id="whereToBuy" [(ngModel)]="whereToBuy" name="whereToBuy" type="text"
                                         class="form-control">
 
+                                    <!-- here we select the file from the computer or from your phone -->
+
                                     <label for="image"> Image </label>
-                                    <input type="file" (change)="onFileSelected($event)" id="image" name="image"
+                                    <input type="file" (change)="onFileSelected($event)" id="image" name="image"  
                                         class="form-control imgTest">
 
                                     <label for="releaseDate"> Release Date </label>
