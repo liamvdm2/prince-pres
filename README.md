@@ -32,7 +32,7 @@ In the future, we plan to add more features to PrincePress, such as chat functio
 ## Developed by:
 * [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ugurkan Karaca](https://www.linkedin.com/in/ugurkan-karaca/)
 &nbsp;
-* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Liam Vandermaesen](www.linkedin.com/in/liam-vandermaesen-9b6935294)
+* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Liam Vandermaesen](https://www.linkedin.com/in/liam-vandermaesen)
 &nbsp;
 * [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Eline Boffin](https://www.linkedin.com/in/eline-boffin/)
 &nbsp;
