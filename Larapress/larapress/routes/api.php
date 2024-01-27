@@ -65,7 +65,7 @@ Route::delete('/users/{username}', function ($username) {       // be careful wi
 
 Route::put('/users/{id}', function ($id, Request $request) {
 
-    $user = User::find($id);
+    $user = User::find($id); // find the user with the given id
 
     if ($user) {
         $validatedData = $request->validate([
@@ -73,7 +73,7 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'surname' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'username' => 'required',
-            'birthday' => 'required| date_format:Y-m-d',
+            'birthday' => 'required| date_format:Y-m-d', // check if the birthday is in the correct format 
         ]);
 
         $user->update($validatedData);
@@ -137,25 +137,25 @@ Route::post('/login', function (Request $request) {
 
 // Comments
 
-Route::get('/comments', function () {
-    $results = DB::table('Comments')
+//Route::get('/comments', function () {
+  //  $results = DB::table('Comments')
         // Join the Comments table to the users table on the user_id field
-        ->join('users', 'users.id', '=', 'Comments.user_id')
+        //->join('users', 'users.id', '=', 'Comments.user_id')
         // Select the username field from the users table and all fields from the Comments table
-        ->select('users.username', 'Comments.*')
-        ->get();
+        //->select('users.username', 'Comments.*')
+    //    ->get();
 
-    $results = $results->map(function ($item) {
+    //$results = $results->map(function ($item) {
         // Remove the user_id field from the results so its better visible
-        unset($item->user_id);
+        //unset($item->user_id);
         // Convert the item to a collection and sort the keys so comment_id is first
-        return collect($item)->sortKeys();
-    });
+        //return collect($item)->sortKeys();
+    //});
 
-    return response()->json($results);
-});
+    //return response()->json($results);
+//});
 
-route::post('/comments', function (Request $request) {
+/* route::post('/comments', function (Request $request) {
 
     $content = $request->content;
 
@@ -165,28 +165,28 @@ route::post('/comments', function (Request $request) {
 
     $comments = Comment::create([
         'content' => $validatedData['content'],
-        'user_id' => Auth::id(), // gets the id of the currently logged in user
+        'user_id' => Auth::id(), gets the id of the currently logged in user
         'updated_at' => now(),
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'Comment created successfully'], 201);
-});
+}); */
 
-Route::delete('/comments/{id}', function ($id) {        // user can delete his comment or the admin can
-    $comment = Comment::find($id);
+//Route::delete('/comments/{id}', function ($id) {        // user can delete his comment or the admin can
+   // $comment = Comment::find($id);
 
-    if ($comment) {
+    //if ($comment) {
         // Check if the current user is the comment's owner or an admin
-        if (Auth::id() === $comment->user_id /* || Auth::user()->isAdmin() */) {
-            $comment->delete();
-            return response()->json(['message' => 'Comment deleted successfully']);
-        } else {
-            return response()->json(['error' => 'You do not have permission to delete this comment'], 403);
-        }
-    } else {
-        return response()->json(['error' => 'Comment not found'], 404);
-    }
-});
+       // if (Auth::id() === $comment->user_id /* || Auth::user()->isAdmin() */) {
+           // $comment->delete();
+          //  return response()->json(['message' => 'Comment deleted successfully']);
+        //} else {
+        //    return response()->json(['error' => 'You do not have permission to delete this comment'], 403);
+      //  }
+    //} else {
+    //    return response()->json(['error' => 'Comment not found'], 404);
+  //  }
+//});
 
 // we dont use update route for comments because we dont want to be able to edit comments
 
