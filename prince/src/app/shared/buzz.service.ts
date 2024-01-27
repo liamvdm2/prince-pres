@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -25,17 +26,21 @@ export class BuzzService {
 		return result.json();
 	}
 
-	async getBuzz() {
-		try {
-			const response = await fetch('http://127.0.0.1:8000/api/buzz');
-			if (!response.ok) {
-				throw new Error('Failed to fetch news');
-			}
-			const data = await response.json();
-			return data;
-		} catch (error) {
-			console.error('Error fetching users:', error);
-			throw error;
-		}
-	}
+	constructor(private http: HttpClient) { }
+
+	private apiUrl = 'http://127.0.0.1:8000/api/buzz';
+
+	getById(id: string): Promise<any> {
+		// Send a GET request to the API
+		return this.http.get(`${this.apiUrl}/${id}`).toPromise().then(response => {
+		   console.log(response); // Log the response
+		   const Buzz = response as any[];
+		   for (let buzz of Buzz) {
+			 if (buzz.id === Number(id)) {
+			   return buzz;
+			 }
+		   }
+		   throw new Error(`This post is not found or deleted`);
+		});
+	   }
 }
