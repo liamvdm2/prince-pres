@@ -77,7 +77,7 @@ export class UserService {
 		return null
 	}
 
-	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any) {
+	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any, password: any) {
 		// Construct the user object
 		const updatedUser = {
 			id: id,
@@ -90,8 +90,6 @@ export class UserService {
 
 			// Add any other properties you want to update
 		};
-
-		console.log(updatedUser)
 
 		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {
 			method: 'PUT',
@@ -108,7 +106,7 @@ export class UserService {
 		}
 
 		const data = await result.json();
-		console.log('Updated user data:', data);
+		/* console.log('Updated user data:', data); */
 
 		return data;
 	}
