@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductServiceDetails } from './productDetails.service';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { DetailsProductService } from './details-product.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+ selector: 'app-details',
+ templateUrl: './details.component.html',
+ styleUrls: ['./details.component.css'],
+ providers: [DetailsProductService]
 })
 export class DetailsComponent implements OnInit {
-  products: any;
-  productsUrl = this.productServiceDetails.productsUrl;
+ product: any;
 
-  constructor(private productServiceDetails: ProductServiceDetails) { }
+ constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute) { }
 
-  getProducts() {
-    this.productServiceDetails.getProducts().then(data => {
-      this.products = data;
-      console.log(data);
-    }).catch(error => console.log(error));
-  }
-
-  ngOnInit() {
-    this.getProducts();
-  }
+ ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      let id = params.get('id');
+      if (id !== null) {
+        this.DetailsProductService.getProductById(id).then((product: any) => {
+          this.product = product;
+          console.log(this.product); // Log the product to the console
+        }).catch((err: any) => {
+          // Handle error
+        });
+      }
+    });
+ }
 }

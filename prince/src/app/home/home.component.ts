@@ -54,9 +54,10 @@ export class HomeComponent implements OnInit {
   }
 
   goToDetailsPage(id: string): void {
-    console.log(`Navigating to details page with ID: ${id}`);
-    this.router.navigate(['/details', id]);
-  }
+    const productId = +id;
+    console.log(`Navigating to details page with ID: ${productId}`);
+    this.router.navigate([productId, 'details']);
+   }   
 
   ngOnInit() {
     this.getProducts();

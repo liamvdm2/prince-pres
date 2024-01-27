@@ -53,6 +53,7 @@
             <div class="book-grid">
                 <div *ngFor="let product of products" (click)="goToDetailsPage(product.id)">
                     <img class="book-cover" [src]="product.product_cover">
+                    <p>{{ product.product_title }}</p>
                 </div>
             </div>
         </div>

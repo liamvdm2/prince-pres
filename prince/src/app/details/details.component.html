@@ -18,13 +18,13 @@
 <!-- //////////////////// display book info //////////////////// -->
 <section class="container mt-5">
     <div class="book-details">
-        <img id="book-cover" class="book-cover" alt="Book Cover" [src]="products?.product_cover">
+        <img id="book-cover" class="book-cover" alt="Book Cover" [src]="product?.product_cover">
         <div class="book-info">
-            <h2 class="book-title">{{ products?.title }} Volume {{ products?.volume }}</h2>
-            <p class="book-description">{{ products?.description }}</p>
+            <h2 class="book-title">{{ product?.title }} Volume {{ product?.volume }}</h2>
+            <p class="book-description">{{ product?.description }}</p>
             <div class="purchase-links">
                 <h5>Available at:</h5>
-                <a [href]="products?.available_at" class="btn btn-dark">Buy Now</a>
+                <a [href]="product?.available_at" class="btn btn-dark">Buy Now</a>
             </div>
         </div>
     </div>
