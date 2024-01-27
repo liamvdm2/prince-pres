@@ -13,6 +13,17 @@ use App\Models\Wishlist;
 use App\Models\Genre;
 use App\Models\buzz;
 
+// acces to pages
+
+Route::get('/admin', function () {
+    return view('Only for admin');
+})->middleware('CheckRole:1');
+
+
+
+
+
+
 // buzz
 
 Route::get('/buzz', function (Request $request) {
@@ -94,7 +105,7 @@ Route::post('/users', function (Request $request) {
     $password = $request->password;
     $username = $request->username;
     $birthday = $request->birthday;
-
+    $role_id = $request->role_id;
 
     $validatedData = $request->validate([
         'name' => 'required|max:255',
