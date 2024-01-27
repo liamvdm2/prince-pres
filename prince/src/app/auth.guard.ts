@@ -9,7 +9,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
 		if (userRoleId === '1') {
 			return true;
 		} else {
-			window.location.href = '/login';
 			return false;
 		}
 	} else {
