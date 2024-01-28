@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { UserService } from '../shared/user.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +26,8 @@ export class RegisterComponent {
 
   
   onSubmit() {
+    
+    
     this.router.navigate(['/login']);
 
     const options = {

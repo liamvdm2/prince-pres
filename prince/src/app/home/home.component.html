@@ -51,14 +51,18 @@
                 <h2 class="titleLabelText display-7 text-uppercase">Our Selection</h2>
             </div>
             <div class="book-grid">
-                <div *ngFor="let product of products" (click)="goToDetailsPage(product.id)">
-                    <img class="book-cover" [src]="product.product_cover">
-                    <p>{{ product.product_title }}</p>
-                </div>
+                <div *ngFor="let product of products" (click)="goToDetailsPage(product.id)" class="card h-100">
+                    <img class="card-img-top more-books-covers" [src]="product.product_cover">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.product_title }}</h5>
+                        <span class="volume-text">Volume: {{ product.volume }}</span>
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
 </section>
+
 
 <!-- //////////////////// seasons banner //////////////////// -->
 <section id="our-selection" class="overflow-hidden mt-5 padding-xlarge">
@@ -81,14 +85,15 @@
             <div class="display-header d-flex justify-content-between pb-3">
                 <h2 class="display-7 text-dark text-uppercase">Get in the {{currentSeason}} spirit!</h2>
             </div>
-            <div id="moreBooksContainer" class="swiper-container">
-                <div class="swiper-wrapper books-wrapper">
-                    <div *ngFor="let product of seasonalProducts">
-                        <img class="book-cover swiper-book-cover" [src]="product.product_cover">
+            <div class="book-grid">
+                <div *ngFor="let product of seasonalProducts" (click)="goToDetailsPage(product.id)" class="card h-100">
+                    <img class="card-img-top more-books-covers" [src]="product.product_cover">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.product_title }}</h5>
+                        <span class="volume-text">Volume: {{ product.volume }}</span>
                     </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>
@@ -96,31 +101,3 @@
 <footer>
     <p>&copy; 2024 PrincePress. All rights reserved.</p>
 </footer>
-
-<!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var swiper = new Swiper('#moreBooksContainer', {
-            direction: 'horizontal',
-            slidesPerView: 'auto',
-            spaceBetween: 20,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Smooth scroll to "Our Selection" when clicking "Explore Stories"
-        document.getElementById('explore-stories-button').addEventListener('click', function (event) {
-            event.preventDefault();
-            document.getElementById('our-selection').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-</script> -->
