@@ -5,23 +5,8 @@ import * as bcrypt from 'bcryptjs';
 	providedIn: 'root'
 })
 export class UserService {
-
-	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
-
-		/* 	
-			Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
-			The example provided by me was with the json server... there we had no auto password hashing!
-	
-			Sooooo... in the end, it does matter ;)
-	
-			We where double encrypting the password (once in angular, and again in laravel)
-			Our password would never been true this way...
-			Laravel also uses the same hasing bcrypt hashing algoritm -> so perfecly compatable with our login check routine in angular.
-	
-			// Not needed with the laravel api
-			const salt = bcrypt.genSaltSync(10);
-			const hashedPassword = bcrypt.hashSync(password, salt);
-		 */
+	userRole: any;
+	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any, role_id: number = 2) {
 
 		const user = {
 			username: username,
@@ -30,6 +15,7 @@ export class UserService {
 			name: name,
 			email: email,
 			birthdate: birthday,
+			role_id: role_id
 		};
 		const result = await fetch('http://127.0.0.1:8000/api/users', {
 			method: 'POST',
@@ -61,20 +47,17 @@ export class UserService {
 			throw error; // Propagate the error
 		}
 	}
-	// Checks user credentials and returns a valid token or null
+	// Authenticates a user credentials and returns a valid token or null
 	async login(username: string, password: string): Promise<string | null> {
 		const body = { username, password };
-		console.log(body);
 		let users = await this.getUsers();
-		console.log(users);
 		let user = users.find((u: { username: string; password: string; }) => u.username === username);
-		console.log(user);
-		console.log(password, user.password);
-		console.log(bcrypt.compareSync(password, user.password));
 		if (bcrypt.compareSync(password, user.password)) {
+			this.userRole = user.role_id; // Set the userRole property
+			localStorage.setItem('userRole', user.role_id.toString()); // Store userRole in local storage
 			return user;
 		}
-		return null
+		return null;
 	}
 
 	async updateUser(id: number, user: any, name: string, surname: any, email: any, birthday: any, username: any, password: any) {
@@ -87,8 +70,6 @@ export class UserService {
 			birthday: birthday,
 			password: user.password,
 			username: user.username
-
-			// Add any other properties you want to update
 		};
 
 		const result = await fetch(`http://127.0.0.1:8000/api/users/${id}`, {

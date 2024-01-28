@@ -25,15 +25,16 @@ export class LoginComponent {
 
     console.log('Username:', this.username + 'Password:', this.password);
     
+    // we call the login service method from the user service class and pass the username and password to it
     const user = await this.userService.login(this.username, this.password);
     console.log(user);
     if (user) {
       console.log('Server Response:', user);
       //Store token in local storage
-      const userjson = JSON.stringify(user)
+      const userjson = JSON.stringify(user) // convert user object to JSON string
 
       localStorage.setItem('username', userjson);
-      localStorage.setItem('token', userjson);
+      localStorage.setItem('token', userjson); // store token in local storage
       //Redirect to protected component
       this.router.navigate(['/userprofile']);
       console.log('Login successful for user:', this.username);
