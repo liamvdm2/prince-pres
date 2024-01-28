@@ -63,6 +63,16 @@ Route::get('/users', function (Request $request) {
     return response()->json($results);
 });
 
+
+route::get('/users/{username}', function ($username) {
+    $user = User::where('username', $username)->first();
+    if ($user) {
+        return response()->json($user);
+    } else {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+});
+
 Route::delete('/users/{username}', function ($username) {       // be careful with this route as it will delete all comments and user info associated with the user
     $user = User::where('username', $username)->first();
 
@@ -208,6 +218,16 @@ Route::post('/login', function (Request $request) {
 Route::get('/products', function (Request $request) {
     $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
 });
+
+route::get('/products/{id}', function ($id) {
+    $product = Product::find($id);
+    if ($product) {
+        return response()->json($product);
+    } else {
+        return response()->json(['error' => 'Product not found'], 404);
+    }
+});
+
 
 
 // Products
