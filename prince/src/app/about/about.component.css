@@ -1,91 +1,73 @@
-h1, h2, h3, h4, h5, h6 {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+.team-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /*padding: 50px;*/
+    margin-top: 50px;
+    /*margin-left: 100px;*/
+    margin: 50px;
 }
 
-header {
+.team-member {
     text-align: center;
-    color: #fff;
-    background-color: lightslategray;
-    background-image: url(../../assets/Logo.png);
-    background-attachment: scroll;
-    background-position: center center;
-    background-repeat: none;
-    background-size: 25%;
-
-}
-.container {
-    height: 50vh;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 50%;
+    height: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10%;
+    margin: 15px;
 }
 
-header .intro-text {
-    padding-top: 100px;
-    padding-bottom: 50px;
-}
-
-header .intro-text .intro-lead-in {
-    margin-bottom: 25px;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 22px;
-    font-style: italic;
-    line-height: 22px;
-}
-
-header .intro-text .intro-heading {
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 50px;
-    font-weight: 700;
-    line-height: 50px;
-}
-
-@media(min-width:768px) {
-    header .intro-text {
-        padding-top: 150px;
-    }
-
-    header .intro-text .intro-lead-in {
-        margin-bottom: 25px;
-        font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 40px;
-        font-style: italic;
-        line-height: 40px;
-    }
-
-    header .intro-text .intro-heading {
-        margin-bottom: 50px;
-        text-transform: uppercase;
-        font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 75px;
-        font-weight: 700;
-        line-height: 75px;
-    }
-}
-
-section h2.section-heading {
-    margin-top: 0;
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
     margin-bottom: 15px;
-    font-size: 40px;
 }
 
-section h3.section-subheading {
-    margin-bottom: 75px;
-    text-transform: none;
-    font-family: "Droid Serif","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 400;
+.team-member h2 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
 }
 
-@media(min-width:768px) {
-    section {
-        padding: 150px 0;
+.team-member p {
+    color: #888;
+    font-size: 17px;
+}
+
+.eline {
+    padding: 11.5%;
+}
+
+.team, .about {
+    text-align: center;
+    font-size: 75px;
+}
+
+.subText {
+    color: #D3D3D3;
+    font-size: 17px;
+    text-align: center;
+}
+
+.point {
+    height: 30px;
+}
+
+.team {
+    margin-top: 120px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .team-container {
+        flex-wrap: wrap;
+        justify-content: center;
     }
-}
 
-.service-heading {
-    margin: 15px 0;
-    text-transform: none;
+    .team-member {
+        width: 45%; /* Two team members next to each other */
+    }
 }
