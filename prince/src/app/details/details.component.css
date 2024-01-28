@@ -257,11 +257,11 @@ table {
 }
 
 .book-description {
-    color: rgb(41, 41, 41);
+    color: black;
     padding: 11px;
     text-align: justify;
     border-radius: 7px;
-    background: linear-gradient(to right, #aefdfd50, #f3b2ff50);
+    background: linear-gradient(to right, #aefdfd65, #f3b2ff65);
     font-family: 'Josefin Sans';
     font-weight: 700;
     font-size: 20px;
@@ -329,15 +329,9 @@ table {
     text-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
-/* Give this a color overlay of that gradient */
-.fancy {
-    height: 100vh;
-    background: linear-gradient(to right, rgba(243, 178, 255, 0), rgba(174, 253, 255, 1), rgba(243, 178, 255, 0)) center/ 90% 5px no-repeat;
-}
-
 .back-button{
   color: transparent;
-  background-image: linear-gradient(90deg, white 50%, black 50%);
+  background-image: linear-gradient(90deg, rgb(235, 151, 250) 50%, black 50%);
   background-position:100%;
   background-size:200% 100%;
   background-clip:text;

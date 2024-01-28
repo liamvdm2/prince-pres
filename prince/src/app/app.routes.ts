@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { MailinglistComponent } from './mailinglist/mailinglist.component';
-
+import { SeriesComponent } from './series/series.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { NewsComponent } from './news/news.component';
 
@@ -70,6 +70,10 @@ export const routes: Routes = [
     {
         path: 'news',
         component: NewsComponent
+    },
+    {
+        path: 'series',
+        component: SeriesComponent
     },
     {
         path: 'about',
