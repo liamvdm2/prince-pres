@@ -24,6 +24,9 @@
                             <label>ReleaseDate:</label>
                             <p>{{releaseDate}}</p>
 
+                            <label>Volume:</label>
+                            <p>{{volume}}</p>
+
                             <label>Type:</label>
                             <p>{{type}}</p>
 
@@ -86,7 +89,22 @@
                                         class="form-control">
 
                                     <label for="type"> Type </label>
-                                    <input id="type" [(ngModel)]="type" name="type" type="text" class="form-control">
+                                    <select name="type" id="type" [(ngModel)]="type">
+                                        <option value="LN">Light Novels</option>
+                                        <option value="M">Manga</option>
+                                        <option value="D">Digital</option>
+                                    </select>
+
+                                    <label for="season"> Season </label>
+                                    <select name="season" id="season" [(ngModel)]="season">
+                                        <option value="Winter">Winter</option>
+                                        <option value="Spring">Spring</option>
+                                        <option value="Summer">Summer</option>
+                                        <option value="Autumn">Autumn</option>
+                                    </select>
+
+                                    <label for="volume"> Volume </label>
+                                    <input id="volume" [(ngModel)]="volume" name="volume" type="text">
                                 </form>
                             </div>
                         </div>
