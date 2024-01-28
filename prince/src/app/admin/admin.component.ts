@@ -24,19 +24,27 @@ export class AdminComponent {
   releaseDate: any;
   /* genre: any; */
   type: any;
+  volume: any;
+  season: any;
 
   constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
 
   sanitizeImage(base64String: string) {
-    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${base64String}`);
+    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${base64String}`); // we use sanitizer so we can preview the image
   }
 
 
   onFileSelected(event: Event) {
+    // Cast the event target to an HTMLInputElement to access the files property.
     const input = event.target as HTMLInputElement;
+    // If no files selected or they dont exist, exit the function. 
     if (!input.files?.length) return;
+    // Access the first file in the FileList object.
     const file = input.files[0];
+      // Create a new FileReader object to read the content of the file.
     const reader = new FileReader();
+     // Set the onload event handler for the FileReader.
+  // This function is called once the read operation is successfully completed.
     reader.onload = (e) => {
       // Define an event handler for when the reader loads a file
       const base64String = btoa(reader.result as string);
@@ -58,6 +66,8 @@ export class AdminComponent {
       product_release: this.releaseDate,
       product_cover: this.imagePath,
       available_at: this.whereToBuy,
+      volume: this.volume,
+      season : this.season,
     };
 
     // Send a POST request to the server with the book data
@@ -71,6 +81,8 @@ export class AdminComponent {
         this.imagePath = '';
         this.releaseDate = '';
         this.type = '';
+        this.volume = '';
+        this.season = '';
       },
       err => {
         console.error(err);
@@ -78,18 +90,7 @@ export class AdminComponent {
     );
   }
 
-  /*clearInput() {
-    const clearData = {
-      product_title: this.title = '',
-      product_desc: this.description = '',
-      product_type: this.type = '',
-      product_author: this.author = '',
-      product_release: this.releaseDate = '',
-      product_cover: this.imagePath = '',
-      available_at: this.whereToBuy = '',
-    }
-  }*/
-
+  // function to clear the input fields
   clearInput() {
     const isConfirmed = window.confirm('Are you sure you want to clear the input fields?');
     if (isConfirmed) {
@@ -100,6 +101,8 @@ export class AdminComponent {
       this.releaseDate = '';
       this.imagePath = '';
       this.whereToBuy = '';
+      this.volume = '';
+      this.season = '';
     }
   }
 }

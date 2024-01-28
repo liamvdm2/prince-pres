@@ -1,6 +1,20 @@
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+html,
+
 body {
+    margin: 0;
+    padding: 0;
     background: radial-gradient(rgb(132, 132, 132) 10%, rgb(39, 39, 39) 100%);
 }
+
 
 #banner {
     padding: 50px 0;
@@ -66,6 +80,18 @@ body {
     margin-bottom: 20px;
 }
 
+.explore-books {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 65px;
+}
+
+.explore-books h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
 .book-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -101,7 +127,6 @@ body {
 
 footer {
     color: #ffffff;
-    background-color: #343a40;
     text-align: center;
     padding: 10px;
     width: 100%;
@@ -189,3 +214,138 @@ footer {
     align-items: center;
     margin-top: 20px;
 }
+
+
+/*WISHLIST STYLING*/
+.lists {
+    margin-right: 100px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+table {
+    width: 15vw; 
+}
+
+#heart {
+    color: #DD4A49;
+}
+
+#star {
+    color: #FFD321;
+}
+
+#check {
+    color: #01BD00;
+}
+
+.sectionBG {
+    position: relative;
+}
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(50px);
+    z-index: -1;
+}
+
+.book-description {
+    color: rgb(41, 41, 41);
+    padding: 11px;
+    text-align: justify;
+    border-radius: 7px;
+    background: linear-gradient(to right, #aefdfd50, #f3b2ff50);
+    font-family: 'Josefin Sans';
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.card-body {
+    padding: 10px;
+    background: linear-gradient( 155deg, rgb(174 253 255 / 80%) 35%, rgb(244 178 255 / 80%) 100%);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.card-title {
+    font-family: "Mukta";
+    margin-bottom: -7.5px;
+    cursor: pointer;
+}
+
+.volume-text {
+    font-weight: 400;
+    font-family: 'Mukta';
+    margin-bottom: -0.5px;
+    cursor: pointer;
+    vertical-align: -5px;
+}
+
+.card {
+    box-shadow: 7px 7px 0px rgb(186, 197, 190);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 2px rgb(186, 197, 190);
+}
+
+.card-img, .card-img-top {
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+}
+
+.col-sm-6, .col-md-4, .col-lg-3 {
+    min-width: 200px;
+}
+
+.more-books-covers img {
+    width: 100% !important;
+    height: 375px !important;
+    object-fit: cover !important;
+}
+
+
+.book-title {
+    text-shadow: 0 0 10px rgb(255, 255, 255);
+    padding-bottom: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.book-link {
+    text-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+/* Give this a color overlay of that gradient */
+.fancy {
+    height: 100vh;
+    background: linear-gradient(to right, rgba(243, 178, 255, 0), rgba(174, 253, 255, 1), rgba(243, 178, 255, 0)) center/ 90% 5px no-repeat;
+}
+
+.back-button{
+  color: transparent;
+  background-image: linear-gradient(90deg, white 50%, black 50%);
+  background-position:100%;
+  background-size:200% 100%;
+  background-clip:text;
+  -webkit-background-clip:text;
+  
+  transition: background-position .2s ease;
+}
+.back-button:hover{
+  background-position:0;
+}
+

@@ -13,6 +13,17 @@ use App\Models\Wishlist;
 use App\Models\Genre;
 use App\Models\buzz;
 
+// acces to pages
+
+Route::get('/admin', function () {
+    return view('Only for admin');
+})->middleware('CheckRole:1');
+
+
+
+
+
+
 // buzz
 
 Route::get('/buzz', function (Request $request) {
@@ -52,6 +63,16 @@ Route::get('/users', function (Request $request) {
     return response()->json($results);
 });
 
+
+route::get('/users/{username}', function ($username) {
+    $user = User::where('username', $username)->first();
+    if ($user) {
+        return response()->json($user);
+    } else {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+});
+
 Route::delete('/users/{username}', function ($username) {       // be careful with this route as it will delete all comments and user info associated with the user
     $user = User::where('username', $username)->first();
 
@@ -65,7 +86,7 @@ Route::delete('/users/{username}', function ($username) {       // be careful wi
 
 Route::put('/users/{id}', function ($id, Request $request) {
 
-    $user = User::find($id);
+    $user = User::find($id); // find the user with the given id
 
     if ($user) {
         $validatedData = $request->validate([
@@ -73,7 +94,7 @@ Route::put('/users/{id}', function ($id, Request $request) {
             'surname' => 'required|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'username' => 'required',
-            'birthday' => 'required| date_format:Y-m-d',
+            'birthday' => 'required| date_format:Y-m-d', // check if the birthday is in the correct format 
         ]);
 
         $user->update($validatedData);
@@ -94,7 +115,7 @@ Route::post('/users', function (Request $request) {
     $password = $request->password;
     $username = $request->username;
     $birthday = $request->birthday;
-
+    $role_id = $request->role_id;
 
     $validatedData = $request->validate([
         'name' => 'required|max:255',
@@ -137,25 +158,25 @@ Route::post('/login', function (Request $request) {
 
 // Comments
 
-Route::get('/comments', function () {
-    $results = DB::table('Comments')
+//Route::get('/comments', function () {
+  //  $results = DB::table('Comments')
         // Join the Comments table to the users table on the user_id field
-        ->join('users', 'users.id', '=', 'Comments.user_id')
+        //->join('users', 'users.id', '=', 'Comments.user_id')
         // Select the username field from the users table and all fields from the Comments table
-        ->select('users.username', 'Comments.*')
-        ->get();
+        //->select('users.username', 'Comments.*')
+    //    ->get();
 
-    $results = $results->map(function ($item) {
+    //$results = $results->map(function ($item) {
         // Remove the user_id field from the results so its better visible
-        unset($item->user_id);
+        //unset($item->user_id);
         // Convert the item to a collection and sort the keys so comment_id is first
-        return collect($item)->sortKeys();
-    });
+        //return collect($item)->sortKeys();
+    //});
 
-    return response()->json($results);
-});
+    //return response()->json($results);
+//});
 
-route::post('/comments', function (Request $request) {
+/* route::post('/comments', function (Request $request) {
 
     $content = $request->content;
 
@@ -165,28 +186,28 @@ route::post('/comments', function (Request $request) {
 
     $comments = Comment::create([
         'content' => $validatedData['content'],
-        'user_id' => Auth::id(), // gets the id of the currently logged in user
+        'user_id' => Auth::id(), gets the id of the currently logged in user
         'updated_at' => now(),
         'created_at' => now(),
     ]);
     return response()->json(['message' => 'Comment created successfully'], 201);
-});
+}); */
 
-Route::delete('/comments/{id}', function ($id) {        // user can delete his comment or the admin can
-    $comment = Comment::find($id);
+//Route::delete('/comments/{id}', function ($id) {        // user can delete his comment or the admin can
+   // $comment = Comment::find($id);
 
-    if ($comment) {
+    //if ($comment) {
         // Check if the current user is the comment's owner or an admin
-        if (Auth::id() === $comment->user_id /* || Auth::user()->isAdmin() */) {
-            $comment->delete();
-            return response()->json(['message' => 'Comment deleted successfully']);
-        } else {
-            return response()->json(['error' => 'You do not have permission to delete this comment'], 403);
-        }
-    } else {
-        return response()->json(['error' => 'Comment not found'], 404);
-    }
-});
+       // if (Auth::id() === $comment->user_id /* || Auth::user()->isAdmin() */) {
+           // $comment->delete();
+          //  return response()->json(['message' => 'Comment deleted successfully']);
+        //} else {
+        //    return response()->json(['error' => 'You do not have permission to delete this comment'], 403);
+      //  }
+    //} else {
+    //    return response()->json(['error' => 'Comment not found'], 404);
+  //  }
+//});
 
 // we dont use update route for comments because we dont want to be able to edit comments
 
@@ -198,6 +219,16 @@ Route::get('/products', function (Request $request) {
     $results = DB::table('products')->get();       // SELECT * FROM products is query in SQL
 });
 
+route::get('/products/{id}', function ($id) {
+    $product = Product::find($id);
+    if ($product) {
+        return response()->json($product);
+    } else {
+        return response()->json(['error' => 'Product not found'], 404);
+    }
+});
+
+
 
 // Products
 
@@ -206,10 +237,12 @@ Route::post('/products', function (Request $request) {
     $desc = $request->product_desc;
     $type = $request->product_type;
     $author = $request->product_author;
-    $genreId = $request->genre_id;
+   /*  $genreId = $request->genre_id; */
     $release = $request->product_release;
     $cover = $request->product_cover;
     $available = $request->available_at;
+    $volume = $request->volume;
+    $season = $request->season;
 
 
 
@@ -223,10 +256,12 @@ Route::post('/products', function (Request $request) {
         'product_desc' => $desc,
         'product_type' => $type,
         'product_author' => $author,
-        'genre_id' => $genreId,
+      /*   'genre_id' => $genreId, */
         'product_release' => $release,
         'product_cover' => $cover,
-        'available_at' => $available
+        'available_at' => $available,
+        'volume' => $volume,
+        'season' => $request->season,
     ]);
 
     // Return a response
@@ -252,10 +287,11 @@ Route::put('/products/{id}', function ($id, Request $request) {
         'product_desc' => $request->product_desc,
         'product_type' => $request->product_type,
         'product_author' => $request->product_author,
-        'genre_id' => $request->genre_id,
+       /*  'genre_id' => $request->genre_id, */
         'product_release' => $request->product_release,
         'product_cover' => $request->product_cover,
-        'available_at' => $request->available_at
+        'available_at' => $request->available_at,
+        'volume' => $request->volume,
     ]);
 
     return response()->json(['message' => 'Product updated successfully'], 200);
@@ -275,9 +311,9 @@ Route::delete('/products/{id}', function ($id) {
 
 // wishlist
 
-Route::get('/wishlist/{username}', function ($username) {
+Route::get('/wishlist/{user_id}', function ($user_id) {
     // Fetch the user whose username matches the {username} parameter
-    $user = DB::table('users')->where('username', $username)->first();
+    $user = DB::table('users')->where('user_id', $user_id)->first();
     // If the user does not exist, return a error
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
@@ -294,9 +330,9 @@ Route::get('/wishlist/{username}', function ($username) {
 });
 
 // Define the POST endpoint for adding a product to a user's wishlist
-Route::post('/wishlist/{username}/{product_id}', function ($username, $product_id) {
+Route::post('/wishlist/{user_id}/{product_id}', function ($user_id, $product_id) {
     // Fetch the user whose username matches the {username} parameter
-    $user = DB::table('users')->where('username', $username)->first();
+    $user = DB::table('users')->where('user_id', $user_id)->first();
     // If the user does not exist, return an error
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
