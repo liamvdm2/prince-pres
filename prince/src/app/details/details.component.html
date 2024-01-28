@@ -1,30 +1,23 @@
-<!-- //////////////////// load clicked product //////////////////// -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookId = urlParams.get('bookId');
-
-        const bookCover = document.getElementById('book-cover');
-        bookCover.src = `media/book${bookId}.png`;
-
-    });
-</script>
-
 <!-- //////////////////// display page banner //////////////////// -->
-<!-- <section class="banner">
-    <img src="media/seriesBanner.png" alt="Series Banner">
-</section> -->
+<section class="banner">
+    <img [src]="product?.product_banner ? product?.product_banner : '../../assets/banner-default.png'" alt="Banner">
+</section>
+
+<a href="#" (click)="goBack()" class="mt-3 back-button" style="font-size: 20px; text-decoration: none;">
+    <i class="fa-solid fa-angle-left"></i> Return Home</a>
 
 <!-- //////////////////// display book info //////////////////// -->
-<section class="container mt-5">
+<section class="container mt-5 sectionBG">
+    <div class="bg-image" [style.backgroundImage]="'url(' + product?.product_cover + ')'"></div>
     <div class="book-details">
         <img id="book-cover" class="book-cover" alt="Book Cover" [src]="product?.product_cover">
         <div class="book-info">
-            <h2 class="book-title">{{ product?.title }} Volume {{ product?.volume }}</h2>
-            <p class="book-description">{{ product?.description }}</p>
+            <h2 class="book-title">{{ product?.product_title }} | Volume {{ product?.volume }} | {{
+                getProductTypeName(product?.product_type)}}</h2>
+            <p class="book-description">{{ product?.product_desc }}</p>
             <div class="purchase-links">
-                <h5>Available at:</h5>
-                <a [href]="product?.available_at" class="btn btn-dark">Buy Now</a>
+                <h5 class="book-link">Available at:</h5>
+                <a [href]="product?.available_at" target="_blank" class="btn btn-dark">Amazon</a>
             </div>
         </div>
     </div>
@@ -34,78 +27,39 @@
 <section class="container mt-5">
     <div class="related-books">
         <h2>More from the Series!</h2>
-        <div id="moreBooksContainer" class="swiper-container">
-            <div class="swiper-wrapper books-wrapper">
-                <script>
-                    for (let i = 1; i <= 11; i++) {
-                        document.write(`
-                            <div class="swiper-slide">
-                                <a href="details.html?bookId=${i}">
-                                    <img class="book-cover swiper-book-cover" src="media/book${i}.png" alt="Book ${i} Cover">
-                                </a>
-                            </div>
-                        `);
-                    }
-                </script>
-            </div>
-        </div>
-        <!-- Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
-
-    <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var swiper = new Swiper('#moreBooksContainer', {
-                slidesPerView: 'auto',
-                spaceBetween: 20,
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-            });
-        });
-    </script> -->
-</section>
-
-<!-- //////////////////// display similar products //////////////////// -->
-<!-- <section class="container mt-5">
-        <div class="related-books">
-            <h2 class="text-uppercase">Relaited</h2>
-            <div id="moreBooksContainer" class="swiper-container">
-                <div class="swiper-wrapper books-wrapper">
-                    <script>
-                        for (let i = 1; i <= 11; i++) {
-                            document.write(`
-                            <div class="swiper-slide">
-                                <a href="details.html?bookId=${i}">
-                                    <img class="book-cover swiper-book-cover" src="media/book${i}.png" alt="Book ${i} Cover">
-                                </a>
-                            </div>
-                        `);
-                        }
-                    </script>
+        <div class="row">
+            <div *ngFor="let product of getFilteredSeriesProducts()" class="col-sm-6 col-md-4 col-lg-3 mb-4"
+                (click)="goToDetailsPage(product.id)">
+                <div class="card h-100">
+                    <img class="card-img-top" [src]="product.product_cover" alt="Product cover">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.product_title}}</h5>
+                        <span class="volume-text">Volume: {{product.volume}}</span>
+                    </div>
                 </div>
             </div>
-            <div class="swiper-pagination"></div>
         </div>
+    </div>
+</section>
 
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var swiper = new Swiper('#moreBooksContainer', {
-                    slidesPerView: 'auto',
-                    spaceBetween: 20,
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                });
-            });
-        </script>
-    </section> -->
+<!-- //////////////////// display explore //////////////////// -->
+<section class="container mt-5">
+    <div class="explore-books">
+        <h2>Explore More Books!</h2>
+        <div class="row">
+            <div *ngFor="let book of randomBooks" class="col-sm-6 col-md-4 col-lg-3 mb-4 more-books-covers"
+                (click)="goToDetailsPage(book.id)">
+                <div class="card h-100">
+                    <img class="card-img-top more-books-covers" [src]="book.product_cover" alt="Book cover">
+                    <div class="card-body">
+                        <h5 class="card-title">{{book.product_title}}</h5>
+                        <span class="volume-text">Volume: {{book.volume}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <footer>
     <p>&copy; 2024 PrincePress. All rights reserved.</p>
