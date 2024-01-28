@@ -9,30 +9,14 @@ export class UserService {
 
 
 	private currentUserSubject = new BehaviorSubject<any>(null);
+	private userRole: any; 
 
 	get currentUser() {
 		return this.currentUserSubject.asObservable();
 	}
 
 
-	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
-
-		/* 	
-			Disabled the password hashing because the laravel api will do this automaticly in the User::create method.
-			The example provided by me was with the json server... there we had no auto password hashing!
 	
-			Sooooo... in the end, it does matter ;)
-	
-			We where double encrypting the password (once in angular, and again in laravel)
-			Our password would never been true this way...
-			Laravel also uses the same hasing bcrypt hashing algoritm -> so perfecly compatable with our login check routine in angular.
-	
-			// Not needed with the laravel api
-			const salt = bcrypt.genSaltSync(10);
-			const hashedPassword = bcrypt.hashSync(password, salt);
-		 */
-
-	userRole: any;
 	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any, role_id: number = 2) {
 
 
