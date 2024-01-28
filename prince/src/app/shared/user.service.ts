@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as bcrypt from 'bcryptjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class UserService {
+
+	private currentUserSubject = new BehaviorSubject<any>(null);
+
+	get currentUser() {
+		return this.currentUserSubject.asObservable();
+	}
+
 
 	async register(username: any, password: any, surname: any, name: any, email: any, birthday: any) {
 
@@ -72,6 +80,7 @@ export class UserService {
 		console.log(password, user.password);
 		console.log(bcrypt.compareSync(password, user.password));
 		if (bcrypt.compareSync(password, user.password)) {
+			this.currentUserSubject.next(user);
 			return user;
 		}
 		return null

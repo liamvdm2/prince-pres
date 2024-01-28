@@ -10,7 +10,7 @@ class Wishlist extends Model
     use HasFactory;
 
     protected $fillable =  [
-      /*   'user_id', */
+       'user_id', 
         'wishlist_id',
     ];
 
