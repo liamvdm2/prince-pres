@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsProductService } from './details-product.service';
 import { WishlistService } from '../shared/wishlist.service';
 import { UserService } from '../shared/user.service';
-
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({
@@ -22,10 +21,12 @@ export class DetailsComponent implements OnInit {
   seriesProducts: any[] = [];
   randomBooks: any[] = [];
   currentBookId: any;
+  filteredSeriesProducts: any[] = [];
   goToDetailsPage(id: string): void {
     const productId = +id;
     console.log(`Navigating to details page with ID: ${productId}`);
     this.router.navigate([productId, 'details']);
+    window.scrollTo(12, 0);
   }
 
   ngOnInit(): void {
@@ -38,6 +39,8 @@ export class DetailsComponent implements OnInit {
           this.DetailsProductService.getAllProducts().subscribe((allProducts: any[]) => {
             this.seriesProducts = allProducts.filter((product: any) => product.product_title === this.product.product_title);
             this.randomBooks = this.getRandomBooks(allProducts, 12);
+            this.filteredSeriesProducts = this.getFilteredSeriesProducts();
+
           });
         }).catch((err: any) => {
           // Handle error

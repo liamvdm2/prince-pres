@@ -3,9 +3,9 @@
 }*/
 
 body {
-    background: rgb(180, 180, 180);
-    background: -moz-radial-gradient(circle, rgba(132, 132, 132) 5%, rgba(21, 21, 21) 100%);
-    background: -webkit-radial-gradient(circle, rgba(132, 132, 132) 5%, rgba(21, 21, 21) 100%);
-    background: radial-gradient(circle, rgba(132, 132, 132) 5%, rgba(21, 21, 21) 100%);
+    background: rgb(174 253 255);
+    background: -moz-radial-gradient(circle, #f4dcf8 5%, #d4f8f8 100%);
+    background: -webkit-radial-gradient(circle, #f4dcf8 5%, #d4f8f8 100%);
+    background: radial-gradient(circle, #f4dcf8 5%, #d4f8f8 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b4b4b4", endColorstr="#000000", GradientType=1);
 }
