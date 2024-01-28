@@ -217,10 +217,12 @@ Route::post('/products', function (Request $request) {
     $desc = $request->product_desc;
     $type = $request->product_type;
     $author = $request->product_author;
-    $genreId = $request->genre_id;
+   /*  $genreId = $request->genre_id; */
     $release = $request->product_release;
     $cover = $request->product_cover;
     $available = $request->available_at;
+    $volume = $request->volume;
+    $season = $request->season;
 
 
 
@@ -234,10 +236,12 @@ Route::post('/products', function (Request $request) {
         'product_desc' => $desc,
         'product_type' => $type,
         'product_author' => $author,
-        'genre_id' => $genreId,
+      /*   'genre_id' => $genreId, */
         'product_release' => $release,
         'product_cover' => $cover,
-        'available_at' => $available
+        'available_at' => $available,
+        'volume' => $volume,
+        'season' => $request->season,
     ]);
 
     // Return a response
@@ -263,10 +267,11 @@ Route::put('/products/{id}', function ($id, Request $request) {
         'product_desc' => $request->product_desc,
         'product_type' => $request->product_type,
         'product_author' => $request->product_author,
-        'genre_id' => $request->genre_id,
+       /*  'genre_id' => $request->genre_id, */
         'product_release' => $request->product_release,
         'product_cover' => $request->product_cover,
-        'available_at' => $request->available_at
+        'available_at' => $request->available_at,
+        'volume' => $request->volume,
     ]);
 
     return response()->json(['message' => 'Product updated successfully'], 200);

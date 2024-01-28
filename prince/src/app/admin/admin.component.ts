@@ -24,6 +24,8 @@ export class AdminComponent {
   releaseDate: any;
   /* genre: any; */
   type: any;
+  volume: any;
+  season: any;
 
   constructor(private sanitizer: DomSanitizer, private http: HttpClient) { }
 
@@ -64,6 +66,8 @@ export class AdminComponent {
       product_release: this.releaseDate,
       product_cover: this.imagePath,
       available_at: this.whereToBuy,
+      volume: this.volume,
+      season : this.season,
     };
 
     // Send a POST request to the server with the book data
@@ -77,6 +81,8 @@ export class AdminComponent {
         this.imagePath = '';
         this.releaseDate = '';
         this.type = '';
+        this.volume = '';
+        this.season = '';
       },
       err => {
         console.error(err);
@@ -95,6 +101,8 @@ export class AdminComponent {
       this.releaseDate = '';
       this.imagePath = '';
       this.whereToBuy = '';
+      this.volume = '';
+      this.season = '';
     }
   }
 }
