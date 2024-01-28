@@ -6,6 +6,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import { MailinglistComponent } from './mailinglist/mailinglist.component';
 
 import { BuzzComponent } from './buzz/buzz.component';
 import { NewsComponent } from './news/news.component';
@@ -20,6 +21,11 @@ export const routes: Routes = [
     {
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'mailinglist',
+        component: MailinglistComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'login',
@@ -48,7 +54,8 @@ export const routes: Routes = [
     },
     {
         path: 'buzz',
-        component: BuzzComponent
+        component: BuzzComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'unauthorized',
