@@ -12,6 +12,7 @@ import { BuzzComponent } from './buzz/buzz.component';
 import { NewsComponent } from './news/news.component';
 
 import { DetailsComponent } from './details/details.component';
+import { AboutComponent } from './about/about.component';
 
 
 import { authGuard } from './auth.guard';
@@ -69,5 +70,9 @@ export const routes: Routes = [
     {
         path: 'news',
         component: NewsComponent
+    },
+    {
+        path: 'about',
+        component: AboutComponent
     }
 ]

@@ -14,11 +14,16 @@ export class WishlistService {
     user_id: undefined
   };
 
+
+
   constructor(private http: HttpClient, private userService: UserService) { 
     userService.currentUser.subscribe(user => {
       this.userObject = user;
+      
     });
+    console.log('test', this.userObject);
  }
+ 
 
 addToWishlist(productId: number) {
   const url = `${this.apiUrl}/wishlist/${this.userObject.user_id}/${productId}`;
