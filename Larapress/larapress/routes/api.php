@@ -311,9 +311,9 @@ Route::delete('/products/{id}', function ($id) {
 
 // wishlist
 
-Route::get('/wishlist/{username}', function ($username) {
+Route::get('/wishlist/{user_id}', function ($user_id) {
     // Fetch the user whose username matches the {username} parameter
-    $user = DB::table('users')->where('username', $username)->first();
+    $user = DB::table('users')->where('user_id', $user_id)->first();
     // If the user does not exist, return a error
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);
@@ -330,9 +330,9 @@ Route::get('/wishlist/{username}', function ($username) {
 });
 
 // Define the POST endpoint for adding a product to a user's wishlist
-Route::post('/wishlist/{username}/{product_id}', function ($username, $product_id) {
+Route::post('/wishlist/{user_id}/{product_id}', function ($user_id, $product_id) {
     // Fetch the user whose username matches the {username} parameter
-    $user = DB::table('users')->where('username', $username)->first();
+    $user = DB::table('users')->where('user_id', $user_id)->first();
     // If the user does not exist, return an error
     if (!$user) {
         return response()->json(['message' => 'User not found'], 404);

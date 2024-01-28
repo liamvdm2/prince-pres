@@ -21,6 +21,19 @@
             </div>
         </div>
     </div>
+    <div class="lists">
+        <table>
+            <tr>
+                <td><i id="heart" [class]="wishlistIcon" (click)="addToWishlist5()"></i></td>
+                <td><i id="star" [class]="favoriteIcon" (click)="changeIconFavorite()"></i></td>
+                <td><i id="check" [class]="personalIcon" (click)="changeIconPersonal()"></i></td>
+                <button (click)="addToWishlist(product.id)">Add to wishlist</button>
+
+
+
+            </tr>
+        </table>
+    </div>
 </section>
 
 <!-- //////////////////// display more from the series //////////////////// -->

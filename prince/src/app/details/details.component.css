@@ -1,9 +1,14 @@
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap');
 @import '@fortawesome/fontawesome-free/css/all.css';
 
 html,
+
 body {
     margin: 0;
     padding: 0;
@@ -210,6 +215,30 @@ footer {
     margin-top: 20px;
 }
 
+
+/*WISHLIST STYLING*/
+.lists {
+    margin-right: 100px;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+table {
+    width: 15vw; 
+}
+
+#heart {
+    color: #DD4A49;
+}
+
+#star {
+    color: #FFD321;
+}
+
+#check {
+    color: #01BD00;
+}
+
 .sectionBG {
     position: relative;
 }
@@ -319,3 +348,4 @@ footer {
 .back-button:hover{
   background-position:0;
 }
+

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsProductService } from './details-product.service';
+import { WishlistService } from '../shared/wishlist.service';
+import { UserService } from '../shared/user.service';
+
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -12,12 +14,19 @@ import { Router } from '@angular/router';
   imports: [CommonModule]
 })
 export class DetailsComponent implements OnInit {
+
+ product: any;
+ currentUsername: string = '';
+
+ constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute, private wishlistService: WishlistService, private userService: UserService) { }
+
   product: any;
   seriesProducts: any[] = [];
-  randomBooks: any[] = []; // Add this line
+  randomBooks: any[] = []; 
   currentBookId: any;
 
   constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute, private router: Router) { }
+
 
   goToDetailsPage(id: string): void {
     const productId = +id;
@@ -41,6 +50,44 @@ export class DetailsComponent implements OnInit {
         });
       }
     });
+
+    this.userService.currentUser.subscribe(user => {
+			this.currentUsername = user?.username;
+		});
+ }
+
+ addToWishlist(productId: number) {
+  this.wishlistService.addToWishlist(productId).subscribe(response => {
+    console.log(response);
+  });
+}
+
+
+
+
+ /*addToWishlist() {
+  this.wishlistService.addToWishlist('USER_ID', this.product.id);
+}*/
+
+ /*WISHLIS*/
+ wishlistIcon: string = 'fa-regular fa-heart';
+  favoriteIcon: string = 'fa-regular fa-star';
+  personalIcon: string = 'fa-solid fa-check';
+
+  addToWishlist5(): void {
+    this.wishlistIcon = this.wishlistIcon === 'fa-regular fa-heart' ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+  }
+  
+  changeIconFavorite(): void {
+    this.favoriteIcon = this.favoriteIcon === 'fa-regular fa-star' ? 'fa-solid fa-star' : 'fa-regular fa-star';
+  }
+
+  changeIconPersonal(): void {
+    this.personalIcon = this.personalIcon === 'fa-solid fa-check' ? 'fa-solid fa-check-double' : 'fa-solid fa-check';
+  }
+
+}
+
   }
 
   getRandomBooks(array: any[], count: number): any[] {
