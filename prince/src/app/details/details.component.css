@@ -349,3 +349,10 @@ table {
   background-position:0;
 }
 
+.hand {
+    cursor: grab;
+}
+
+.hand:active {
+    cursor: grabbing;
+}

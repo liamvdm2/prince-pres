@@ -15,19 +15,13 @@ import { Router } from '@angular/router';
 })
 export class DetailsComponent implements OnInit {
 
- product: any;
- currentUsername: string = '';
-
- constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute, private wishlistService: WishlistService, private userService: UserService) { }
+  constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute, private wishlistService: WishlistService, private userService: UserService, private router: Router) { }
 
   product: any;
+  currentUsername: string = '';
   seriesProducts: any[] = [];
-  randomBooks: any[] = []; 
+  randomBooks: any[] = [];
   currentBookId: any;
-
-  constructor(private DetailsProductService: DetailsProductService, private route: ActivatedRoute, private router: Router) { }
-
-
   goToDetailsPage(id: string): void {
     const productId = +id;
     console.log(`Navigating to details page with ID: ${productId}`);
@@ -52,42 +46,8 @@ export class DetailsComponent implements OnInit {
     });
 
     this.userService.currentUser.subscribe(user => {
-			this.currentUsername = user?.username;
-		});
- }
-
- addToWishlist(productId: number) {
-  this.wishlistService.addToWishlist(productId).subscribe(response => {
-    console.log(response);
-  });
-}
-
-
-
-
- /*addToWishlist() {
-  this.wishlistService.addToWishlist('USER_ID', this.product.id);
-}*/
-
- /*WISHLIS*/
- wishlistIcon: string = 'fa-regular fa-heart';
-  favoriteIcon: string = 'fa-regular fa-star';
-  personalIcon: string = 'fa-solid fa-check';
-
-  addToWishlist5(): void {
-    this.wishlistIcon = this.wishlistIcon === 'fa-regular fa-heart' ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
-  }
-  
-  changeIconFavorite(): void {
-    this.favoriteIcon = this.favoriteIcon === 'fa-regular fa-star' ? 'fa-solid fa-star' : 'fa-regular fa-star';
-  }
-
-  changeIconPersonal(): void {
-    this.personalIcon = this.personalIcon === 'fa-solid fa-check' ? 'fa-solid fa-check-double' : 'fa-solid fa-check';
-  }
-
-}
-
+      this.currentUsername = user?.username;
+    });
   }
 
   getRandomBooks(array: any[], count: number): any[] {
@@ -95,10 +55,15 @@ export class DetailsComponent implements OnInit {
     return shuffledArray.slice(0, count);
   }
 
+
   getFilteredSeriesProducts() {
     console.log('currentBookId:', this.currentBookId);
     console.log('seriesProducts:', this.seriesProducts);
     return this.seriesProducts.filter(product => product.id !== this.currentBookId);
+  }
+
+  goBack() {
+    this.router.navigate(['./home']);
   }
 
   getProductTypeName(productType: string): string {
@@ -114,8 +79,29 @@ export class DetailsComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.router.navigate(['./home']);
+  // /////////////////////// ELINE //////////////////////////////////
+  addToWishlist(productId: number) {
+    this.wishlistService.addToWishlist(productId).subscribe(response => {
+      console.log(response);
+    });
+  }
+
+  wishlistIcon: string = 'fa-regular fa-heart';
+  favoriteIcon: string = 'fa-regular fa-star';
+  personalIcon: string = 'fa-solid fa-check';
+
+  addToWishlist5(): void {
+    this.wishlistIcon = this.wishlistIcon === 'fa-regular fa-heart' ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
+  }
+
+  changeIconFavorite(): void {
+    this.favoriteIcon = this.favoriteIcon === 'fa-regular fa-star' ? 'fa-solid fa-star' : 'fa-regular fa-star';
+  }
+
+  changeIconPersonal(): void {
+    this.personalIcon = this.personalIcon === 'fa-solid fa-check' ? 'fa-solid fa-check-double' : 'fa-solid fa-check';
   }
 
 }
+
+

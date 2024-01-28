@@ -10,7 +10,7 @@
 <section class="container mt-5 sectionBG">
     <div class="bg-image" [style.backgroundImage]="'url(' + product?.product_cover + ')'"></div>
     <div class="book-details">
-        <img id="book-cover" class="book-cover" alt="Book Cover" [src]="product?.product_cover">
+        <img id="book-cover" class="book-cover hand" alt="Book Cover" [src]="product?.product_cover">
         <div class="book-info">
             <h2 class="book-title">{{ product?.product_title }} | Volume {{ product?.volume }} | {{
                 getProductTypeName(product?.product_type)}}</h2>
