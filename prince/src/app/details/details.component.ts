@@ -83,19 +83,18 @@ export class DetailsComponent implements OnInit {
   }
 
   // /////////////////////// ELINE //////////////////////////////////
+  wishlistIcon: string = 'fa-regular fa-heart';
   addToWishlist(productId: number) {
     this.wishlistService.addToWishlist(productId).subscribe(response => {
       console.log(response);
+      this.wishlistIcon = this.wishlistIcon === 'fa-regular fa-heart' ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
     });
+
   }
 
-  wishlistIcon: string = 'fa-regular fa-heart';
-  favoriteIcon: string = 'fa-regular fa-star';
+  
+  /*favoriteIcon: string = 'fa-regular fa-star';
   personalIcon: string = 'fa-solid fa-check';
-
-  addToWishlist5(): void {
-    this.wishlistIcon = this.wishlistIcon === 'fa-regular fa-heart' ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
-  }
 
   changeIconFavorite(): void {
     this.favoriteIcon = this.favoriteIcon === 'fa-regular fa-star' ? 'fa-solid fa-star' : 'fa-regular fa-star';
@@ -103,7 +102,7 @@ export class DetailsComponent implements OnInit {
 
   changeIconPersonal(): void {
     this.personalIcon = this.personalIcon === 'fa-solid fa-check' ? 'fa-solid fa-check-double' : 'fa-solid fa-check';
-  }
+  }*/
 
 }
 
