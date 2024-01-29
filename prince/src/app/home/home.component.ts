@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   productsUrl = this.productService.productsUrl
   currentSeason: string = '';
   seasonalProducts: any[] = [];
+  bgImage: string = '';
 
   getProducts() {
     this.productService.getProducts()
@@ -49,6 +50,24 @@ export class HomeComponent implements OnInit {
     return season;
   }
 
+  ngOnInit() {
+    this.getProducts();
+    this.bgImage = this.getBgImagePath(this.currentSeason);
+  }
+
+  getBgImagePath(season: string): string {
+    switch (season) {
+      case 'spring':
+        return '../../assets/spring.png';
+      case 'summer':
+        return '../../assets/summer.png';
+      case 'autumn':
+        return '../../assets/autumn.png';
+      default:
+        return '../../assets/winter.png';
+    }
+  }
+
   filterBySeason(season: string): any[] {
     return this.products.filter((product: any) => product.season === season);
   }
@@ -57,9 +76,5 @@ export class HomeComponent implements OnInit {
     const productId = +id;
     console.log(`Navigating to details page with ID: ${productId}`);
     this.router.navigate([productId, 'details']);
-   }   
-
-  ngOnInit() {
-    this.getProducts();
   }
 }
