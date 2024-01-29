@@ -30,7 +30,7 @@ This project was built using a variety of technologies:
 In the future, we plan to add more features to PrincePress, such as chat functions, book recommendations based on user preferences, a gallery, and more. We believe that these features will enhance the user experience and make PrincePress a go-to platform for Light Novel and Manga enthousiasts.
 
 ## Developed by:
-* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ugurkan Karaca](www.linkedin.com/in/ugurkan-karaca)
+* [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Ugurkan Karaca](https://www.linkedin.com/in/ugurkan-karaca/)
 &nbsp;
 * [![Linkedin](https://i.stack.imgur.com/gVE0j.png) Liam Vandermaesen](https://www.linkedin.com/in/liam-vandermaesen)
 &nbsp;
