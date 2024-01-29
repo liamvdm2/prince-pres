@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  imports: [CommonModule],
-  providers: [ProductService, CommonModule],
+ selector: 'app-home',
+ standalone: true,
+ templateUrl: './home.component.html',
+ styleUrls: ['./home.component.css'],
+ imports: [CommonModule, RouterOutlet, RouterModule],
+ providers: [ProductService, CommonModule],
 })
 export class HomeComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router) { }
