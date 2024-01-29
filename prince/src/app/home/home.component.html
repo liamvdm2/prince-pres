@@ -1,3 +1,4 @@
+<p class="pt-5"></p>
 <!-- //////////////////// display page banner //////////////////// -->
 <section id="banner" class="pageBanner position-relative overflow-hidden"
     style="background-image: url('../../assets/crown.png'); background-position: center; background-size: contain; background-repeat: no-repeat; padding-bottom: 50px;">
@@ -14,29 +15,30 @@
 <!-- //////////////////// centered navigation //////////////////// -->
 <nav class="navigation navbar navbar-expand-lg navbar-dark text-uppercase">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavHome"
+            aria-controls="navbarNavHome" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="collapse navbar-collapse" id="navbarNavHome">
             <ul class="navbar-nav mx-auto"> <!-- Updated class to mx-auto for centering -->
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/light-novel">Light Novels</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/light-novel">Light Novels</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/manga">Manga</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/manga">Manga</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/all-series">All Series</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/all-series">All Series</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/contact">Contact</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/contact">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/about">About</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/about">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/login">Login</a>
+                <li class="nav-item" style="cursor: pointer;">
+                    <a class="nav-link container d-flex justify-content-center" routerLink="/userprofile">Profile</a>
                 </li>
             </ul>
         </div>
@@ -57,7 +59,7 @@
                         <h5 class="card-title">{{ product.product_title }}</h5>
                         <span class="volume-text">Volume: {{ product.volume }}</span>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
@@ -65,12 +67,15 @@
 
 
 <!-- //////////////////// seasons banner //////////////////// -->
-<section id="our-selection" class="overflow-hidden mt-5 padding-xlarge" [style.background-image]="'url(' + bgImage + ')'" *ngIf="seasonalProducts.length > 0">
+<section id="our-selection" class="overflow-hidden mt-5 padding-xlarge"
+    [style.background-image]="'url(' + bgImage + ')'" *ngIf="seasonalProducts.length > 0">
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-sm-12">
             <div class="text-content padding-medium">
                 <h3 style="text-shadow: 0 0 15px white; color:black;">Get cozy &</h3>
-                <h2 class="display-2 pb-5 text-uppercase text-dark" style="text-shadow: 0 0 15px white; color:black !important; font-weight: 350 !important;">Discover seasonal favorites!</h2>
+                <h2 class="display-2 pb-5 text-uppercase text-dark"
+                    style="text-shadow: 0 0 15px white; color:black !important; font-weight: 350 !important;">Discover
+                    seasonal favorites!</h2>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">

@@ -1,6 +1,6 @@
 /*BOX*/
 .register-box {
-    position: absolute;
+    position: fixed;
     top: 52%;
     left: 50%;
     width: 600px;
