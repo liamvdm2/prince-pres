@@ -13,6 +13,7 @@ import { NewsComponent } from './news/news.component';
 import { MangaComponent } from './manga/manga.component';
 import { DetailsComponent } from './details/details.component';
 import { AboutComponent } from './about/about.component';
+import { LightNovelComponent } from './lightnovel/lightnovel.component';
 
 
 import { authGuard } from './auth.guard';
@@ -72,7 +73,7 @@ export const routes: Routes = [
         component: NewsComponent
     },
     {
-        path: 'series',
+        path: 'all-series',
         component: SeriesComponent
     },
     {
@@ -82,5 +83,9 @@ export const routes: Routes = [
     {
         path: 'manga',
         component: MangaComponent
+    },
+    {
+        path: 'light-novel',
+        component: LightNovelComponent
     }
 ]
