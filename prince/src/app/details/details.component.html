@@ -18,16 +18,20 @@
             <div class="purchase-links">
                 <h5 class="book-link">Available at:</h5>
                 <a [href]="product?.available_at" target="_blank" class="btn btn-dark">Amazon</a>
+                <button class="btn btn-light" (click)="addToWishlist(product.id)">
+                    <i id="heart" [class]="wishlistIcon" (click)="addToWishlist(product.id)"></i>
+                    Add to wishlist
+                </button>
             </div>
         </div>
     </div>
     <div class="lists">
         <table>
             <tr>
-                <td><i id="heart" [class]="wishlistIcon" (click)="addToWishlist5()"></i></td>
+                <!--<td><i id="heart" [class]="wishlistIcon" (click)="addToWishlist5()"></i></td>
                 <td><i id="star" [class]="favoriteIcon" (click)="changeIconFavorite()"></i></td>
-                <td><i id="check" [class]="personalIcon" (click)="changeIconPersonal()"></i></td>
-                <button (click)="addToWishlist(product.id)">Add to wishlist</button>
+                <td><i id="check" [class]="personalIcon" (click)="changeIconPersonal()"></i></td>-->
+
 
 
 
