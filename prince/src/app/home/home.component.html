@@ -65,12 +65,12 @@
 
 
 <!-- //////////////////// seasons banner //////////////////// -->
-<section id="our-selection" class="overflow-hidden mt-5 padding-xlarge">
+<section id="our-selection" class="overflow-hidden mt-5 padding-xlarge" [style.background-image]="'url(' + bgImage + ')'" *ngIf="seasonalProducts.length > 0">
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 col-sm-12">
             <div class="text-content padding-medium">
-                <h3 style="text-shadow: 0 0 15px white;">Get cozy &</h3>
-                <h2 class="display-2 pb-5 text-uppercase text-dark" style="text-shadow: 0 0 15px white;">Discover seasonal favorites!</h2>
+                <h3 style="text-shadow: 0 0 15px white; color:black;">Get cozy &</h3>
+                <h2 class="display-2 pb-5 text-uppercase text-dark" style="text-shadow: 0 0 15px white; color:black !important; font-weight: 350 !important;">Discover seasonal favorites!</h2>
             </div>
         </div>
         <div class="col-md-6 col-sm-12">
@@ -79,7 +79,7 @@
 </section>
 
 <!-- //////////////////// seasonal products //////////////////// -->
-<section id="more-books" class="overflow-hidden">
+<section id="more-books" class="overflow-hidden" *ngIf="seasonalProducts.length > 0">
     <div class="container">
         <div class="row">
             <div class="display-header d-flex justify-content-between pb-3">
