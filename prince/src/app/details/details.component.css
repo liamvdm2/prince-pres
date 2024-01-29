@@ -1,20 +1,8 @@
-
 @import '@fortawesome/fontawesome-free/css/all.css';
-
-
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap');
 @import '@fortawesome/fontawesome-free/css/all.css';
-
-html,
-
-body {
-    margin: 0;
-    padding: 0;
-    background: radial-gradient(rgb(132, 132, 132) 10%, rgb(39, 39, 39) 100%);
-}
-
 
 #banner {
     padding: 50px 0;
