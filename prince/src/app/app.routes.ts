@@ -10,7 +10,7 @@ import { MailinglistComponent } from './mailinglist/mailinglist.component';
 import { SeriesComponent } from './series/series.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { NewsComponent } from './news/news.component';
-
+import { MangaComponent } from './manga/manga.component';
 import { DetailsComponent } from './details/details.component';
 import { AboutComponent } from './about/about.component';
 
@@ -78,5 +78,9 @@ export const routes: Routes = [
     {
         path: 'about',
         component: AboutComponent
+    },
+    {
+        path: 'manga',
+        component: MangaComponent
     }
 ]
