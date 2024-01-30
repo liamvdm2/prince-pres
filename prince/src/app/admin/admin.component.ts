@@ -90,6 +90,8 @@ export class AdminComponent {
     );
   }
 
+  // close this
+
   // function to clear the input fields
   clearInput() {
     const isConfirmed = window.confirm('Are you sure you want to clear the input fields?');
