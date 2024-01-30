@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser'; //<img> tag in HTML fo
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
