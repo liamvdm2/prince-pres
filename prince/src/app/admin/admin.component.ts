@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser'; //<img> tag in HTML fo
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
@@ -93,6 +94,7 @@ export class AdminComponent {
   // close this
 
   // function to clear the input fields
+  // test test
   clearInput() {
     const isConfirmed = window.confirm('Are you sure you want to clear the input fields?');
     if (isConfirmed) {
